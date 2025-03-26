@@ -4,6 +4,15 @@ export const DEV_LINKEDIN= "www.linkedin.com/in/samyak-shreyash";
 export const DEV_TWITTER= "https://x.com/Samyak_shreyash";
 export const DEV_EMAIL="mailto:sam.shreyash@gmail.com";
 export const DEV_IMAGE="/profile_img.jpg";
+
+export const PAGES = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Projects", href: "/projects" },
+    { name: "Blogs", href: "/blogs" },
+    { name: "Contact", href: "/contact" }
+];
+
 export const TECH_STACK = [
     {
         tech: "Java",
