@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { DEV_NAME } from "@/utils/constants";
+import { Inter } from "next/font/google";
+import { ThemeProvider } from "@/app/components/theme-provider";
+import SiteHeader from "./components/site-header";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: `${DEV_NAME}`,
@@ -14,7 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={inter.className}>
+        <ThemeProvider attribute="class" defaultTheme="system">
+          <div className="flex flex-col min-h-screen">
+            <SiteHeader />
+            <main className="flex-1">{children}</main>
+          </div>
+          </ThemeProvider>
         {children}
       </body>
     </html>
