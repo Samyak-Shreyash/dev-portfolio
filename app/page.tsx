@@ -1,8 +1,11 @@
-import { DEV_GITHUB, DEV_LINKEDIN, DEV_NAME, DEV_TWITTER, TECH_STACK } from "@/utils/constants";
+import { DEV_NAME, TECH_STACK } from "@/utils/constants";
 import Link from "next/link";
 import { Button } from "./components/ui/button";
-import { ArrowRightIcon, Github, Linkedin, Twitter } from "lucide-react";
+import { ArrowRightIcon, Contact, Github, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
+import React from "react";
+import ContactIcons from "./components/contactIcons";
+import SiteFooter from "./components/site-footer";
 
 export default function Home() {
   return (
@@ -31,26 +34,7 @@ export default function Home() {
                     <Button variant="outline">Get In Touch</Button>
                   </Link>
                 </div>
-                <div className="flex items-center gap-4 mt-4">
-                  <Link href={DEV_GITHUB} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon">
-                      <Github className="h-5 w-5" />
-                      <span className="sr-only">GitHub</span>
-                    </Button>
-                  </Link>
-                  <Link href={DEV_LINKEDIN} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon">
-                      <Linkedin className="h-5 w-5" />
-                      <span className="sr-only">LinkedIn</span>
-                    </Button>
-                  </Link>
-                  <Link href={DEV_TWITTER} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon">
-                      <Twitter className="h-5 w-5" />
-                      <span className="sr-only">Twitter</span>
-                    </Button>
-                  </Link>
-                  </div>
+                <ContactIcons />
                   </div>
                   <div className="flex items-center justify-center">
                     <div className="relative aspect-square overflow-hidden rounded-full border-8 border-muted">
@@ -96,6 +80,7 @@ export default function Home() {
                   </div>
           </section>
           </main>
+          <SiteFooter />
       </div>
   );
 }
