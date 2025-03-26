@@ -1,11 +1,9 @@
-import { DEV_NAME, TECH_STACK } from "@/utils/constants";
+import { DEV_IMAGE, DEV_NAME, TECH_STACK } from "@/utils/constants";
 import Link from "next/link";
 import { Button } from "./components/ui/button";
-import { ArrowRightIcon, Contact } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
-import React from "react";
-import ContactIcons from "./components/contactIcons";
-import SiteFooter from "./components/site-footer";
+import ContactIcons from "@/app/components/contactIcons";
 
 export default function Home() {
   return (
@@ -38,7 +36,7 @@ export default function Home() {
                   <div className="flex items-center justify-center">
                     <div className="relative aspect-square overflow-hidden rounded-full border-8 border-muted">
                       <Image 
-                      src="/profile_img.jpg" 
+                      src={DEV_IMAGE} 
                       alt={DEV_NAME}
                       width={600}
                       height={600}
@@ -78,8 +76,6 @@ export default function Home() {
                   </div>
                   </div>
           </section>
-          </main>
-          <SiteFooter />
       </div>
   );
 }
