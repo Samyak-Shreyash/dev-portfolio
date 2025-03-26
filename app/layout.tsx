@@ -24,7 +24,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SiteFooter />
           </div>
           </ThemeProvider>
-        {children}
       </body>
     </html>
   );
