@@ -2,6 +2,13 @@ export const DEV_NAME = "Samyak Shreyash";
 export const DEV_GITHUB= "https://github.com/Samyak-Shreyash";
 export const DEV_LINKEDIN= "www.linkedin.com/in/samyak-shreyash";
 export const DEV_TWITTER= "https://x.com/Samyak_shreyash";
+export const PAGES = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Projects", href: "/projects" },
+    { name: "Blogs", href: "/blogs" },
+    { name: "Contact", href: "/contact" }
+];
 export const TECH_STACK = [
     {
         "tech": "Java",
