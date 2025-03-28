@@ -1,5 +1,5 @@
 "use client"
-import { ABOUT_ME, ACCOMPLISHMENTS, BG_IMAGE_DARK, DEV_IMAGE, DEV_NAME, DEV_TITLE, TECH_STACK, WORK_EXP } from '@/utils/constants';
+import { ABOUT_ME, ACCOMPLISHMENTS, BG_IMAGE_LIGHT, DEV_IMAGE, DEV_NAME, DEV_TITLE, TECH_STACK, WORK_EXP } from '@/utils/constants';
 import Image from 'next/image';
 import ContactIcons from '../components/contactIcons';
 import { Button } from '../components/ui/button';
@@ -15,7 +15,7 @@ export default function about() {
         <div className="min-h-screen bg-gradient-to-b from-background-to-muted/50">
           <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20-to-primary/5 z-10">
-            <Image src={BG_IMAGE_DARK} alt='Background' fill className='object-cover' priority />
+            <Image src={BG_IMAGE_LIGHT} alt='Background' fill className='object-cover' priority />
             <div className='absolute inset-0 flex flex-col justify-center items-center text-center z-20 p-4'>
               <div>
                 <Image src={DEV_IMAGE} alt={DEV_NAME} width={150} height={150} className='rounded-full border-4 border-background mb-6' priority />
