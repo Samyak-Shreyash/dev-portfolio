@@ -3,16 +3,14 @@ import { ABOUT_ME, ACCOMPLISHMENTS, BG_IMAGE_DARK, DEV_IMAGE, DEV_NAME, DEV_TITL
 import Image from 'next/image';
 import ContactIcons from '../components/contactIcons';
 import { Button } from '../components/ui/button';
-import { ChevronRight, Download, Mail } from 'lucide-react';
+import { Download, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/components/ui/tabs';
-import { useState } from 'react';
-import { Card, CardContent } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
+import { Card, CardContent } from '@/app/components/ui/card'
+import { Badge } from '@/app/components/ui/badge';
 import { cn } from '@/lib/utils';
 
 export default function about() {
-    const [activeTab, setActiveTab] = useState("about");
     return (
         <div className="min-h-screen bg-gradient-to-b from-background-to-muted/50">
           <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
@@ -43,7 +41,7 @@ export default function about() {
             </div>
             </section>
             <main className='container max-w-5xl mx-auto px-4 py-12'>
-            <Tabs defaultValue="about" className="w-full" onValueChange={setActiveTab}>
+            <Tabs defaultValue="about" className="w-full">
           <TabsList className="grid w-full grid-cols-5 mb-8">
             <TabsTrigger value="about" className="interactive">
               About
@@ -62,7 +60,7 @@ export default function about() {
           <TabsContent value="about" className="space-y-8">
             <div className='prose prose-lg dark:prose-invert max-w-none'>
               <h2 className='text-3xl font-bold mb-6'>About Me</h2>
-              {ABOUT_ME.map((para) => {return ( <p>{para}</p>);})}
+              {ABOUT_ME.map((para, key) => {return ( <p key={key}>{para}</p>);})}
             </div>
           </TabsContent>
 
@@ -82,8 +80,8 @@ export default function about() {
                         <Badge variant="outline" className='mt-2 md:mt-0 w-fit'>{job.period}</Badge>
                       </div>
                       <ul>
-                      {job.description.split('\n').map((work) => (
-                              <li>{`${work}`}</li>
+                      {job.description.split('\n').map((work, index) => (
+                              <li key={index}>{`${work}`}</li>
                             ))}
                       </ul>
                       <div className="flex flex-wrap gap-2">
