@@ -24,7 +24,7 @@ export default function about() {
               <h2 className='text-xl md:text-2xl text-muted-foreground mb-6'>{DEV_TITLE}</h2>
               <div className="flex ">
                 <Button asChild className="inline-flex items-center gap-2">
-                  <a href="/resume.pdf" download>
+                  <a href="/Samyak-Shreyash-6yrs-Java.pdf" download>
                     <Download className="h-4 w-4" /> Download Resume
                   </a>
                 </Button>
