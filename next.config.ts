@@ -1,5 +1,3 @@
-import type { NextConfig } from "next";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -16,11 +14,12 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
-};
-
-module.exports = {
   allowedDevOrigins: ['local-origin.dev', '*.local-origin.dev'],
 };
+module.exports = {
+  allowedDevOrigins: ['local-origin.dev', '*.local-origin.dev'],
+}
+
 
 export default nextConfig;
 

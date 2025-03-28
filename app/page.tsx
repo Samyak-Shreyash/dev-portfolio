@@ -1,4 +1,4 @@
-import { DEV_IMAGE, DEV_NAME, TECH_STACK } from "@/utils/constants";
+import { FULL_IMG, DEV_NAME, TECH_STACK } from "@/utils/constants";
 import Link from "next/link";
 import { Button } from "./components/ui/button";
 import { ArrowRightIcon } from "lucide-react";
@@ -36,7 +36,7 @@ export default function Home() {
                   <div className="flex items-center justify-center">
                     <div className="relative aspect-square overflow-hidden rounded-full border-8 border-muted">
                       <Image 
-                      src={DEV_IMAGE} 
+                      src={FULL_IMG} 
                       alt={DEV_NAME}
                       width={600}
                       height={600}
