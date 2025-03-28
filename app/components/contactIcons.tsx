@@ -1,4 +1,3 @@
-// This component is used to display the contact icons for the developer.
 import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN, DEV_TWITTER } from "@/utils/constants";
 import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 import Link from "next/link";
