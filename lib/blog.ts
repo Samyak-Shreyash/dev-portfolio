@@ -1,8 +1,8 @@
 import { connectToDatabase } from "@/lib/mongodb"
-import { ObjectId } from "mongodb"
+import { Document, ObjectId, WithId } from "mongodb"
 import type { BlogPost } from "@/lib/types"
 
-function postMapper(BlogPost: any): BlogPost | null {
+function postMapper(BlogPost: WithId<Document> | null): BlogPost | null {
   if (!BlogPost)
     return null;
   return {
