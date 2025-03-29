@@ -18,7 +18,7 @@ export const PAGES = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
-    { name: "Blogs", href: "/blogs" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" }
 ];
 
