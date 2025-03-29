@@ -1,6 +1,4 @@
 import { DEV_NAME } from "@/utils/constants";
-import dynamic from 'next/dynamic';
-// const BlogCard = dynamic(() => import("@/app/components/blog-card"), { ssr: false });
 import { BlogCard } from "../components/blog-card";
 import { getBlogPosts } from "@/lib/blog";
 
