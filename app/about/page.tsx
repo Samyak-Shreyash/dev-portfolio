@@ -62,7 +62,7 @@ export default function about() {
           <TabsContent value="about" className="space-y-8">
             <div className='prose prose-lg dark:prose-invert max-w-none'>
               <h2 className='text-3xl font-bold mb-6'>About Me</h2>
-              {ABOUT_ME.map((para) => {return ( <p>{para}</p>);})}
+              {ABOUT_ME.map((para, index) => {return ( <p key={index}>{para}</p>);})}
             </div>
           </TabsContent>
 
@@ -82,8 +82,8 @@ export default function about() {
                         <Badge variant="outline" className='mt-2 md:mt-0 w-fit'>{job.period}</Badge>
                       </div>
                       <ul>
-                      {job.description.split('\n').map((work) => (
-                              <li>{`${work}`}</li>
+                      {job.description.split('\n').map((work, index) => (
+                              <li key={index}>{`${work}`}</li>
                             ))}
                       </ul>
                       <div className="flex flex-wrap gap-2">

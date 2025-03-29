@@ -8,7 +8,7 @@ import { Menu } from "lucide-react";
 
 export default function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full px-8 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
       <Link href="/" className="font-bold text-xl">
                   Samyak <span className="text-primary">Shreyash</span>
@@ -24,6 +24,7 @@ export default function SiteHeader() {
             </Link>
           ))}
             </nav>
+            //TODO: Fix Hamburger Menu
         <Sheet>
         <SheetTrigger asChild className="md:hidden">
                     <Button variant="outline" size="icon">
