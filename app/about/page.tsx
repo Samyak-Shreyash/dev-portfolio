@@ -12,8 +12,8 @@ import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
-export default function about() {
-  const { theme, resolvedTheme } = useTheme()
+export default function ASbout() {
+  const { resolvedTheme } = useTheme()
   const [backgroundImage, setBackgroundImage] = useState(BG_IMAGE_LIGHT)
 
   useEffect(() => {
