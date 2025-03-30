@@ -1,3 +1,4 @@
+/*! tailwindcss v4.0.17 | MIT License | https://tailwindcss.com */
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -259,19 +260,19 @@
   }
   .container {
     width: 100%;
-    @media (min-width: 40rem) {
+    @media (width >= 40rem) {
       max-width: 40rem;
     }
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       max-width: 48rem;
     }
-    @media (min-width: 64rem) {
+    @media (width >= 64rem) {
       max-width: 64rem;
     }
-    @media (min-width: 80rem) {
+    @media (width >= 80rem) {
       max-width: 80rem;
     }
-    @media (min-width: 96rem) {
+    @media (width >= 96rem) {
       max-width: 96rem;
     }
   }
@@ -855,32 +856,32 @@
     }
   }
   .min-\[400px\]\:flex-row {
-    @media (min-width: 400px) {
+    @media (width >= 400px) {
       flex-direction: row;
     }
   }
   .sm\:max-w-sm {
-    @media (min-width: 40rem) {
+    @media (width >= 40rem) {
       max-width: var(--container-sm);
     }
   }
   .sm\:grid-cols-3 {
-    @media (min-width: 40rem) {
+    @media (width >= 40rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   .sm\:flex-row {
-    @media (min-width: 40rem) {
+    @media (width >= 40rem) {
       flex-direction: row;
     }
   }
   .sm\:justify-end {
-    @media (min-width: 40rem) {
+    @media (width >= 40rem) {
       justify-content: flex-end;
     }
   }
   .sm\:space-x-2 {
-    @media (min-width: 40rem) {
+    @media (width >= 40rem) {
       :where(& > :not(:last-child)) {
         --tw-space-x-reverse: 0;
         margin-inline-start: calc(calc(var(--spacing) * 2) * var(--tw-space-x-reverse));
@@ -889,167 +890,167 @@
     }
   }
   .sm\:text-left {
-    @media (min-width: 40rem) {
+    @media (width >= 40rem) {
       text-align: left;
     }
   }
   .sm\:text-4xl {
-    @media (min-width: 40rem) {
+    @media (width >= 40rem) {
       font-size: var(--text-4xl);
       line-height: var(--tw-leading, var(--text-4xl--line-height));
     }
   }
   .sm\:text-5xl {
-    @media (min-width: 40rem) {
+    @media (width >= 40rem) {
       font-size: var(--text-5xl);
       line-height: var(--tw-leading, var(--text-5xl--line-height));
     }
   }
   .md\:mt-0 {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       margin-top: calc(var(--spacing) * 0);
     }
   }
   .md\:flex {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       display: flex;
     }
   }
   .md\:hidden {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       display: none;
     }
   }
   .md\:h-16 {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       height: calc(var(--spacing) * 16);
     }
   }
   .md\:grid-cols-2 {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   .md\:grid-cols-3 {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   .md\:grid-cols-4 {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
   .md\:flex-row {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       flex-direction: row;
     }
   }
   .md\:items-center {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       align-items: center;
     }
   }
   .md\:px-6 {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       padding-inline: calc(var(--spacing) * 6);
     }
   }
   .md\:py-0 {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       padding-block: calc(var(--spacing) * 0);
     }
   }
   .md\:py-24 {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       padding-block: calc(var(--spacing) * 24);
     }
   }
   .md\:text-2xl {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       font-size: var(--text-2xl);
       line-height: var(--tw-leading, var(--text-2xl--line-height));
     }
   }
   .md\:text-5xl {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       font-size: var(--text-5xl);
       line-height: var(--tw-leading, var(--text-5xl--line-height));
     }
   }
   .md\:text-xl {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       font-size: var(--text-xl);
       line-height: var(--tw-leading, var(--text-xl--line-height));
     }
   }
   .md\:text-xl\/relaxed {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       font-size: var(--text-xl);
       line-height: var(--leading-relaxed);
     }
   }
   .lg\:grid-cols-3 {
-    @media (min-width: 64rem) {
+    @media (width >= 64rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   .lg\:grid-cols-6 {
-    @media (min-width: 64rem) {
+    @media (width >= 64rem) {
       grid-template-columns: repeat(6, minmax(0, 1fr));
     }
   }
   .lg\:grid-cols-\[1fr_400px\] {
-    @media (min-width: 64rem) {
+    @media (width >= 64rem) {
       grid-template-columns: 1fr 400px;
     }
   }
   .lg\:gap-12 {
-    @media (min-width: 64rem) {
+    @media (width >= 64rem) {
       gap: calc(var(--spacing) * 12);
     }
   }
   .lg\:py-32 {
-    @media (min-width: 64rem) {
+    @media (width >= 64rem) {
       padding-block: calc(var(--spacing) * 32);
     }
   }
   .lg\:text-6xl {
-    @media (min-width: 64rem) {
+    @media (width >= 64rem) {
       font-size: var(--text-6xl);
       line-height: var(--tw-leading, var(--text-6xl--line-height));
     }
   }
   .lg\:text-base\/relaxed {
-    @media (min-width: 64rem) {
+    @media (width >= 64rem) {
       font-size: var(--text-base);
       line-height: var(--leading-relaxed);
     }
   }
   .xl\:grid-cols-\[1fr_500px\] {
-    @media (min-width: 80rem) {
+    @media (width >= 80rem) {
       grid-template-columns: 1fr 500px;
     }
   }
   .xl\:py-48 {
-    @media (min-width: 80rem) {
+    @media (width >= 80rem) {
       padding-block: calc(var(--spacing) * 48);
     }
   }
   .xl\:text-5xl {
-    @media (min-width: 80rem) {
+    @media (width >= 80rem) {
       font-size: var(--text-5xl);
       line-height: var(--tw-leading, var(--text-5xl--line-height));
     }
   }
   .xl\:text-6xl\/none {
-    @media (min-width: 80rem) {
+    @media (width >= 80rem) {
       font-size: var(--text-6xl);
       line-height: 1;
     }
   }
   .xl\:text-xl\/relaxed {
-    @media (min-width: 80rem) {
+    @media (width >= 80rem) {
       font-size: var(--text-xl);
       line-height: var(--leading-relaxed);
     }
@@ -1343,9 +1344,7 @@ body {
   syntax: "*";
   inherits: false;
 }
-@supports (property(--tw-ease)) {
-  @property --tw-ease {
-    syntax: "*";
-    inherits: false;
-  }
+@property --tw-ease {
+  syntax: "*";
+  inherits: false;
 }
