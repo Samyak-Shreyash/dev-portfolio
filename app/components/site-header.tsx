@@ -24,7 +24,6 @@ export default function SiteHeader() {
             </Link>
           ))}
             </nav>
-            //TODO: Fix Hamburger Menu
         <Sheet>
         <SheetTrigger asChild className="md:hidden">
                     <Button variant="outline" size="icon">
