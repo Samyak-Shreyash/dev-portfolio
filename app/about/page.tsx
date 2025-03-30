@@ -1,23 +1,21 @@
 "use client"
-import { ABOUT_ME, ACCOMPLISHMENTS, BG_IMAGE_DARK, DEV_IMAGE, DEV_NAME, DEV_TITLE, TECH_STACK, WORK_EXP } from '@/utils/constants';
+import { ABOUT_ME, ACCOMPLISHMENTS, BG_IMAGE_LIGHT, DEV_IMAGE, DEV_NAME, DEV_TITLE, TECH_STACK, WORK_EXP } from '@/utils/constants';
 import Image from 'next/image';
 import ContactIcons from '../components/contactIcons';
 import { Button } from '../components/ui/button';
-import { ChevronRight, Download, Mail } from 'lucide-react';
+import { Download, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/components/ui/tabs';
-import { useState } from 'react';
-import { Card, CardContent } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
+import { Card, CardContent } from '@/app/components/ui/card'
+import { Badge } from '@/app/components/ui/badge';
 import { cn } from '@/lib/utils';
 
 export default function about() {
-    const [activeTab, setActiveTab] = useState("about");
     return (
         <div className="min-h-screen bg-gradient-to-b from-background-to-muted/50">
           <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20-to-primary/5 z-10">
-            <Image src={BG_IMAGE_DARK} alt='Background' fill className='object-cover' priority />
+            <Image src={BG_IMAGE_LIGHT} alt='Background' fill className='object-cover' priority />
             <div className='absolute inset-0 flex flex-col justify-center items-center text-center z-20 p-4'>
               <div>
                 <Image src={DEV_IMAGE} alt={DEV_NAME} width={150} height={150} className='rounded-full border-4 border-background mb-6' priority />
@@ -26,7 +24,7 @@ export default function about() {
               <h2 className='text-xl md:text-2xl text-muted-foreground mb-6'>{DEV_TITLE}</h2>
               <div className="flex ">
                 <Button asChild className="inline-flex items-center gap-2">
-                  <a href="/resume.pdf" download>
+                  <a href="/Samyak-Shreyash-6yrs-Java.pdf" download>
                     <Download className="h-4 w-4" /> Download Resume
                   </a>
                 </Button>
@@ -43,7 +41,7 @@ export default function about() {
             </div>
             </section>
             <main className='container max-w-5xl mx-auto px-4 py-12'>
-            <Tabs defaultValue="about" className="w-full" onValueChange={setActiveTab}>
+            <Tabs defaultValue="about" className="w-full">
           <TabsList className="grid w-full grid-cols-5 mb-8">
             <TabsTrigger value="about" className="interactive">
               About
@@ -62,7 +60,7 @@ export default function about() {
           <TabsContent value="about" className="space-y-8">
             <div className='prose prose-lg dark:prose-invert max-w-none'>
               <h2 className='text-3xl font-bold mb-6'>About Me</h2>
-              {ABOUT_ME.map((para, index) => {return ( <p key={index}>{para}</p>);})}
+              {ABOUT_ME.map((para, key) => {return ( <p key={key}>{para}</p>);})}
             </div>
           </TabsContent>
 
