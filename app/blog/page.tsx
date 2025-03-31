@@ -1,5 +1,5 @@
 import { DEV_NAME } from "@/utils/constants";
-import { BlogCard } from "../components/blog-card";
+import { BlogCard } from "@/components/blog-card";
 import { getBlogPosts } from "@/lib/blog";
 
 export const metadata = {

@@ -1,9 +1,9 @@
 import { DEV_IMAGE, DEV_NAME, TECH_STACK } from "@/utils/constants";
 import Link from "next/link";
-import { Button } from "./components/ui/button";
+import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
-import ContactIcons from "@/app/components/contactIcons";
+import ContactIcons from "@/components/contact-icons";
 
 export default function Home() {
   return (

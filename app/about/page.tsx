@@ -1,13 +1,13 @@
 "use client"
 import { ABOUT_ME, ACCOMPLISHMENTS, BG_IMAGE_DARK, BG_IMAGE_LIGHT, DEV_IMAGE, DEV_NAME, DEV_TITLE, TECH_STACK, WORK_EXP } from '@/utils/constants';
 import Image from 'next/image';
-import ContactIcons from '../components/contactIcons';
-import { Button } from '../components/ui/button';
+import ContactIcons from '@/components/contact-icons';
+import { Button } from '@/components/ui/button';
 import { Download, Mail } from 'lucide-react';
 import Link from 'next/link';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/components/ui/tabs';
-import { Card, CardContent } from '@/app/components/ui/card'
-import { Badge } from '@/app/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
