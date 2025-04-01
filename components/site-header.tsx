@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/Sheet";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
+import CustomCursor from "./custom-cursor";
 
 export default function SiteHeader() {
   return (
