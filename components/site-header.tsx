@@ -30,13 +30,13 @@ export default function SiteHeader() {
                       <span className="sr-only">Toggle menu</span>
                     </Button>
                   </SheetTrigger>
-                  <SheetContent side="right">
+                  <SheetContent side="right" className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                     <nav className="flex flex-col gap-4 mt-8">
                     {PAGES.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-medium transition-colors hover:text-primary"
+              className="text-lg"
             >
               {item.name}
             </Link>
