@@ -185,7 +185,7 @@ export default function ContactPage() {
                     <span className="text-green-500 font-medium">Available for new projects</span>
                   </div>
                   <p className="text-muted-foreground">
-                    I'm currently taking on select freelance projects and open to discussing full-time opportunities.
+                    I&apos;m currently taking on select freelance projects and open to discussing full-time opportunities.
                   </p>
                 </div>
 
