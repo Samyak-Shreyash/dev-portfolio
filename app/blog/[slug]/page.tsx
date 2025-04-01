@@ -4,7 +4,7 @@ import Image from "next/image"
 import { format } from "date-fns"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { DEV_IMAGE } from "@/utils/constants"
+import { DEV_IMAGE, DEV_NAME } from "@/utils/constants"
 import type { Metadata } from "next"
 import { JSX } from "react"
 
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    title: `${post.title} | Blog`,
+    title: `${post.title} by ${DEV_NAME}`,
     description: post.excerpt,
   }
 }

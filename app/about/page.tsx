@@ -12,10 +12,11 @@ import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
-export default function ASbout() {
+export default function About() {
   const { resolvedTheme } = useTheme()
   const [backgroundImage, setBackgroundImage] = useState(BG_IMAGE_LIGHT)
 
+  
   useEffect(() => {
     setBackgroundImage(resolvedTheme === "dark" ? BG_IMAGE_DARK : BG_IMAGE_LIGHT)
   }, [resolvedTheme])

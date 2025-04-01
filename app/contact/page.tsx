@@ -175,33 +175,19 @@ export default function ContactPage() {
           </div>
 
           {/* Current Status Card */}
-          <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500/50 to-primary/30 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-            <div className="relative bg-background/80 backdrop-blur-sm rounded-lg p-6 h-full border border-primary/10">
-              <h2 className="text-xl font-semibold mb-6 text-primary">Current Status</h2>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                </span>
-                <span className="text-green-500 font-medium">Available for new projects</span>
-              </div>
-              <p className="text-muted-foreground mb-6">
-                I&apos;m currently working full time, but would be available for select freelance projects.
-              </p>
-
-              <div className="mt-auto">
-                <h3 className="text-lg font-medium mb-2">Preferred Technologies</h3>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">React</span>
-                  <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Next.js</span>
-                  <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">TypeScript</span>
-                  <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Node.js</span>
-                  <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Java</span>
+          <div className="relative p-6 rounded-lg bg-gradient-to-r from-primary/5 to-secondary/5 border border-primary/10">
+                  <h3 className="text-xl font-semibold mb-2">Current Status</h3>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="relative flex h-3 w-3">
+                      <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <span className="text-green-500 font-medium">Available for new projects</span>
+                  </div>
+                  <p className="text-muted-foreground">
+                    I&apos;m currently taking on select freelance projects and open to discussing full-time opportunities.
+                  </p>
                 </div>
-              </div>
-            </div>
-          </div>
 
           {/* Contact Form Card */}
           <div className="relative group md:col-span-2 lg:col-span-1">
