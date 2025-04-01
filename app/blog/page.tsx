@@ -3,7 +3,7 @@ import { BlogCard } from "@/components/blog-card";
 import { getBlogPosts } from "@/lib/blog";
 
 export const metadata = {
-    title: `Blog | ${DEV_NAME}`,
+    title: `Blogs by ${DEV_NAME}`,
     description: "Read my latest blog posts about technology, design, and more.",
   }
   
