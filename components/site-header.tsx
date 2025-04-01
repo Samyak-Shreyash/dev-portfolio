@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/Sheet";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
-
 export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full px-8 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

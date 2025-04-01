@@ -1,5 +1,5 @@
-import { Card, CardContent, CardFooter, CardHeader } from "@/app/components/ui/card"
-import { Badge } from "@/app/components/ui/badge"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import Link from "next/link"
 import { format } from "date-fns"
@@ -11,10 +11,11 @@ interface BlogCardProps {
 
 export function BlogCard({ post }: BlogCardProps) {
   return (
+    
     <Card className="overflow-hidden flex flex-col h-full">
       <div className="relative h-48 w-full">
         <Image
-          src={post.coverImage?.toString() || "/placeholder.svg?height=192&width=384/placeholder.svg?height=192&width=384"}
+          src={post.coverImage?.toString() ?? "/placeholder.svg?height=192&width=384/placeholder.svg?height=192&width=384"}
           alt={post.title}
           fill
           className="object-cover"
@@ -30,7 +31,8 @@ export function BlogCard({ post }: BlogCardProps) {
         </Link>
       </CardHeader>
       <CardContent className="flex-1">
-        <p className="text-muted-foreground line-clamp-3">{post.excerpt?.toString() || post.content.substring(0, 150)}</p>
+        
+        <p className="text-muted-foreground line-clamp-3">{post.excerpt?? post.content.substring(0, 150)}</p>
       </CardContent>
       <CardFooter>
         <Link href={`/blog/${post.slug}`} className="text-sm font-medium text-primary hover:underline">

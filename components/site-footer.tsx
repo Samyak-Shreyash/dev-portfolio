@@ -1,5 +1,5 @@
 import { DEV_NAME } from "@/utils/constants";
-import ContactIcons from "./contactIcons";
+import ContactIcons from "./contact-icons";
 
 export default function SiteFooter() {
     return (

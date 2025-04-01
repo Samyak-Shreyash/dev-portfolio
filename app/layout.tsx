@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import "@/styles/globals.css"
-import "./globals.css";
+import "./globals.css"
 import { DEV_NAME } from "@/utils/constants";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/app/components/theme-provider";
-import SiteHeader from "./components/site-header";
-import SiteFooter from "./components/site-footer";
+import { ThemeProvider } from "@/components/theme-provider";
+import SiteHeader from "@/components/site-header";
+import SiteFooter from "@/components/site-footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: `${DEV_NAME}`,
-  description: "My Devekloper Portfolio",
+  description: "My Developer Portfolio",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

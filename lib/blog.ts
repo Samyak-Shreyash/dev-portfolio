@@ -9,6 +9,7 @@ function postMapper(BlogPost: WithId<Document> | null): BlogPost | null {
     _id: BlogPost._id.toString(),
     title: BlogPost.title,
     slug: BlogPost.slug,
+    excerpt: BlogPost.excerpt,
     content: BlogPost.content,
     coverImage: BlogPost.coverImage.toString(),
     published: BlogPost.published,

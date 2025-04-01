@@ -24,7 +24,7 @@ export default function ContactIcons() {
                 <span className="sr-only">Twitter</span>
             </Button>
             </Link>
-            <Link href={DEV_EMAIL} target="_blank" rel="noopener noreferrer">
+            <Link href={`mailto:${DEV_EMAIL}`} target="_blank" rel="noopener noreferrer">
             <Button variant="ghost" size="icon">
                 <Mail className="h-5 w-5" />
                 <span className="sr-only">Mail</span>
