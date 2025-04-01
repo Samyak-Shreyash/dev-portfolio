@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
-export default function ASbout() {
+export default function About() {
   const { resolvedTheme } = useTheme()
   const [backgroundImage, setBackgroundImage] = useState(BG_IMAGE_LIGHT)
 
