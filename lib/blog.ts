@@ -1,20 +1,22 @@
 import { connectToDatabase } from "@/lib/mongodb"
 import { Document, ObjectId, WithId } from "mongodb"
 import type { BlogPost } from "@/lib/types"
+import readingTime from "reading-time";
 
-function postMapper(BlogPost: WithId<Document> | null): BlogPost | null {
-  if (!BlogPost)
+function postMapper(Post: WithId<Document> | null): BlogPost | null {
+  if (!Post)
     return null;
   return {
-    _id: BlogPost._id.toString(),
-    title: BlogPost.title,
-    slug: BlogPost.slug,
-    excerpt: BlogPost.excerpt,
-    content: BlogPost.content,
-    coverImage: BlogPost.coverImage.toString(),
-    published: BlogPost.published,
-    createdAt: BlogPost.createdAt,
-    updatedAt: BlogPost.updatedAt
+    _id: Post._id?.toString(),
+    title: Post.title,
+    slug: Post.slug,
+    excerpt: Post.excerpt,
+    content: Post.content,
+    coverImage: Post.coverImage?.toString(),
+    published: Post.published,
+    createdAt: Post.createdAt,
+    updatedAt: Post.updatedAt,
+    readingTime: readingTime(Post.content).text
   } as BlogPost; 
 }
 
