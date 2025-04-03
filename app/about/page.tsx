@@ -75,7 +75,7 @@ export default function About() {
           </TabsList>
 
           <TabsContent value="about" className="space-y-8">
-            <div className="prose prose-lg dark:prose-invert max-w-none">
+            <div className="max-w-none prose prose-lg dark:prose-invert">
               <h2 className='text-3xl font-bold mb-6'>About Me</h2>
               {ABOUT_ME.map((para, key) => {return ( <p key={key}>{para}</p>);})}
             </div>

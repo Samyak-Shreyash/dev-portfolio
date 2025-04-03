@@ -84,9 +84,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <div className="items-end">{post.readingTime}</div>
         </div>
 
-        <div className="max-w-none prose prose-lg dark:prose-invert">
-            <MDXRemote source={post.content} />
-        </div>
+        <article className="prose prose-neutral dark:prose-invert max-w-none">
+          <MDXRemote source={post?.content} />
+    </article>
     </article>
   )
 }
