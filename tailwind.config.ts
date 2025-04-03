@@ -90,6 +90,27 @@ export default {
         },
       },
     },
+    typography: {
+      DEFAULT: {
+        css: {
+          '--tw-prose-body': 'hsl(var(--foreground))',
+          '--tw-prose-headings': 'hsl(var(--primary))',
+          '--tw-prose-links': 'hsl(var(--primary))',
+          '--tw-prose-bold': 'hsl(var(--primary-foreground))',
+          '--tw-prose-quotes': 'hsl(var(--accent))',
+        },
+      },
+      invert: {
+        css: {
+          '--tw-prose-invert-body': 'hsl(var(--foreground))',
+          '--tw-prose-invert-headings': 'hsl(var(--primary))',
+          '--tw-prose-invert-links': 'hsl(var(--primary))',
+          '--tw-prose-invert-bold': 'hsl(var(--primary-foreground))',
+          '--tw-prose-invert-quotes': 'hsl(var(--accent))',
+          '--tw-prose-invert-code': 'hsl(var(--primary))',
+        },
+      },
+    },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 }

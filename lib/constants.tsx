@@ -5,6 +5,7 @@ export const DEV_LINKEDIN= "linkedin.com/in/samyak-shreyash";
 export const DEV_TWITTER= "x.com/Samyak_shreyash";
 export const DEV_EMAIL="sam.shreyash@gmail.com";
 export const DEV_IMAGE="/profile_img.jpg";
+export const CURR_IMG="/ghibli_image.png"
 export const BG_IMAGE_DARK="/bg_image_dark.jpg";
 export const BG_IMAGE_LIGHT="/bg_image_light.jpg";
 

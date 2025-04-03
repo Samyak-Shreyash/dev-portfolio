@@ -22,9 +22,9 @@ export default function About() {
   }, [resolvedTheme])
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-[hsl(var(--background))] to-muted/50">
+    <div className="min-h-screen bg-linear-to-b from-[hsl(var(--background))] to-[hsl(var(--muted))]/50">
         <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
-            <div className="absolute inset-0 bg-linear-to-r from-[hsl(var(--primary))]/20 to-primary/5 z-10">
+            <div className="absolute inset-0 bg-linear-to-r from-[hsl(var(--primary))]/20 to-[hsl(var(--primary))]/5 z-10">
              <picture>
             <source media="(prefers-color-scheme: dark)" srcSet={BG_IMAGE_DARK} />
             <source media="(prefers-color-scheme: light)" srcSet={BG_IMAGE_LIGHT} />
@@ -75,7 +75,7 @@ export default function About() {
           </TabsList>
 
           <TabsContent value="about" className="space-y-8">
-            <div className='prose prose-lg dark:prose-invert max-w-none'>
+            <div className="prose prose-lg dark:prose-invert max-w-none">
               <h2 className='text-3xl font-bold mb-6'>About Me</h2>
               {ABOUT_ME.map((para, key) => {return ( <p key={key}>{para}</p>);})}
             </div>
@@ -103,7 +103,9 @@ export default function About() {
                       </ul>
                       <div className="flex flex-wrap gap-2">
                         {job.technologies.map((tech, techIndex) => (
-                          <Badge key={techIndex} variant="secondary">
+                          <Badge key={techIndex} 
+                          className="bg-hsl(var(--primary-foreground)) border-outline text-hsl(var(--secondary-foreground)) hover:bg-hsl(var(--secondary))/80"
+                          >
                             {tech}
                           </Badge>
                         ))}
@@ -123,12 +125,12 @@ export default function About() {
                   <div
                     key={index}
                     className={cn(
-                      "relative p-4 rounded-lg border bg-card text-card-foreground shadow transition-all duration-300 hover:shadow-md interactive",
-                      tech.skill >= 4 ? "border-primary/50" : "",
+                      "relative p-4 rounded-lg border bg-[hsl(var(--card))] text-card-foreground shadow transition-all duration-300 hover:shadow-md interactive",
+                      tech.skill >= 4 ? "border-[hsl(var(--primary))]/50" : "",
                     )}
                   >
                     <div className="flex items-center space-x-3">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary font-bold">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[hsl(var(--primary))]/10 text-primary font-bold">
                         <Image src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
                         alt={tech.tech}
                         width={40}
@@ -140,7 +142,7 @@ export default function About() {
                           {Array.from({ length: 5 }).map((_, i) => (
                             <div
                               key={i}
-                              className={cn("w-6 h-2 rounded-full mr-1", i < tech.skill ? "bg-primary" : "bg-muted")}
+                              className={cn("w-6 h-2 rounded-full mr-1", i < tech.skill ? "bg-[hsl(var(--primary))]" : "bg-[hsl(var(--muted))]")}
                             />
                           ))}
                         </div>
