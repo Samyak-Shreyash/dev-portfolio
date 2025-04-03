@@ -1,12 +1,13 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  darkMode: ["class"],
+import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
+import tailwindcssAnimate from "tailwindcss-animate";
+
+const config: Config = {
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{ts,tsx,css}",
+    "*.{js,ts,jsx,tsx,css}",
   ],
   theme: {
     container: {
@@ -52,6 +53,10 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      fontFamily: {
+        sans: "var(--font-geist-sans)",
+        mono: "var(--font-geist-mono)",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -59,12 +64,12 @@ module.exports = {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: 0 },
+          from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
+          to: { height: "0" },
         },
       },
       animation: {
@@ -89,7 +94,29 @@ module.exports = {
         },
       },
     },
+    typography: {
+      DEFAULT: {
+        css: {
+          "--tw-prose-body": "hsl(var(--foreground))",
+          "--tw-prose-headings": "hsl(var(--primary))",
+          "--tw-prose-links": "hsl(var(--primary))",
+          "--tw-prose-bold": "hsl(var(--primary-foreground))",
+          "--tw-prose-quotes": "hsl(var(--accent))",
+        },
+      },
+      invert: {
+        css: {
+          "--tw-prose-invert-body": "hsl(var(--foreground))",
+          "--tw-prose-invert-headings": "hsl(var(--primary))",
+          "--tw-prose-invert-links": "hsl(var(--primary))",
+          "--tw-prose-invert-bold": "hsl(var(--primary-foreground))",
+          "--tw-prose-invert-quotes": "hsl(var(--accent))",
+          "--tw-prose-invert-code": "hsl(var(--primary))",
+        },
+      },
+    },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
-}
+  plugins: [tailwindcssAnimate, typography],
+};
 
+export default config;

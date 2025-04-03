@@ -1,31 +1,31 @@
 "use client"
-import { ABOUT_ME, ACCOMPLISHMENTS, BG_IMAGE_DARK, BG_IMAGE_LIGHT, DEV_IMAGE, DEV_NAME, DEV_TITLE, TECH_STACK, WORK_EXP } from '@/utils/constants';
-import Image from 'next/image';
-import ContactIcons from '@/components/contact-icons';
-import { Button } from '@/components/ui/button';
-import { Download, Mail } from 'lucide-react';
-import Link from 'next/link';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { cn } from "@/lib/utils"
+import { BG_IMAGE_LIGHT, BG_IMAGE_DARK, DEV_IMAGE, DEV_NAME, DEV_TITLE, ABOUT_ME, ACCOMPLISHMENTS, TECH_STACK, WORK_EXP } from "@/lib/constants"
+import { Download, Mail } from "lucide-react"
+import { useTheme } from "next-themes"
+import Image from "next/image"
+import Link from "next/link"
+import { useState, useEffect } from "react"
 
 export default function About() {
-  const { resolvedTheme } = useTheme()
-  const [backgroundImage, setBackgroundImage] = useState(BG_IMAGE_LIGHT)
+    const { resolvedTheme } = useTheme()
+    const [backgroundImage, setBackgroundImage] = useState(BG_IMAGE_LIGHT)
 
   
   useEffect(() => {
     setBackgroundImage(resolvedTheme === "dark" ? BG_IMAGE_DARK : BG_IMAGE_LIGHT)
   }, [resolvedTheme])
 
-    return (
-        <div className="min-h-screen bg-gradient-to-b from-background-to-muted/50">
-          <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20-to-primary/5 z-10">
-            <picture>
+  return (
+    <div className="min-h-screen bg-linear-to-b from-[hsl(var(--background))] to-[hsl(var(--muted))]/50">
+        <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
+            <div className="absolute inset-0 bg-linear-to-r from-[hsl(var(--primary))]/20 to-[hsl(var(--primary))]/5 z-10">
+             <picture>
             <source media="(prefers-color-scheme: dark)" srcSet={BG_IMAGE_DARK} />
             <source media="(prefers-color-scheme: light)" srcSet={BG_IMAGE_LIGHT} />
             <Image
@@ -36,13 +36,13 @@ export default function About() {
               priority
             />
             </picture>
-            <div className='absolute inset-0 flex flex-col justify-center items-center text-center z-20 p-4'>
-              <div>
-                <Image src={DEV_IMAGE} alt={DEV_NAME} width={150} height={150} className='rounded-full border-4 border-background mb-6' priority />
-              </div>
-              <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold text-background mb-4'>{DEV_NAME}</h1>
-              <h2 className='text-xl md:text-2xl text-muted-foreground mb-6'>{DEV_TITLE}</h2>
-              <div className="flex ">
+            <div className="absolute inset-0 flex flex-col justify-center items-center text-center z-20 p-4">
+                <div>
+                    <Image src={DEV_IMAGE} alt={DEV_NAME} width={150} height={150} className="rounded-full border-4 border-background mb-6" priority/>
+                </div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-background mb-4">{DEV_NAME}</h1>
+                <h1 className="text-xl md:text-2xl text-muted-foreground mb-6">{DEV_TITLE}</h1>
+                <div className="flex ">
                 <Button asChild className="inline-flex items-center gap-2">
                   <a href="/Samyak-Shreyash-6yrs-Java.pdf" download>
                     <Download className="h-4 w-4" /> Download Resume
@@ -53,9 +53,6 @@ export default function About() {
                     <Mail className="h-4 w-4" /> Contact Me
                   </Link>
                 </Button>
-              </div>
-              <div className='flex-space-x-4'>
-                <ContactIcons />
               </div>
             </div>
             </div>
@@ -78,7 +75,7 @@ export default function About() {
           </TabsList>
 
           <TabsContent value="about" className="space-y-8">
-            <div className='prose prose-lg dark:prose-invert max-w-none'>
+            <div className="max-w-none prose prose-lg dark:prose-invert">
               <h2 className='text-3xl font-bold mb-6'>About Me</h2>
               {ABOUT_ME.map((para, key) => {return ( <p key={key}>{para}</p>);})}
             </div>
@@ -106,7 +103,9 @@ export default function About() {
                       </ul>
                       <div className="flex flex-wrap gap-2">
                         {job.technologies.map((tech, techIndex) => (
-                          <Badge key={techIndex} variant="secondary">
+                          <Badge key={techIndex} 
+                          className="bg-hsl(var(--primary-foreground)) border-outline text-hsl(var(--secondary-foreground)) hover:bg-hsl(var(--secondary))/80"
+                          >
                             {tech}
                           </Badge>
                         ))}
@@ -126,12 +125,12 @@ export default function About() {
                   <div
                     key={index}
                     className={cn(
-                      "relative p-4 rounded-lg border bg-card text-card-foreground shadow transition-all duration-300 hover:shadow-md interactive",
-                      tech.skill >= 4 ? "border-primary/50" : "",
+                      "relative p-4 rounded-lg border bg-[hsl(var(--card))] text-card-foreground shadow transition-all duration-300 hover:shadow-md interactive",
+                      tech.skill >= 4 ? "border-[hsl(var(--primary))]/50" : "",
                     )}
                   >
                     <div className="flex items-center space-x-3">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary font-bold">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[hsl(var(--primary))]/10 text-primary font-bold">
                         <Image src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
                         alt={tech.tech}
                         width={40}
@@ -143,7 +142,7 @@ export default function About() {
                           {Array.from({ length: 5 }).map((_, i) => (
                             <div
                               key={i}
-                              className={cn("w-6 h-2 rounded-full mr-1", i < tech.skill ? "bg-primary" : "bg-muted")}
+                              className={cn("w-6 h-2 rounded-full mr-1", i < tech.skill ? "bg-[hsl(var(--primary))]" : "bg-[hsl(var(--muted))]")}
                             />
                           ))}
                         </div>

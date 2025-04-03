@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Toast } from "@/components/ui/toast"
 import { Toaster } from "@/components/ui/toaster"
+import { Toast } from "./ui/toast"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -56,18 +56,19 @@ export default function ContactForm() {
       setSubmitted(true)
       Toast({
         title: "Message received!",
-        content: "Thank you for reaching out. I'll get back to you soon.",
+        content: "Thank you for reaching out. Ill get back to you soon.",
       })
 
       // Reset submitted state after 5 seconds
       setTimeout(() => setSubmitted(false), 5000)
     } catch (error) {
-      console.error(error)
       Toast({
         title: "Something went wrong!",
         content: "Your message couldn't be sent. Please try again later.",
         variant: "destructive",
       })
+      // Log form data to console (for demonstration)
+      console.log("Form not submitted:", error)
     } finally {
       setIsSubmitting(false)
     }
@@ -75,26 +76,12 @@ export default function ContactForm() {
 
   return (
     <div className="relative group">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-secondary rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-      <div className="relative rounded-lg border bg-background/80 backdrop-blur-sm p-6 shadow-sm">
-        <h2 className="text-2xl font-semibold mb-6">Send me a message</h2>
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--secondary))] rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+      <div className="relative rounded-lg border border-[hsl(var(--primary))]/10 bg-[hsl(var(--background))]/80 backdrop-blur-sm p-6 shadow-sm">
+        <h2 className="text-2xl text-primary font-semibold mb-6">Send me a message</h2>
         {submitted ? (
           <div className="text-center py-8">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-500 mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-check"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
             </div>
             <h3 className="text-xl font-medium mb-2">Message Sent!</h3>
             <p className="text-muted-foreground mb-4">Thank you for reaching out. I&apos;ll get back to you soon.</p>
@@ -105,7 +92,7 @@ export default function ContactForm() {
         ) : (
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid gap-6 sm:grid-cols-2">
+              {/* <div className="grid gap-6 sm:grid-cols-2"> */}
                 <FormField
                   control={form.control}
                   name="name"
@@ -113,7 +100,7 @@ export default function ContactForm() {
                     <FormItem>
                       <FormLabel>Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your name" {...field} className="bg-background/50" />
+                        <Input placeholder="Your name" {...field} className="bg-[hsl(var(--background))]/50 " />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -126,13 +113,12 @@ export default function ContactForm() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="your.email@example.com" {...field} className="bg-background/50" />
+                        <Input placeholder="your.email@example.com" {...field} className="bg-[hsl(var(--background))]/50" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-              </div>
               <FormField
                 control={form.control}
                 name="subject"
@@ -140,7 +126,7 @@ export default function ContactForm() {
                   <FormItem>
                     <FormLabel>Subject</FormLabel>
                     <FormControl>
-                      <Input placeholder="What is this regarding?" {...field} className="bg-background/50" />
+                      <Input placeholder="What is this regarding?" {...field} className="bg-[hsl(var(--background))]/50" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -155,7 +141,7 @@ export default function ContactForm() {
                     <FormControl>
                       <Textarea
                         placeholder="Your message here..."
-                        className="min-h-[120px] bg-background/50"
+                        className="min-h-[120px] bg-[hsl(var(--background))]/50"
                         {...field}
                       />
                     </FormControl>
@@ -165,7 +151,7 @@ export default function ContactForm() {
               />
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 transition-all duration-300"
+                className="w-full bg-gradient-to-r from-[hsl(var(--primary))/80] toe-[hsl(var(--primary))] hover:from-[hsl(var(--primary))]/90 hover:to-[hsl(var(--primary))]/70 transition-all duration-300"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (

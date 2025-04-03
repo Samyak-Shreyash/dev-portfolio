@@ -3,8 +3,8 @@ import { notFound } from "next/navigation"
 import Image from "next/image"
 import { format } from "date-fns"
 import { MDXRemote } from "next-mdx-remote/rsc"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { DEV_IMAGE, DEV_NAME } from "@/utils/constants"
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar'
+import { DEV_IMAGE, DEV_NAME } from "@/lib/constants"
 import type { Metadata } from "next"
 import { JSX } from "react"
 
@@ -55,27 +55,38 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <article className="container mx-auto px-4 py-12 max-w-4xl">
-      {post.coverImage && (
-        <div className="relative w-full h-[400px] mb-8 rounded-lg overflow-hidden">
-          <Image src={post.coverImage ?? "/placeholder.svg"} alt={post.title} fill className="object-cover" priority />
+        {post.coverImage && (
+            <div className="relative w-full h-[400px] mb-8 rounded-lg overflow-hidden">
+                <Image 
+                className="object-cover"
+                src={post.coverImage ?? "/placeholder.svg" } 
+                alt={post.title} 
+                fill
+                priority
+                />
+            </div>
+        )}
+        <h1 className="text-4xl font-bold tracking-tight mb-4">{post.title}</h1>
+
+        <div className="flex items-center gap-4 mb-8 text-muted-foreground">
+            <div className="flex items-center gap-2">
+                <Avatar className="h-8 w-8">
+                    <AvatarImage 
+                        src={DEV_IMAGE}
+                        alt={DEV_NAME}
+                        height={32}
+                        width={32}
+                    />
+                    <AvatarFallback>S</AvatarFallback>
+                </Avatar>
+            </div>
+            <div className="text-sm">{format(new Date(post.createdAt ?? Date.now()), "MMMM d, yyyy")}</div>
+            <div className="items-end">{post.readingTime}</div>
         </div>
-      )}
 
-      <h1 className="text-4xl font-bold tracking-tight mb-4">{post.title}</h1>
-
-      <div className="flex items-center gap-4 mb-8 text-muted-foreground">
-        <div className="flex items-center gap-2">
-          <Avatar className="h-8 w-8">
-            <AvatarImage src={DEV_IMAGE} height={32} width={32} alt="Author" />
-            <AvatarFallback>S</AvatarFallback>
-          </Avatar>
-        </div>
-        <div className="text-sm">{format(new Date(post.createdAt ?? Date.now()), "MMMM d, yyyy")}</div>
-      </div>
-
-      <div className="prose prose-lg dark:prose-invert max-w-none">
-        <MDXRemote source={post.content ?? ""} />
-      </div>
+        <article className="prose prose-neutral dark:prose-invert max-w-none">
+          <MDXRemote source={post?.content} />
+    </article>
     </article>
   )
 }

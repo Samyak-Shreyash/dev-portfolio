@@ -34,10 +34,11 @@ export function BlogCard({ post }: BlogCardProps) {
         
         <p className="text-muted-foreground line-clamp-3">{post.excerpt?? post.content.substring(0, 150)}</p>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex flex-row justify-between">
         <Link href={`/blog/${post.slug}`} className="text-sm font-medium text-primary hover:underline">
           Read More
         </Link>
+        <span>{post.readingTime}</span>
       </CardFooter>
     </Card>
   )

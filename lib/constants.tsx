@@ -1,10 +1,11 @@
 export const DEV_NAME = "Samyak Shreyash";
 export const DEV_TITLE = "Software Engineer | Full Stack Developer | Open Source Contributor";
-export const DEV_GITHUB= "https://github.com/Samyak-Shreyash";
-export const DEV_LINKEDIN= "https://www.linkedin.com/in/samyak-shreyash";
-export const DEV_TWITTER= "https://x.com/Samyak_shreyash";
+export const DEV_GITHUB= "github.com/Samyak-Shreyash";
+export const DEV_LINKEDIN= "linkedin.com/in/samyak-shreyash";
+export const DEV_TWITTER= "x.com/Samyak_shreyash";
 export const DEV_EMAIL="sam.shreyash@gmail.com";
 export const DEV_IMAGE="/profile_img.jpg";
+export const CURR_IMG="/ghibli_image.png"
 export const BG_IMAGE_DARK="/bg_image_dark.jpg";
 export const BG_IMAGE_LIGHT="/bg_image_light.jpg";
 
@@ -18,7 +19,7 @@ export const PAGES = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
-    { name: "Blog", href: "/blog" },
+    { name: "Blogs", href: "/blog" },
     { name: "Contact", href: "/contact" }
 ];
 
@@ -187,4 +188,3 @@ export const TECH_STACK = [
       icon: "🎓",
     },
   ]
-  "✍️"
