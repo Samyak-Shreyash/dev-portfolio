@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
 import { Toaster } from "@/components/ui/toaster"
+import { Toast } from "./ui/toast"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -54,19 +54,21 @@ export default function ContactForm() {
       // Reset form and show success message
       form.reset()
       setSubmitted(true)
-      toast({
+      Toast({
         title: "Message received!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
+        content: "Thank you for reaching out. Ill get back to you soon.",
       })
 
       // Reset submitted state after 5 seconds
       setTimeout(() => setSubmitted(false), 5000)
     } catch (error) {
-      toast({
+      Toast({
         title: "Something went wrong!",
-        description: "Your message couldn't be sent. Please try again later.",
+        content: "Your message couldn't be sent. Please try again later.",
         variant: "destructive",
       })
+      // Log form data to console (for demonstration)
+      console.log("Form not submitted:", error)
     } finally {
       setIsSubmitting(false)
     }
@@ -82,7 +84,7 @@ export default function ContactForm() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-500 mb-4">
             </div>
             <h3 className="text-xl font-medium mb-2">Message Sent!</h3>
-            <p className="text-muted-foreground mb-4">Thank you for reaching out. I'll get back to you soon.</p>
+            <p className="text-muted-foreground mb-4">Thank you for reaching out. I&apos;ll get back to you soon.</p>
             <Button variant="outline" onClick={() => setSubmitted(false)}>
               Send another message
             </Button>

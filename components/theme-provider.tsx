@@ -14,7 +14,7 @@ export function ThemesProvider({ children, ...props }: ThemeProviderProps) {
   
   useEffect(() => {
     setMounted(true);
-}, []);
+}, [resolvedTheme]);
 
 if (!mounted) {
   return null; // Or a loading state

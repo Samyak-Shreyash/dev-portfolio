@@ -18,7 +18,7 @@ export const PAGES = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
-    { name: "Blog", href: "/blog" },
+    { name: "Blogs", href: "/blog" },
     { name: "Contact", href: "/contact" }
 ];
 
@@ -187,4 +187,3 @@ export const TECH_STACK = [
       icon: "🎓",
     },
   ]
-  "✍️"

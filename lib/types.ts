@@ -24,3 +24,10 @@ export interface Project {
     createdAt: string
     updatedAt: string
 }
+
+export interface ACTONTYPES {
+    ADD_TOAST: string,
+    UPDATE_TOAST: string,
+    DISMISS_TOAST: string,
+    REMOVE_TOAST: string,
+  }

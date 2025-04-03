@@ -1,4 +1,4 @@
-import { DEV_NAME } from "@/utils/constants";
+import { DEV_NAME } from "@/lib/constants";
 import { ProjectCard } from "@/components/project-card";
 import { getProjects } from "@/lib/project";
 
