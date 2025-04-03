@@ -53,7 +53,7 @@ export default function ContactPage() {
                                                 <div>
                                                     <h3 className="text-lg font-medium">Check out my LinkedIn</h3>
                                                     <Link
-                                                    href={DEV_LINKEDIN}
+                                                    href={`https://${DEV_LINKEDIN}`}
                                                     className="text-primary hover:underline transition-colors"
                                                     >
                                                         {DEV_LINKEDIN}
@@ -66,12 +66,12 @@ export default function ContactPage() {
                                                 </div>
                                                 <div>
                                                     <h3 className="text-lg font-medium">Check my work</h3>
-                                                    <Link
-                                                    href={DEV_GITHUB}
+                                                    <a
+                                                    href={`https://${DEV_GITHUB}`}
                                                     className="text-primary hover:underline transition-colors"
                                                     >
                                                         {DEV_GITHUB}
-                                                    </Link>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-4">
@@ -82,12 +82,12 @@ export default function ContactPage() {
                                                 </div>
                                                 <div>
                                                     <h3 className="text-lg font-medium">Connect to the Workd</h3>
-                                                    <Link
-                                                    href={DEV_TWITTER}
+                                                    <a
+                                                    href={`https://${DEV_TWITTER}`}
                                                     className="text-primary hover:underline transition-colors"
                                                     >
                                                         {DEV_TWITTER}
-                                                    </Link>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
