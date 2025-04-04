@@ -5,14 +5,34 @@ import { ArrowRight, ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
-import { getBlogPosts } from "@/lib/blog";
-import { getProjects } from "@/lib/project";
 import { format } from "date-fns";
 import { sortBlogs } from "@/lib/utils";
+import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, Suspense } from "react";
+import BlogLoading from "@/components/BlogLoading";
+import { Project } from "@/lib/types";
+
+
+async function fetchPosts() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  if (!response.ok) {
+      throw new Error('Failed to fetch posts')
+  }
+  const data = await response.json()
+  return data;
+}
+
+async function fetchProjects() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`);
+  if (!response.ok) {
+      throw new Error('Failed to fetch projects')
+  }
+  const data = await response.json()
+  return data;
+}
 
 export default async function Home() {
-  const projects = await getProjects()
-  const blogs = sortBlogs(await getBlogPosts()).slice(0, 2); // Get only the latest 2 posts
+  const projects = (await fetchProjects()).slice(0, 3); // Get only the latest 3 projects
+  const blogs = sortBlogs(await fetchPosts()).slice(0, 2); // Get only the latest 2 posts
   return (
     <div>
       <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
@@ -101,10 +121,10 @@ export default async function Home() {
               </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+              <Suspense fallback={<BlogLoading />}>
                  {projects
-                 .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()) // Sort by date (newest first)
-                 .slice(0, 3)
-                 .map((project) => (
+                 .sort((a: { updatedAt: string | number | Date; }, b: { updatedAt: string | number | Date; }) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()) // Sort by date (newest first)
+                 .map((project: Project) => (
                   <div
                   key={project._id}
                   className="group relative overflow-hidden rounded-lg border bg-background p-6 text-left shadow-sm transition-all hover:shadow-md"
@@ -122,6 +142,7 @@ export default async function Home() {
                     </Link>
                   </div>
                  ))}
+                 </Suspense>
           </div>
           {projects.length>2 && <div className="mt-8">
                 <Link href="/projects">
@@ -144,6 +165,7 @@ export default async function Home() {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+              <Suspense fallback={<BlogLoading />}>
                 {blogs
                 .map((post) => (
                   <div
@@ -163,6 +185,7 @@ export default async function Home() {
                     </Link>
                   </div>
                 ))}
+                </Suspense>
                 </div>
                 <div className="mt-8">
                 <Link href="/blog">

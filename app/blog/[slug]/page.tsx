@@ -1,4 +1,3 @@
-import { getBlogPostBySlug, getBlogPosts } from "@/lib/blog"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import { format } from "date-fns"
@@ -6,15 +5,22 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar'
 import { DEV_IMAGE, DEV_NAME, siteMetaData, siteURL } from "@/lib/constants"
 import type { Metadata } from "next"
-import { JSX } from "react"
+import { JSX, Suspense } from "react"
+import BlogLoading from "@/components/BlogLoading"
 
-export async function generateStaticParams() {
-  const posts = await getBlogPosts()
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
+async function fetchBySlug(slug: string) {
+  console.log("Fetching blog post by slug:",slug)
+  if (!slug || slug=== undefined|| slug.length === 0) {
+    return null
+  }
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${slug.trim()}`);
+  if (!response.ok) { 
+      throw new Error('Failed to fetch posts')
+  }
+  const data = await response.json()
+  return data;
 }
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await (params)
 
@@ -25,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
   }
 
-  const blog = await getBlogPostBySlug(slug)
+  const blog = await fetchBySlug(slug)
 
   if (!blog) {
     return {
@@ -74,13 +80,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     return notFound()
   }
 
-  const post = await getBlogPostBySlug(slug)
+  const post = await fetchBySlug(slug)
 
   if (!post) {
     return notFound()
   }
 
   return (
+    <Suspense fallback={<BlogLoading />}>
     <article className="container mx-auto px-4 py-12 max-w-4xl">
         {post.coverImage && (
             <div className="relative w-full h-[400px] mb-8 rounded-lg overflow-hidden">
@@ -111,9 +118,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <div className="items-end">{post.readingTime}</div>
         </div>
 
-        <article className="prose prose-neutral dark:prose-invert max-w-none">
+        <div className="prose prose-neutral dark:prose-invert max-w-none">
           <MDXRemote source={post?.content} />
+    </div>
     </article>
-    </article>
-  )
-}
+    </Suspense>
+  )}
