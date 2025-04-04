@@ -1,12 +1,41 @@
-import { DEV_NAME } from "@/lib/constants";
+import { DEV_IMAGE, DEV_NAME, DEV_TITLE, siteURL } from "@/lib/constants";
 import { ProjectCard } from "@/components/project-card";
 import { getProjects } from "@/lib/project";
+import { Metadata } from "next";
 
-export const metadata = {
-    title: `Projects of ${DEV_NAME}`,
-    description: "Checkout my latest Web-development, Data and other Projects ",
-  }
-  
+    
+// export const metadata: Metadata = {
+//   title: `Blogs | ${DEV_NAME}`,
+//   keywords: ['Samyak Shreyash', 'Software Engineer', 'Full Stack Developer', 'Portfolio'],
+//   description: DEV_TITLE,
+//   authors: [{ name: DEV_NAME, url: siteURL}],
+//   openGraph: {
+//     title: `Blogs | ${DEV_NAME}`,
+//     description:
+//       'Checkout my latest Web-development, Data and other Projects.',
+//     url: 'https://samyak-shreyash.vercel.app/projects',
+//     siteName: 'Samyak Shreyash Portfolio',
+//     images: [
+//       {
+//         url: `${siteURL}/uploads/${DEV_IMAGE}`, // Place the image in /public
+//         width: 1200,
+//         height: 630,
+//         alt: `${DEV_NAME} Portfolio OG Image`,
+//       },
+//     ],
+//     locale: 'en_IN',
+//     type: 'article',
+//   },
+//   twitter: {
+//     card: 'summary_large_image',
+//     title:  `Blogs | ${DEV_NAME}`,
+//     site: '@Samyak_shreyash',
+//     description:
+//       'Checkout my latest Web-development, Data and other Projects ',
+//     images: ['/og-image.png'],
+//     creator: '@Samyak_shreyash', // Optional Twitter handle
+//   },
+// };
 export default async function ProjectPage() {
     const projects = await getProjects()
   

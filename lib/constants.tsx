@@ -1,3 +1,4 @@
+export const siteURL = "https://samyakshreyash.vercel.app";
 export const DEV_NAME = "Samyak Shreyash";
 export const DEV_TITLE = "Software Engineer | Full Stack Developer | Open Source Contributor";
 export const DEV_GITHUB= "github.com/Samyak-Shreyash";
@@ -188,3 +189,22 @@ export const TECH_STACK = [
       icon: "🎓",
     },
   ]
+  export const siteMetaData = {
+    title: DEV_TITLE,
+    author: DEV_NAME,
+    headerTitle: DEV_NAME,
+    description: `Developer Portfolio made by and for ${DEV_NAME}`,
+    language: 'en-US',
+    interests: 'technology, Coding, travelling, food and fitness',
+    locale: 'en-US',
+    theme: 'system',
+    siteUrl: siteURL,
+    siteLogo: `${siteURL}/uploads/${DEV_IMAGE}`,
+    socialBanner: `${siteURL}/uploads/${DEV_IMAGE}`,
+    email: DEV_EMAIL,
+    socialLinks: {
+      github: DEV_GITHUB,
+      linkedIn: DEV_LINKEDIN,
+      twitter: DEV_TWITTER,
+  },
+  }

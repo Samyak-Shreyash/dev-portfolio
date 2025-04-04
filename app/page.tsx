@@ -8,10 +8,11 @@ import "./globals.css";
 import { getBlogPosts } from "@/lib/blog";
 import { getProjects } from "@/lib/project";
 import { format } from "date-fns";
+import { sortBlogs } from "@/lib/utils";
 
 export default async function Home() {
   const projects = await getProjects()
-  const blogs = (await getBlogPosts())
+  const blogs = sortBlogs(await getBlogPosts()).slice(0, 2); // Get only the latest 2 posts
   return (
     <div>
       <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
@@ -144,8 +145,6 @@ export default async function Home() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                 {blogs
-                .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()) // Sort by date (newest first)
-                .slice(0, 2) // Get only the latest 3 posts
                 .map((post) => (
                   <div
                   key={post?._id}

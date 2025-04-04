@@ -5,12 +5,47 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
-import { BG_IMAGE_LIGHT, BG_IMAGE_DARK, DEV_IMAGE, DEV_NAME, DEV_TITLE, ABOUT_ME, ACCOMPLISHMENTS, TECH_STACK, WORK_EXP } from "@/lib/constants"
+import { BG_IMAGE_LIGHT, BG_IMAGE_DARK, DEV_IMAGE, DEV_NAME, DEV_TITLE, ABOUT_ME, ACCOMPLISHMENTS, TECH_STACK, WORK_EXP} from "@/lib/constants"
 import { Download, Mail } from "lucide-react"
 import { useTheme } from "next-themes"
 import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect } from "react"
+
+
+// export const metadata: Metadata = {
+//   title: `About | ${DEV_NAME}`,
+//   keywords: ['Samyak Shreyash', 'Software Engineer', 'Full Stack Developer', 'Portfolio'],
+//   description: DEV_TITLE,
+//   authors: [{ name: DEV_NAME, url: siteURL}],
+//   openGraph: {
+//     title: `About | ${DEV_NAME}`,
+//     description:
+//       'Learn more about Samyak Shreyash, a software engineer passionate about full stack development and modern technologies.',
+//     url: 'https://samyak-shreyash.vercel.app/about',
+//     siteName: 'Samyak Shreyash Portfolio',
+//     images: [
+//       {
+//         url: `${siteURL}/uploads/${DEV_IMAGE}`, // Place the image in /public
+//         width: 1200,
+//         height: 630,
+//         alt: `${DEV_NAME} Portfolio OG Image`,
+//       },
+//     ],
+//     locale: 'en_IN',
+//     type: 'article',
+//   },
+//   twitter: {
+//     card: 'summary_large_image',
+//     title:  `About | ${DEV_NAME}`,
+//     site: '@Samyak_shreyash',
+//     description:
+//       'Learn more about Samyak Shreyash, a software engineer passionate about full stack development and modern technologies.',
+//     images: ['/og-image.png'],
+//     creator: '@Samyak_shreyash', // Optional Twitter handle
+//   },
+// };
+
 
 export default function About() {
     const { resolvedTheme } = useTheme()

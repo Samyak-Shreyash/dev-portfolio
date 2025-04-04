@@ -4,7 +4,7 @@ import Image from "next/image"
 import { format } from "date-fns"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar'
-import { DEV_IMAGE, DEV_NAME } from "@/lib/constants"
+import { DEV_IMAGE, DEV_NAME, siteMetaData, siteURL } from "@/lib/constants"
 import type { Metadata } from "next"
 import { JSX } from "react"
 
@@ -25,19 +25,46 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
   }
 
-  const post = await getBlogPostBySlug(slug)
+  const blog = await getBlogPostBySlug(slug)
 
-  if (!post) {
+  if (!blog) {
     return {
       title: "Post Not Found",
       description: "The blog post you're looking for doesn't exist",
     }
   }
 
+  let imageList = [siteMetaData.socialBanner];
+  // imageList = blog.images ? [...imageList, ...blog.images] : imageList;
+  imageList = blog.coverImage ? [...imageList, blog.coverImage] : imageList;
+
+  const ogImages = imageList.map((img) => {
+    return { url: img.includes("http") ? img : siteMetaData.siteUrl + img };
+  });
+
   return {
-    title: `${post.title} by ${DEV_NAME}`,
-    description: post.excerpt,
-  }
+    title: blog.title,
+    description: blog.excerpt?? siteMetaData.description,
+    // keywords: blog.tags.join(", "),
+    openGraph: {
+      title: blog.title,
+      description: blog.excerpt?? siteMetaData.description,
+      url: siteMetaData.siteUrl + blog.slug,
+      images: ogImages,
+      locale: "en_US",
+      type: "article",
+      publishedTime: new Date(blog.createdAt).toISOString(),
+      modifiedTime: new Date(blog.updatedAt).toISOString(),
+      authors: [siteMetaData.author],
+      siteName: siteURL,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description: blog.excerpt?? siteMetaData.description,
+      images: ogImages, // Must be an absolute URL
+    }
+}
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }): Promise<JSX.Element>  {
