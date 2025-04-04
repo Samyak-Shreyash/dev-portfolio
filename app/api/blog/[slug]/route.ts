@@ -1,12 +1,12 @@
 import { connectToDatabase } from "@/lib/mongodb";
 import { BlogPost } from "@/lib/types";
 import { WithId, Document } from "mongodb";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import readingTime from "reading-time";
 
 // The GET handler for fetching a blog post by slug
 export async function GET(
-  _req: Request,
+  _req: NextRequest,
   context: { params: { slug: string } }
 ) {
   const { slug } = context.params;
