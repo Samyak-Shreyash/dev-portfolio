@@ -5,7 +5,6 @@ import CustomCursor from "@/components/custom-cursor"
 import { Card, CardContent } from "@/components/ui/card"
 import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN, DEV_TWITTER } from "@/lib/constants"
 import { Github, Linkedin, Mail, Twitter } from "lucide-react"
-import Link from "next/link"
 
 export default function ContactPage() {
     return (
@@ -38,12 +37,12 @@ export default function ContactPage() {
                                                 </div>
                                                 <div>
                                                     <h3 className="text-lg font-medium">Mail me </h3>
-                                                    <Link
+                                                    <a
                                                     href={`mailto:${DEV_EMAIL}`}
                                                     className="text-primary hover:underline transition-colors"
                                                     >
                                                         {DEV_EMAIL}
-                                                    </Link>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-4">
@@ -52,12 +51,12 @@ export default function ContactPage() {
                                                 </div>
                                                 <div>
                                                     <h3 className="text-lg font-medium">Check out my LinkedIn</h3>
-                                                    <Link
+                                                    <a
                                                     href={`https://${DEV_LINKEDIN}`}
                                                     className="text-primary hover:underline transition-colors"
                                                     >
                                                         {DEV_LINKEDIN}
-                                                    </Link>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-4">

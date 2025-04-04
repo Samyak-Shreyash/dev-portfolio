@@ -1,5 +1,4 @@
 import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN, DEV_TWITTER } from "@/lib/constants";
-import Link from "next/link";
 import { Button } from "./ui/button";
 import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 
@@ -14,7 +13,7 @@ return(
         </a>
         <a href={`https://${DEV_LINKEDIN}`} target="_blank" rel="noopener noreferrer">
         <Button variant="ghost" size="icon">
-            <Linkedin className="h-5 w-5" />
+            <Linkedin className="h-5 w-5 hover:"  />
             <span className="sr-only">LinkedIn</span>
         </Button>
         </a>
