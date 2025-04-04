@@ -1,6 +1,5 @@
 import { connectToDatabase } from "@/lib/mongodb";
 import { Project } from "@/lib/types";
-import { sortBlogs } from "@/lib/utils";
 import { Document, ObjectId, WithId } from "mongodb"
 import { NextResponse } from "next/server";
 

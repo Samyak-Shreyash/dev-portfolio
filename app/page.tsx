@@ -7,7 +7,7 @@ import Link from "next/link";
 import "./globals.css";
 import { format } from "date-fns";
 import { sortBlogs } from "@/lib/utils";
-import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, Suspense } from "react";
+import { Suspense } from "react";
 import BlogLoading from "@/components/BlogLoading";
 import { Project } from "@/lib/types";
 
