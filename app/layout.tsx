@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { DEV_NAME, siteMetaData } from "@/lib/constants";
+import { siteMetaData } from "@/lib/constants";
 import { Inter } from "next/font/google";
 import { ThemesProvider } from "@/components/theme-provider";
 import SiteHeader from "@/components/site-header";
@@ -10,7 +10,7 @@ import SiteFooter from "@/components/site-footer";
 const inter = Inter({ subsets: ["latin"] });
 
 
-export const metadata = {
+export const metadata: Metadata= {
     metadataBase: new URL(siteMetaData.siteUrl),
     title: {
       template: `%s | ${siteMetaData.title}`,

@@ -1,8 +1,5 @@
-import { DEV_IMAGE, DEV_NAME, DEV_TITLE, siteURL } from "@/lib/constants";
 import { ProjectCard } from "@/components/project-card";
 import { getProjects } from "@/lib/project";
-import { Metadata } from "next";
-
     
 // export const metadata: Metadata = {
 //   title: `Blogs | ${DEV_NAME}`,
