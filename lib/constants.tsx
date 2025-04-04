@@ -1,3 +1,6 @@
+import { Briefcase, GraduationCap, Laptop } from "lucide-react";
+
+export const siteURL = "https://samyakshreyash.vercel.app";
 export const DEV_NAME = "Samyak Shreyash";
 export const DEV_TITLE = "Software Engineer | Full Stack Developer | Open Source Contributor";
 export const DEV_GITHUB= "github.com/Samyak-Shreyash";
@@ -120,52 +123,52 @@ export const TECH_STACK = [
         date: "Oct 2023",
         title: "Lead Engineer At Mphasis",
         description: "Started Working at Mphasis",
-        icon: "⭐",
+        icon: <Briefcase className="h-6 w-6" />,
       },
       {
         date: "Aug 2021",
         title: "Application Engineer at Baxter",
         description: "Started Working at Baxter",
-        icon: "⭐",
+        icon: <Briefcase className="h-6 w-6" />,
       },
       {
         date: "Nov 2019",
         title: "Application Engineer-II at Wells Fargo",
         description: "Promoted to Application Engineer II ",
-        icon: "⭐",
+        icon: <Briefcase className="h-6 w-6" />,
       },
       {
         date: "July 2018",
         title: "Application Engineer at Wells Fargo",
         description: "Started Working at Wells Fargo",
-        icon: "⭐",
+        icon: <Briefcase className="h-6 w-6" />,
       },
     {
       date: "June 2018",
       title: "Graduated with Bachelor's Degree",
       description:
         "Completed Bachelor of Engineering in Computer Science",
-      icon: "🎓",
+      icon: <GraduationCap className="h-6 w-6" />,
     },
     {
       date: "Jan 2018",
       title: "Intern at Wells Fargo",
       description:
         "Created Wells Fargo-Cisco Bridge tool increasing the efficiency by 78%",
-      icon: "⭐",
+      icon: <Laptop className="h-6 w-6" />,
     },
     {
       date: "Dec 2015",
       title: "Intern at SafeSecurity, IIT Bombay",
       description:
         "Developed a Threat Life Company Management Web Application.",
-      icon: "⭐",
+      icon: <Briefcase className="h-6 w-6" />,
     },
     {
         date: "Jan 2015",
         title: "Internshala Student Partner",
         description: "Interned With Internshala",
-        icon:  "✍️"
+        icon:  <Laptop className="h-6 w-6" />,
       },
       {
         date: "July 2014",
@@ -179,12 +182,31 @@ export const TECH_STACK = [
       title: "Graduated from Senior Secondary School",
       description:
         "Concluded Secondary Education from JVM, Shyamali, Ranchi wih Science and Computer Science",
-      icon:  "🎓",
+      icon:   <GraduationCap className="h-6 w-6" />
     },
     {
       date: "Mar 2011",
       title: "Graduated from Secondary School",
       description: "Concluded Secondary Education from St. Francis School, Deoghar from ICSE Board",
-      icon: "🎓",
+      icon:  <GraduationCap className="h-6 w-6" />
     },
   ]
+  export const siteMetaData = {
+    title: DEV_TITLE,
+    author: DEV_NAME,
+    headerTitle: DEV_NAME,
+    description: `Developer Portfolio made by and for ${DEV_NAME}`,
+    language: 'en-US',
+    interests: 'technology, Coding, travelling, food and fitness',
+    locale: 'en-US',
+    theme: 'system',
+    siteUrl: siteURL,
+    siteLogo: `${siteURL}/uploads/${DEV_IMAGE}`,
+    socialBanner: `${siteURL}/uploads/${DEV_IMAGE}`,
+    email: DEV_EMAIL,
+    socialLinks: {
+      github: DEV_GITHUB,
+      linkedIn: DEV_LINKEDIN,
+      twitter: DEV_TWITTER,
+  },
+  }
