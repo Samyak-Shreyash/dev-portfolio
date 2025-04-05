@@ -12,7 +12,7 @@ export const CURR_IMG="/ghibli_image.png"
 export const BG_IMAGE_DARK="/bg_image_dark.jpg";
 export const BG_IMAGE_LIGHT="/bg_image_light.jpg";
 
-export const DEV_RESUME = "/resume.pdf";
+export const DEV_RESUME = "/Samyak-Shreyash-7yrs-Java.pdf";
 export const ABOUT_ME=[
     "Hello! I'm Samyak Shreyash, a passionate Senior Software Developer with over 6 years of experience building Web applications. I specialize in creating responsive, accessible, and performant user interfaces that provide exceptional user experiences.",
     "I have a strong foundation in both front-end and back-end development, with expertise in Java, Python, and JavaScript. I am proficient in using frameworks like React and Next.js to build dynamic web applications. I also have experience with cloud technologies like AWS and containerization tools like Docker and Kubernetes.",
@@ -99,11 +99,11 @@ export const TECH_STACK = [
           technologies: ["Java", "SQL", "PostgreSQL"],
         },
         {
-          company: "Digital Solutions Ltd.",
+          company: "Baxter International",
           role: "Full Stack Developer",
           period: "2021-2023",
           description:
-            "Worked on creation on Audit System with <strong>AWS Kinesis streams to log account activities.\n Created major KPIs within the Sharesource product and created Analytics features with dashboards and custom alerts providing valuable insights on patient health to end-users(Clinicians).\n Worked on upgrade of projects from monolithic to micro-services, and upgrade of liferay projects to DXP 7.4.\n Developed rule-based engine for recommendation on prescription setting for clinicians.\n Conceptualized and developed new features within the mobile-app to Improve User Experience increasing User Acquisition by 15%.\n Developed features for full-stack development of complete new device withing ShareSource with prescription settings for clinicians, treatment processing as well as analysis and complete implementation of analytics features with dashboards",
+            "Worked on creation on Audit System with AWS Kinesis streams to log account activities.\n Created major KPIs within the Sharesource product and created Analytics features with dashboards and custom alerts providing valuable insights on patient health to end-users(Clinicians).\n Worked on upgrade of projects from monolithic to micro-services, and upgrade of liferay projects to DXP 7.4.\n Developed rule-based engine for recommendation on prescription setting for clinicians.\n Conceptualized and developed new features within the mobile-app to Improve User Experience increasing User Acquisition by 15%.\n Developed features for full-stack development of complete new device withing ShareSource with prescription settings for clinicians, treatment processing as well as analysis and complete implementation of analytics features with dashboards",
           technologies: ["Java", "Spring-boot","AWS", "AWS Kinesis streams", "Vue"],
         },
         {

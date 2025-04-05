@@ -1,43 +1,8 @@
-"use client"
-
 import ContactForm from "@/components/contact-form"
 import CustomCursor from "@/components/custom-cursor"
 import { Card, CardContent } from "@/components/ui/card"
 import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN, DEV_TWITTER } from "@/lib/constants"
 import { Github, Linkedin, Mail, Twitter } from "lucide-react"
-
-// export const metadata: Metadata = {
-//     title: `Contact | ${DEV_NAME}`,
-//     keywords: ['Samyak Shreyash', 'Software Engineer', 'Full Stack Developer', 'Portfolio'],
-//     description: DEV_TITLE,
-//     authors: [{ name: DEV_NAME, url: siteURL}],
-//     openGraph: {
-//       title: `Contact | ${DEV_NAME}`,
-//       description:
-//         'Contact Samyak Shreyash, a software engineer passionate about full stack development and modern technologies.',
-//       url: 'https://samyak-shreyash.vercel.app/contact',
-//       siteName: 'Samyak Shreyash Portfolio',
-//       images: [
-//         {
-//           url: `${siteURL}/uploads/${DEV_IMAGE}`, // Place the image in /public
-//           width: 1200,
-//           height: 630,
-//           alt: `${DEV_NAME} Portfolio OG Image`,
-//         },
-//       ],
-//       locale: 'en_IN',
-//       type: 'article',
-//     },
-//     twitter: {
-//       card: 'summary_large_image',
-//       title:  `Contact | ${DEV_NAME}`,
-//       site: '@Samyak_shreyash',
-//       description:
-//         'Learn more about Samyak Shreyash, a software engineer passionate about full stack development and modern technologies.',
-//       images: ['/og-image.png'],
-//       creator: '@Samyak_shreyash', // Optional Twitter handle
-//     },
-//   };
   
 export default function ContactPage() {
     return (
