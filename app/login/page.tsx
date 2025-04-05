@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -43,7 +42,7 @@ export default function Login() {
   const onSubmit = async (data: { email: string; password: string }) => {
     setLoading(true);
     try {
-      const res = await fetch(`$apiUrl/api/login`, {
+      const res = await fetch(`{${apiUrl}/api/login}`, {
         method: "POST",
         headers: { "Content-Types": "application/json" },
         body: JSON.stringify(data),
@@ -52,7 +51,7 @@ export default function Login() {
       const result = await res.json();
       
       console.log(result);
-      
+
       if (result.success) {
         Toast({
           title: "User Authorised!",
@@ -67,6 +66,7 @@ export default function Login() {
         });
       }
     } catch (error) {
+      console.log(error);
       Toast({
         title: "Login Error",
         content: "Are you sure you want to go this path!",
