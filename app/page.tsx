@@ -100,7 +100,7 @@ export default async function Home() {
                     className="flex flex-col items-center gap-2"
                     key={tech.tech}
                   >
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[hsl(var(--background))]">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[hsl(var(--background))]/90">
                       <Image
                         src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
                         alt={tech.tech}

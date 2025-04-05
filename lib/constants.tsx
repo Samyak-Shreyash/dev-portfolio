@@ -12,7 +12,7 @@ export const CURR_IMG="/ghibli_image.png"
 export const BG_IMAGE_DARK="/bg_image_dark.jpg";
 export const BG_IMAGE_LIGHT="/bg_image_light.jpg";
 
-export const DEV_RESUME = "/resume.pdf";
+export const DEV_RESUME = "/Samyak-Shreyash-7yrs-Java.pdf";
 export const ABOUT_ME=[
     "Hello! I'm Samyak Shreyash, a passionate Senior Software Developer with over 6 years of experience building Web applications. I specialize in creating responsive, accessible, and performant user interfaces that provide exceptional user experiences.",
     "I have a strong foundation in both front-end and back-end development, with expertise in Java, Python, and JavaScript. I am proficient in using frameworks like React and Next.js to build dynamic web applications. I also have experience with cloud technologies like AWS and containerization tools like Docker and Kubernetes.",
@@ -92,27 +92,39 @@ export const TECH_STACK = [
     export const WORK_EXP = [
         {
           company: "Mphasis",
-          role: "Senior Developer",
-          period: "2023-Present",
+          role: "Senior System Software Engineer",
+          period: "Oct'2023-Present",
           description:
-            "Backend development team, implementing new features, and improving performance across the platform.",
-          technologies: ["Java", "SQL", "PostgreSQL"],
+            " - Developed and enhanced **financial technology** workflows using **Java** and **Spring** Framework, ensuring scalable and maintainable solutions across multiple services."+
+            "\n - Managed and optimized data flow using **Sybase**, **MySQL**, and **JDBC**, implemented structured exception handling to improve fault tolerance and minimize runtime errors."+
+            "\n - Built full-stack web applications from scratch using **React.js** on the frontend and RESTful APIs on the backend, providing **real-time insights** and functionality to end-users."+
+            "\n - Designed and deployed robust backend APIs to interact with databases like **Sybase** and legacy systems such as Mainframes, enabling **fast and efficient data reconciliation**.",
+          technologies: ["Java", "SQL", "PostgreSQL", "Sybase", "Kafka"],
         },
         {
-          company: "Digital Solutions Ltd.",
-          role: "Full Stack Developer",
-          period: "2021-2023",
+          company: "Baxter International",
+          role: "Software Developer II",
+          period: "Aug'2021-Oct'2023",
           description:
-            "Worked on creation on Audit System with <strong>AWS Kinesis streams to log account activities.\n Created major KPIs within the Sharesource product and created Analytics features with dashboards and custom alerts providing valuable insights on patient health to end-users(Clinicians).\n Worked on upgrade of projects from monolithic to micro-services, and upgrade of liferay projects to DXP 7.4.\n Developed rule-based engine for recommendation on prescription setting for clinicians.\n Conceptualized and developed new features within the mobile-app to Improve User Experience increasing User Acquisition by 15%.\n Developed features for full-stack development of complete new device withing ShareSource with prescription settings for clinicians, treatment processing as well as analysis and complete implementation of analytics features with dashboards",
-          technologies: ["Java", "Spring-boot","AWS", "AWS Kinesis streams", "Vue"],
+            " - Worked on creation on *Audit System* with **AWS Kinesis streams** to log account activities."+
+            "\n - Created major KPIs within the *Sharesource product* and created Analytics features with dashboards and custom alerts providing valuable insights on patient health to end-users(Clinicians)."+
+            "\n - Worked on upgrade of projects from **monolithic** to **micro-services**, and upgrade of liferay projects to DXP 7.4."+
+            "\n - Developed rule-based engine for recommendation on prescription setting for clinicians."+
+            "\n - Conceptualized and developed new features within the mobile-app to Improve User Experience increasing User Acquisition by **15%**."+
+            "\n - Developed features for full-stack development of complete new device within ShareSource with *prescription settings for clinicians*, *treatment processing* as well as analysis and complete implementation of *analytics features with dashboards*",          
+            technologies: ["Java", "Spring-boot","AWS", "AWS Kinesis streams", "Vue"],
         },
         {
           company: "Wells Fargo",
           role: "Software Developer",
-          period: "2018-2021",
+          period: "July'2018-Aug'2021",
           description:
-            "Developed portal with Spring to revamp entire Final Security Review Process achieving enhanced Application Security practices using Oracle Database.\n Worked on development of Penalty Box with Java for timely audit of security trainings in the Organization.\n Created System to track and generate Consequence Model of all Applications used and developed in Wells Fargo with Java.\n Created Wells Fargo-Cisco Bridge tool for data mapping and validation by Network Security Team with Python and JavaScript.\n Developed System in Python for Automated tracking and Management of software patches, increasing the efficiency by 38%Contributed to the development of the company's main product, learning and implementing best practices in web development.",
-          technologies: ["Application-Security", "Java", "Spring", "Python", "Shell", "Phantomjs", "Oracle"],
+            " - Developed portal with **Spring **to revamp entire *Final Security Review Process* achieving enhanced *Application Security* practices using Java and Oracle Database."+
+            "\n - Worked on development of **Penalty Box** with Java for timely audit of security trainings in the Organization."+
+            "\n - Created System to track and generate **Consequence Model** of all Applications used and developed in Wells Fargo with **Java**."+
+            "\n - **Created** *Wells Fargo-Cisco Bridge tool* for data mapping and validation by Network Security Team with Python and JavaScript."+
+            "\n - Developed System in **Python **for *Automated tracking and Management of software patches*, increasing the efficiency by **38%**, Contributed to the development of the company's main product, learning and implementing best practices in web development.",
+          technologies: ["Java", "Spring", "Python", "Shell", "Phantomjs", "Oracle"],
         },
       ];
 

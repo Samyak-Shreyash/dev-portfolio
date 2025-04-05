@@ -1,49 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: 210, 20%, 98%;  /* Soft Off-White */
-  --foreground: 220, 25%, 15%;  /* Deep Charcoal Blue */
-  --primary: 220, 80%, 50%;     /* Vibrant Royal Blue */
-  --primary-foreground: 210, 40%, 98%; /* Very Light Gray */
-  --secondary: 0, 0%, 100%;          /* Pure White */
-  --secondary-foreground: 220, 25%, 15%; /* Deep Charcoal */
-  --muted: 220, 15%, 94%;       /* Soft Cloud Gray */
-  --muted-foreground: 220, 10%, 40%; /* Medium Gray */
-  --card: 210, 30%, 92%;   /* Subtle Blue-Gray */
-  --card-foreground: 220, 20%, 12%; /* Dark Charcoal Blue */
-  --accent: 35, 85%, 55%;       /* Soft Warm Amber */
-  --accent-foreground: 220, 25%, 15%; /* Deep Charcoal */
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 221.2 83.2% 53.3%;
+  --background: 210 20% 98%;         /* Clean soft off-white */
+  --foreground: 220 15% 18%;         /* Slightly softened charcoal blue */
+
+  --primary: 220 90% 55%;            /* Vivid royal blue (great for light backgrounds) */
+  --primary-foreground: 0 0% 100%;   /* Pure white for best contrast on blue */
+
+  --secondary: 0 0% 100%;            /* Pure white cards/sections */
+  --secondary-foreground: 220 15% 18%; /* Consistent with main text */
+
+  --muted: 220 15% 94%;              /* Soft subtle gray for muted UI */
+  --muted-foreground: 220 10% 45%;   /* Slightly darker gray for legibility */
+
+  --card: 210 30% 96%;               /* Light blue-gray with softness */
+  --card-foreground: 220 15% 20%;    /* Clean and readable against card */
+
+  --accent: 35 95% 56%;              /* Vibrant warm amber (balances the cool theme) */
+  --accent-foreground: 220 15% 18%;  /* Deep text over amber buttons/labels */
+
+  --destructive: 0 75% 55%;          /* Softened red for warning or delete */
+  --destructive-foreground: 0 0% 100%;
+
+  --popover: 0 0% 100%;              /* Pure white dropdowns/tooltips */
+  --popover-foreground: 220 15% 18%;
+
+  --border: 215 20% 85%;             /* Softer border with subtle contrast */
+  --input: 215 20% 85%;              /* Consistent with borders for forms */
+
+  --ring: 220 90% 60%;               /* Same tone as primary for focus ring */
   --radius: 0.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: 230, 25%, 10%;  /* Deep Charcoal Blue */
-    --foreground: 210, 20%, 95%;  /* Light Grayish Blue */
-    --primary: 220, 80%, 60%;     /* Electric Blue */
-    --primary-foreground: 0, 0%, 98%; /* Off-White */
-    --secondary: 210, 30%, 18%;   /* Muted Steel Blue */
-    --secondary-foreground: 210, 40%, 98%; /* Very Light Gray */
-    --muted: 220, 15%, 25%;  /* Slightly lighter */
-    --muted-foreground: 0, 0%, 80%; /* Higher contrast */
-    --card: 225, 20%, 12%;        /* Dark Blue-Gray */
-    --card-foreground: 210, 20%, 90%; /* Pale Gray */
-    --accent: 35, 90%, 55%;       /* Warm Amber (for contrast) */
-    --accent-foreground: 0, 0%, 98%; /* Near White */
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+  --background: 230 20% 8%;           /* Slightly deeper charcoal blue */
+  --foreground: 210 15% 85%;          /* Softened light gray-blue for less strain */
+
+  --primary: 220 100% 65%;            /* Sharper electric blue (more punch) */
+  --primary-foreground: 0 0% 98%;     /* Crisp off-white for contrast */
+
+  --secondary: 215 25% 20%;           /* More muted, refined steel blue */
+  --secondary-foreground: 210 20% 90%;/* Balanced contrast, not too stark */
+
+  --muted: 220 10% 30%;               /* Subtle surface for inputs/footers */
+  --muted-foreground: 0 0% 75%;       /* Softer text for muted areas */
+
+  --card: 228 20% 12%;                /* Slightly more contrast with background */
+  --card-foreground: 210 15% 88%;     /* Gentle on the eyes */
+
+  --accent: 35 95% 55%;               /* Warm amber — kept for vibrancy */
+  --accent-foreground: 0 0% 98%;      /* Bright contrast on accent */
+
+  --destructive: 0 80% 40%;           /* Richer red for clarity */
+  --destructive-foreground: 0 0% 98%;
+
+  --popover: 225 25% 12%;             /* Consistent with card */
+  --popover-foreground: 210 20% 90%;
+
+  --border: 218 20% 18%;              /* Slightly lighter border for depth */
+  --input: 218 20% 18%;               /* Matches border for input elements */
+
+  --ring: 220 100% 60%;               /* Same as primary, helps focus outlines */
   }
 }
 
@@ -376,42 +394,42 @@ prose {
   margin-top: 0.8571429em;
 }
 .prose {
-  --tw-prose-body: #374151;
-  --tw-prose-headings: #111827;
-  --tw-prose-lead: #4b5563;
-  --tw-prose-links: #111827;
-  --tw-prose-bold: #111827;
-  --tw-prose-counters: #6b7280;
-  --tw-prose-bullets: #d1d5db;
-  --tw-prose-hr: #e5e7eb;
-  --tw-prose-quotes: #111827;
-  --tw-prose-quote-borders: #e5e7eb;
-  --tw-prose-captions: #6b7280;
-  --tw-prose-kbd: #111827;
-  --tw-prose-kbd-shadows: 17 24 39;
-  --tw-prose-code: #111827;
-  --tw-prose-pre-code: #e5e7eb;
-  --tw-prose-pre-bg: #1f2937;
-  --tw-prose-th-borders: #d1d5db;
-  --tw-prose-td-borders: #e5e7eb;
-  --tw-prose-invert-body: #d1d5db;
-  --tw-prose-invert-headings: #fff;
-  --tw-prose-invert-lead: #9ca3af;
-  --tw-prose-invert-links: #fff;
-  --tw-prose-invert-bold: #fff;
-  --tw-prose-invert-counters: #9ca3af;
-  --tw-prose-invert-bullets: #4b5563;
-  --tw-prose-invert-hr: #374151;
-  --tw-prose-invert-quotes: #f3f4f6;
-  --tw-prose-invert-quote-borders: #374151;
-  --tw-prose-invert-captions: #9ca3af;
-  --tw-prose-invert-kbd: #fff;
-  --tw-prose-invert-kbd-shadows: 255 255 255;
-  --tw-prose-invert-code: #fff;
-  --tw-prose-invert-pre-code: #d1d5db;
-  --tw-prose-invert-pre-bg: rgb(0 0 0 / 50%);
-  --tw-prose-invert-th-borders: #4b5563;
-  --tw-prose-invert-td-borders: #374151;
+  --tw-prose-body: hsl(220, 15%, 20%);                /* Charcoal Slate */
+  --tw-prose-headings: hsl(220, 25%, 10%);            /* Deep Navy */
+  --tw-prose-lead: hsl(220, 15%, 35%);                /* Muted Steel Gray */
+  --tw-prose-links: hsl(220, 90%, 50%);               /* Bright Royal Blue */
+  --tw-prose-bold: hsl(220, 25%, 10%);                /* Deep Navy */
+  --tw-prose-counters: hsl(220, 10%, 50%);            /* Muted Blue-Gray */
+  --tw-prose-bullets: hsl(220, 15%, 80%);             /* Soft Cloud Gray */
+  --tw-prose-hr: hsl(215, 20%, 85%);                  /* Pale Silver Blue */
+  --tw-prose-quotes: hsl(220, 25%, 15%);              /* Dark Slate Blue */
+  --tw-prose-quote-borders: hsl(215, 20%, 85%);       /* Pale Silver Blue */
+  --tw-prose-captions: hsl(220, 10%, 50%);            /* Muted Slate */
+  --tw-prose-kbd: hsl(220, 25%, 15%);                 /* Navy Charcoal */
+  --tw-prose-kbd-shadows: 220 25% 15%;                  /* Same as above */
+  --tw-prose-code: hsl(220, 25%, 20%);                /* Slate Navy */
+  --tw-prose-pre-code: hsl(220, 10%, 94%);            /* Misty Cloud */
+  --tw-prose-pre-bg: hsl(220, 15%, 15%);              /* Deep Slate */
+  --tw-prose-th-borders: hsl(220, 15%, 85%);          /* Pale Gray Blue */
+  --tw-prose-td-borders: hsl(220, 15%, 90%);          /* Snowy Gray */
+  --tw-prose-invert-body: hsl(220, 15%, 85%);         /* Soft Light Gray */
+  --tw-prose-invert-headings: hsl(0, 0%, 100%);       /* Pure White */
+  --tw-prose-invert-lead: hsl(220, 10%, 70%);         /* Medium Gray Blue */
+  --tw-prose-invert-links: hsl(220, 90%, 70%);        /* Soft Electric Blue */
+  --tw-prose-invert-bold: hsl(0, 0%, 100%);           /* Pure White */
+  --tw-prose-invert-counters: hsl(220, 10%, 65%);     /* Dusty Blue Gray */
+  --tw-prose-invert-bullets: hsl(220, 10%, 40%);      /* Darker Gray Blue */
+  --tw-prose-invert-hr: hsl(220, 15%, 30%);           /* Dim Gray Blue */
+  --tw-prose-invert-quotes: hsl(220, 15%, 95%);       /* Soft Snow White */
+  --tw-prose-invert-quote-borders: hsl(220, 15%, 30%)   /* Dim Gray Blue */
+  --tw-prose-invert-captions: hsl(220, 10%, 60%);       /* Light Muted Blue */
+  --tw-prose-invert-kbd: hsl(0, 0%, 100%);            /* Pure White */
+  --tw-prose-invert-kbd-shadows: 0 0% 100%;             /* Pure White (RGB fallback) */
+  --tw-prose-invert-code: hsl(0, 0%, 100%);           /* Pure White */
+  --tw-prose-invert-pre-code: hsl(220, 15%, 85%);     /* Misty Gray */
+  --tw-prose-invert-pre-bg: hsl(220, 15%, 10%);       /* Deep Charcoal Blue */
+  --tw-prose-invert-th-borders: hsl(220, 15%, 40%);   /* Medium Gray Blue */
+  --tw-prose-invert-td-borders: hsl(220, 15%, 25%);   /* Charcoal Steel */
   font-size: 1rem /* 16px */;
   line-height: 1.75;
 }
@@ -682,7 +700,8 @@ prose {
 .prose-lg :where(.prose-lg > :last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
   margin-bottom: 0;
 }
-.dark\:prose-invert:is(.dark *) {
+@media (prefers-color-scheme: dark) {
+.prose {
   --tw-prose-body: var(--tw-prose-invert-body);
   --tw-prose-headings: var(--tw-prose-invert-headings);
   --tw-prose-lead: var(--tw-prose-invert-lead);
@@ -701,4 +720,5 @@ prose {
   --tw-prose-pre-bg: var(--tw-prose-invert-pre-bg);
   --tw-prose-th-borders: var(--tw-prose-invert-th-borders);
   --tw-prose-td-borders: var(--tw-prose-invert-td-borders);
+}
 }
