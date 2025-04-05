@@ -394,42 +394,42 @@ prose {
   margin-top: 0.8571429em;
 }
 .prose {
-  --tw-prose-body: #374151;
-  --tw-prose-headings: #111827;
-  --tw-prose-lead: #4b5563;
-  --tw-prose-links: #111827;
-  --tw-prose-bold: #111827;
-  --tw-prose-counters: #6b7280;
-  --tw-prose-bullets: #d1d5db;
-  --tw-prose-hr: #e5e7eb;
-  --tw-prose-quotes: #111827;
-  --tw-prose-quote-borders: #e5e7eb;
-  --tw-prose-captions: #6b7280;
-  --tw-prose-kbd: #111827;
-  --tw-prose-kbd-shadows: 17 24 39;
-  --tw-prose-code: #111827;
-  --tw-prose-pre-code: #e5e7eb;
-  --tw-prose-pre-bg: #1f2937;
-  --tw-prose-th-borders: #d1d5db;
-  --tw-prose-td-borders: #e5e7eb;
-  --tw-prose-invert-body: #d1d5db;
-  --tw-prose-invert-headings: #fff;
-  --tw-prose-invert-lead: #9ca3af;
-  --tw-prose-invert-links: #fff;
-  --tw-prose-invert-bold: #fff;
-  --tw-prose-invert-counters: #9ca3af;
-  --tw-prose-invert-bullets: #4b5563;
-  --tw-prose-invert-hr: #374151;
-  --tw-prose-invert-quotes: #f3f4f6;
-  --tw-prose-invert-quote-borders: #374151;
-  --tw-prose-invert-captions: #9ca3af;
-  --tw-prose-invert-kbd: #fff;
-  --tw-prose-invert-kbd-shadows: 255 255 255;
-  --tw-prose-invert-code: #fff;
-  --tw-prose-invert-pre-code: #d1d5db;
-  --tw-prose-invert-pre-bg: rgb(0 0 0 / 50%);
-  --tw-prose-invert-th-borders: #4b5563;
-  --tw-prose-invert-td-borders: #374151;
+  --tw-prose-body: hsl(220, 15%, 20%);                /* Charcoal Slate */
+  --tw-prose-headings: hsl(220, 25%, 10%);            /* Deep Navy */
+  --tw-prose-lead: hsl(220, 15%, 35%);                /* Muted Steel Gray */
+  --tw-prose-links: hsl(220, 90%, 50%);               /* Bright Royal Blue */
+  --tw-prose-bold: hsl(220, 25%, 10%);                /* Deep Navy */
+  --tw-prose-counters: hsl(220, 10%, 50%);            /* Muted Blue-Gray */
+  --tw-prose-bullets: hsl(220, 15%, 80%);             /* Soft Cloud Gray */
+  --tw-prose-hr: hsl(215, 20%, 85%);                  /* Pale Silver Blue */
+  --tw-prose-quotes: hsl(220, 25%, 15%);              /* Dark Slate Blue */
+  --tw-prose-quote-borders: hsl(215, 20%, 85%);       /* Pale Silver Blue */
+  --tw-prose-captions: hsl(220, 10%, 50%);            /* Muted Slate */
+  --tw-prose-kbd: hsl(220, 25%, 15%);                 /* Navy Charcoal */
+  --tw-prose-kbd-shadows: 220 25% 15%;                  /* Same as above */
+  --tw-prose-code: hsl(220, 25%, 20%);                /* Slate Navy */
+  --tw-prose-pre-code: hsl(220, 10%, 94%);            /* Misty Cloud */
+  --tw-prose-pre-bg: hsl(220, 15%, 15%);              /* Deep Slate */
+  --tw-prose-th-borders: hsl(220, 15%, 85%);          /* Pale Gray Blue */
+  --tw-prose-td-borders: hsl(220, 15%, 90%);          /* Snowy Gray */
+  --tw-prose-invert-body: hsl(220, 15%, 85%);         /* Soft Light Gray */
+  --tw-prose-invert-headings: hsl(0, 0%, 100%);       /* Pure White */
+  --tw-prose-invert-lead: hsl(220, 10%, 70%);         /* Medium Gray Blue */
+  --tw-prose-invert-links: hsl(220, 90%, 70%);        /* Soft Electric Blue */
+  --tw-prose-invert-bold: hsl(0, 0%, 100%);           /* Pure White */
+  --tw-prose-invert-counters: hsl(220, 10%, 65%);     /* Dusty Blue Gray */
+  --tw-prose-invert-bullets: hsl(220, 10%, 40%);      /* Darker Gray Blue */
+  --tw-prose-invert-hr: hsl(220, 15%, 30%);           /* Dim Gray Blue */
+  --tw-prose-invert-quotes: hsl(220, 15%, 95%);       /* Soft Snow White */
+  --tw-prose-invert-quote-borders: hsl(220, 15%, 30%)   /* Dim Gray Blue */
+  --tw-prose-invert-captions: hsl(220, 10%, 60%);       /* Light Muted Blue */
+  --tw-prose-invert-kbd: hsl(0, 0%, 100%);            /* Pure White */
+  --tw-prose-invert-kbd-shadows: 0 0% 100%;             /* Pure White (RGB fallback) */
+  --tw-prose-invert-code: hsl(0, 0%, 100%);           /* Pure White */
+  --tw-prose-invert-pre-code: hsl(220, 15%, 85%);     /* Misty Gray */
+  --tw-prose-invert-pre-bg: hsl(220, 15%, 10%);       /* Deep Charcoal Blue */
+  --tw-prose-invert-th-borders: hsl(220, 15%, 40%);   /* Medium Gray Blue */
+  --tw-prose-invert-td-borders: hsl(220, 15%, 25%);   /* Charcoal Steel */
   font-size: 1rem /* 16px */;
   line-height: 1.75;
 }
@@ -700,7 +700,8 @@ prose {
 .prose-lg :where(.prose-lg > :last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
   margin-bottom: 0;
 }
-.dark\:prose-invert:is(.dark *) {
+@media (prefers-color-scheme: dark) {
+.prose {
   --tw-prose-body: var(--tw-prose-invert-body);
   --tw-prose-headings: var(--tw-prose-invert-headings);
   --tw-prose-lead: var(--tw-prose-invert-lead);
@@ -719,4 +720,5 @@ prose {
   --tw-prose-pre-bg: var(--tw-prose-invert-pre-bg);
   --tw-prose-th-borders: var(--tw-prose-invert-th-borders);
   --tw-prose-td-borders: var(--tw-prose-invert-td-borders);
+}
 }
