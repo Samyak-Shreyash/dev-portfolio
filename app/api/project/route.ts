@@ -37,7 +37,7 @@ export async function POST(req: Request) {
 
   // Insert the new blog post into the database
   
-  const result = await db.collection("posts").insertOne({
+  const result = await db.collection("projects").insertOne({
     ...validatedData,
     createdAt: new Date(),
     updatedAt: new Date(),
