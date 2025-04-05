@@ -4,7 +4,7 @@ import { Project } from "@/lib/types";
 import { Suspense } from "react";
 
 async function fetchProjects() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/project`);
   if (!response.ok) {
       throw new Error('Failed to fetch projects')
   }

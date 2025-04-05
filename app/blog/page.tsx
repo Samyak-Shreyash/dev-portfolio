@@ -4,7 +4,7 @@ import { BlogPost } from "@/lib/types";
 import { Suspense } from "react";
 
 async function fetchPosts() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs`);
     if (!response.ok) {
         throw new Error('Failed to fetch posts')
     }

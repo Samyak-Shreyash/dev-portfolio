@@ -6,7 +6,6 @@ export interface BlogPost {
     excerpt?: string
     slug: string
     content: string
-    readingTime: string
     coverImage?: string
     published: boolean
     createdAt: string

@@ -4,16 +4,14 @@ import { CURR_IMG, DEV_NAME, TECH_STACK } from "@/lib/constants";
 import { ArrowRight, ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import "./globals.css";
 import { format } from "date-fns";
-import { sortBlogs } from "@/lib/utils";
 import { Suspense } from "react";
 import BlogLoading from "@/components/BlogLoading";
-import { Project } from "@/lib/types";
+import { BlogPost, Project } from "@/lib/types";
 
 
 async function fetchPosts() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs`);
   if (!response.ok) {
       throw new Error('Failed to fetch posts')
   }
@@ -22,7 +20,7 @@ async function fetchPosts() {
 }
 
 async function fetchProjects() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/project`);
   if (!response.ok) {
       throw new Error('Failed to fetch projects')
   }
@@ -32,7 +30,7 @@ async function fetchProjects() {
 
 export default async function Home() {
   const projects = (await fetchProjects()).slice(0, 3); // Get only the latest 3 projects
-  const blogs = sortBlogs(await fetchPosts()).slice(0, 2); // Get only the latest 2 posts
+  const blogs = (await fetchPosts()).slice(0, 2); // Get only the latest 2 posts
   return (
     <div>
       <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
@@ -167,7 +165,7 @@ export default async function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
               <Suspense fallback={<BlogLoading />}>
                 {blogs
-                .map((post) => (
+                .map((post: BlogPost) => (
                   <div
                   key={post?._id}
                   className="group relative overflow-hidden rounded-lg border bg-[hsl(var(--background))] p-6 text-left shadow-sm transition-all hover:shadow-md"

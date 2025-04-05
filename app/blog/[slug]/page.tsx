@@ -7,13 +7,14 @@ import { DEV_IMAGE, DEV_NAME, siteMetaData, siteURL } from "@/lib/constants"
 import type { Metadata } from "next"
 import { JSX, Suspense } from "react"
 import BlogLoading from "@/components/BlogLoading"
+import readingTime from "reading-time";
 
 async function fetchBySlug(slug: string) {
   console.log("Fetching blog post by slug:",slug)
   if (!slug || slug=== undefined|| slug.length === 0) {
     return null
   }
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${slug.trim()}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/${slug.trim()}`);
   if (!response.ok) { 
       throw new Error('Failed to fetch posts')
   }
@@ -115,7 +116,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </Avatar>
             </div>
             <div className="text-sm">{format(new Date(post.createdAt ?? Date.now()), "MMMM d, yyyy")}</div>
-            <div className="items-end">{post.readingTime}</div>
+            <div className="items-end">{readingTime(post.content).text}</div>
         </div>
 
         <div className="prose prose-neutral dark:prose-invert max-w-none">

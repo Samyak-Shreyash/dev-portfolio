@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { format } from "date-fns"
 import type { BlogPost } from "@/lib/types"
+import readingTime from "reading-time";
 
 interface BlogCardProps {
   post: BlogPost
@@ -38,7 +39,7 @@ export function BlogCard({ post }: BlogCardProps) {
         <Link href={`/blog/${post.slug}`} className="text-sm font-medium text-primary hover:underline">
           Read More
         </Link>
-        <span>{post.readingTime}</span>
+        <span>{readingTime(post.content).text}</span>
       </CardFooter>
     </Card>
   )
