@@ -5,6 +5,7 @@ import { Badge } from "./ui/badge";
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
 import '@/app/globals.css';
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 export function AboutMeTab() {
     return (
@@ -34,11 +35,14 @@ export function AboutMeTab() {
                     {job.period}
                   </Badge>
                 </div>
-                <ul>
+                <div className="prose prose-neutral dark:prose-invert max-w-none">
+                          <MDXRemote source={job?.description} />
+                    </div>
+                {/* <ul>
                   {job.description.split("\n").map((work, index) => (
                     <li key={index}>{`${work}`}</li>
                   ))}
-                </ul>
+                </ul> */}
                 <div className="flex flex-wrap gap-2">
                   {job.technologies.map((tech, techIndex) => (
                     <Badge
