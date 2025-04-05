@@ -175,7 +175,7 @@ export const TECH_STACK = [
         title: "Started Schooling in Sathyabama Institute of Science & Technology",
         description:
           "Started graduation studies with Computer Science Engineering",
-        icon:  "🎓",
+        icon: <GraduationCap className="h-6 w-6" />
       },
     {
       date: "Mar 2013",

@@ -1,4 +1,3 @@
-import { getBlogPostBySlug, getBlogPosts } from "@/lib/blog"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import { format } from "date-fns"
@@ -6,26 +5,37 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar'
 import { DEV_IMAGE, DEV_NAME, siteMetaData, siteURL } from "@/lib/constants"
 import type { Metadata } from "next"
-import { JSX } from "react"
+import { JSX, Suspense } from "react"
+import BlogLoading from "@/components/BlogLoading"
+import readingTime from "reading-time";
 
-export async function generateStaticParams() {
-  const posts = await getBlogPosts()
+export const dynamic = "force-dynamic"
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
-}
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await (params)
-
-  if (!slug) {
+async function fetchBySlug(slug: string) {
+  console.log("Fetching blog post by slug:",slug)
+  if (!slug || slug=== undefined|| slug.length === 0) {
     return {
       title: "Post Not Found",
       description: "The blog post you're looking for doesn't exist",
     }
   }
 
-  const blog = await getBlogPostBySlug(slug)
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL?? siteURL+"/api"
+  const response = await fetch(`${apiUrl}/blogs/${slug.trim()}`);
+  
+  if (!response.ok) { 
+      throw new Error('Failed to fetch posts')
+  }
+  const data = await response.json()
+  if (!data) { 
+      throw new Error('Failed to fetch posts')
+  }
+  return data;
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await (params)
+  const blog = await fetchBySlug(slug)
 
   if (!blog) {
     return {
@@ -70,17 +80,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }): Promise<JSX.Element>  {
   const { slug } = await params
 
-  if (!slug) {
-    return notFound()
-  }
+  const post = await fetchBySlug(slug)
 
-  const post = await getBlogPostBySlug(slug)
-
-  if (!post) {
+  if (!(post??post._id)) {
     return notFound()
   }
 
   return (
+    <Suspense fallback={<BlogLoading />}>
     <article className="container mx-auto px-4 py-12 max-w-4xl">
         {post.coverImage && (
             <div className="relative w-full h-[400px] mb-8 rounded-lg overflow-hidden">
@@ -108,12 +115,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </Avatar>
             </div>
             <div className="text-sm">{format(new Date(post.createdAt ?? Date.now()), "MMMM d, yyyy")}</div>
-            <div className="items-end">{post.readingTime}</div>
+            <div className="items-end">{readingTime(post.content).text}</div>
         </div>
 
-        <article className="prose prose-neutral dark:prose-invert max-w-none">
+        <div className="prose prose-neutral dark:prose-invert max-w-none">
           <MDXRemote source={post?.content} />
+    </div>
     </article>
-    </article>
-  )
-}
+    </Suspense>
+  )}
