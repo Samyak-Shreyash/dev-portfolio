@@ -1,6 +1,6 @@
 import ContactIcons from "@/components/contact-icons";
 import { Button } from "@/components/ui/button";
-import { CURR_IMG, DEV_NAME, TECH_STACK } from "@/lib/constants";
+import { CURR_IMG, DEV_NAME, siteURL, TECH_STACK } from "@/lib/constants";
 import { ArrowRight, ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,22 +9,31 @@ import { Suspense } from "react";
 import BlogLoading from "@/components/BlogLoading";
 import { BlogPost, Project } from "@/lib/types";
 
+export const dynamic = "force-dynamic"
+
+const apiUrl = process.env.NEXT_PUBLIC_API_URL?? siteURL+"/api"
 
 async function fetchPosts() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs`);
+  const response = await fetch(`${apiUrl}/blogs`);
   if (!response.ok) {
       throw new Error('Failed to fetch posts')
   }
   const data = await response.json()
+  if (!data) {
+    throw new Error('Failed to fetch posts')
+}
   return data;
 }
 
 async function fetchProjects() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/project`);
+  const response = await fetch(`${apiUrl}/project`);
   if (!response.ok) {
       throw new Error('Failed to fetch projects')
   }
   const data = await response.json()
+  if (!data) {
+    throw new Error('Failed to fetch projects')
+}
   return data;
 }
 

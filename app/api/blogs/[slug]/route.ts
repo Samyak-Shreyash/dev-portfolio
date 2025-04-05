@@ -16,7 +16,6 @@ export async function GET(_request: NextRequest, { params }: { params: tParams }
     if (!post) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 })
     }
-
     return NextResponse.json(post)
   } catch (error) {
     console.error("Error fetching post:", error)

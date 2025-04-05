@@ -26,7 +26,7 @@ const BlogLoading: React.FC = () => {
         <div className="absolute inset-0 bg-primary/40 rounded-md w-full h-full shadow-lg transform rotate-0" />
         <div className="absolute inset-0 bg-primary/70 rounded-md w-full h-full shadow-lg transform rotate-[10deg]" />
       </motion.div>
-      <p className="text-muted-foreground text-lg font-medium">Fetching your stories...</p>
+      <p className="text-muted-foreground text-lg font-medium">Fetching your page...</p>
     </div>
   );
 };
