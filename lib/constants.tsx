@@ -23,7 +23,7 @@ export const PAGES = [
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
     { name: "Blogs", href: "/blog" },
-    { name: "Contact", href: "/contact" }
+    { name: "Contact", href: "/login" }
 ];
 
 export const TECH_STACK = [

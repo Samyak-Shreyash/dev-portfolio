@@ -26,7 +26,7 @@ export default function ContactPage() {
                         <div className='space-y-8'>
                             <div className='relative group'>
                                 <div className="absolute -inset-0.5 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--secondary))] rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-                                <Card className="relative bg-[hsl(var(--background))]/80 backdrop-blur-sm border-0">
+                                <Card className="relative bg-[hsl(var(--background))] backdrop-blur-sm border-0">
                                     <CardContent className="p-6">
                                         <div className="space-y-6">
                                             <div className="flex items-center gap-4">
