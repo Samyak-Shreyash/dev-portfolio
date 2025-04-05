@@ -92,7 +92,7 @@ export const TECH_STACK = [
     export const WORK_EXP = [
         {
           company: "Mphasis",
-          role: " Senior Software Engineer",
+          role: "Senior System Software Engineer",
           period: "Oct'2023-Present",
           description:
             " - Developed and enhanced **financial technology** workflows using **Java** and **Spring** Framework, ensuring scalable and maintainable solutions across multiple services."+
@@ -107,11 +107,12 @@ export const TECH_STACK = [
           period: "Aug'2021-Oct'2023",
           description:
             " - Worked on creation on *Audit System* with **AWS Kinesis streams** to log account activities."+
-            "\n - Created major KPIs within the *Sharesource produc*t and created Analytics features with dashboards and custom alerts providing valuable insights on patient health to end-users(Clinicians)."+
+            "\n - Created major KPIs within the *Sharesource product* and created Analytics features with dashboards and custom alerts providing valuable insights on patient health to end-users(Clinicians)."+
             "\n - Worked on upgrade of projects from **monolithic** to **micro-services**, and upgrade of liferay projects to DXP 7.4."+
             "\n - Developed rule-based engine for recommendation on prescription setting for clinicians."+
             "\n - Conceptualized and developed new features within the mobile-app to Improve User Experience increasing User Acquisition by **15%**."+
-            "\n - Developed features for full-stack development of complete new device withing ShareSource with p*rescription settings for clinicians*, *treatment processing* as well as analysis and complete implementation of *analytics features with dashboards*",          technologies: ["Java", "Spring-boot","AWS", "AWS Kinesis streams", "Vue"],
+            "\n - Developed features for full-stack development of complete new device within ShareSource with *prescription settings for clinicians*, *treatment processing* as well as analysis and complete implementation of *analytics features with dashboards*",          
+            technologies: ["Java", "Spring-boot","AWS", "AWS Kinesis streams", "Vue"],
         },
         {
           company: "Wells Fargo",
