@@ -1,49 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: 210, 20%, 98%;  /* Soft Off-White */
-  --foreground: 220, 25%, 15%;  /* Deep Charcoal Blue */
-  --primary: 220, 80%, 50%;     /* Vibrant Royal Blue */
-  --primary-foreground: 210, 40%, 98%; /* Very Light Gray */
-  --secondary: 0, 0%, 100%;          /* Pure White */
-  --secondary-foreground: 220, 25%, 15%; /* Deep Charcoal */
-  --muted: 220, 15%, 94%;       /* Soft Cloud Gray */
-  --muted-foreground: 220, 10%, 40%; /* Medium Gray */
-  --card: 210, 30%, 92%;   /* Subtle Blue-Gray */
-  --card-foreground: 220, 20%, 12%; /* Dark Charcoal Blue */
-  --accent: 35, 85%, 55%;       /* Soft Warm Amber */
-  --accent-foreground: 220, 25%, 15%; /* Deep Charcoal */
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 221.2 83.2% 53.3%;
+  --background: 210 20% 98%;         /* Clean soft off-white */
+  --foreground: 220 15% 18%;         /* Slightly softened charcoal blue */
+
+  --primary: 220 90% 55%;            /* Vivid royal blue (great for light backgrounds) */
+  --primary-foreground: 0 0% 100%;   /* Pure white for best contrast on blue */
+
+  --secondary: 0 0% 100%;            /* Pure white cards/sections */
+  --secondary-foreground: 220 15% 18%; /* Consistent with main text */
+
+  --muted: 220 15% 94%;              /* Soft subtle gray for muted UI */
+  --muted-foreground: 220 10% 45%;   /* Slightly darker gray for legibility */
+
+  --card: 210 30% 96%;               /* Light blue-gray with softness */
+  --card-foreground: 220 15% 20%;    /* Clean and readable against card */
+
+  --accent: 35 95% 56%;              /* Vibrant warm amber (balances the cool theme) */
+  --accent-foreground: 220 15% 18%;  /* Deep text over amber buttons/labels */
+
+  --destructive: 0 75% 55%;          /* Softened red for warning or delete */
+  --destructive-foreground: 0 0% 100%;
+
+  --popover: 0 0% 100%;              /* Pure white dropdowns/tooltips */
+  --popover-foreground: 220 15% 18%;
+
+  --border: 215 20% 85%;             /* Softer border with subtle contrast */
+  --input: 215 20% 85%;              /* Consistent with borders for forms */
+
+  --ring: 220 90% 60%;               /* Same tone as primary for focus ring */
   --radius: 0.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: 230, 25%, 10%;  /* Deep Charcoal Blue */
-    --foreground: 210, 20%, 95%;  /* Light Grayish Blue */
-    --primary: 220, 80%, 60%;     /* Electric Blue */
-    --primary-foreground: 0, 0%, 98%; /* Off-White */
-    --secondary: 210, 30%, 18%;   /* Muted Steel Blue */
-    --secondary-foreground: 210, 40%, 98%; /* Very Light Gray */
-    --muted: 220, 15%, 25%;  /* Slightly lighter */
-    --muted-foreground: 0, 0%, 80%; /* Higher contrast */
-    --card: 225, 20%, 12%;        /* Dark Blue-Gray */
-    --card-foreground: 210, 20%, 90%; /* Pale Gray */
-    --accent: 35, 90%, 55%;       /* Warm Amber (for contrast) */
-    --accent-foreground: 0, 0%, 98%; /* Near White */
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+  --background: 230 20% 8%;           /* Slightly deeper charcoal blue */
+  --foreground: 210 15% 85%;          /* Softened light gray-blue for less strain */
+
+  --primary: 220 100% 65%;            /* Sharper electric blue (more punch) */
+  --primary-foreground: 0 0% 98%;     /* Crisp off-white for contrast */
+
+  --secondary: 215 25% 20%;           /* More muted, refined steel blue */
+  --secondary-foreground: 210 20% 90%;/* Balanced contrast, not too stark */
+
+  --muted: 220 10% 30%;               /* Subtle surface for inputs/footers */
+  --muted-foreground: 0 0% 75%;       /* Softer text for muted areas */
+
+  --card: 228 20% 12%;                /* Slightly more contrast with background */
+  --card-foreground: 210 15% 88%;     /* Gentle on the eyes */
+
+  --accent: 35 95% 55%;               /* Warm amber — kept for vibrancy */
+  --accent-foreground: 0 0% 98%;      /* Bright contrast on accent */
+
+  --destructive: 0 80% 40%;           /* Richer red for clarity */
+  --destructive-foreground: 0 0% 98%;
+
+  --popover: 225 25% 12%;             /* Consistent with card */
+  --popover-foreground: 210 20% 90%;
+
+  --border: 218 20% 18%;              /* Slightly lighter border for depth */
+  --input: 218 20% 18%;               /* Matches border for input elements */
+
+  --ring: 220 100% 60%;               /* Same as primary, helps focus outlines */
   }
 }
 
