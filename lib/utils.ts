@@ -31,11 +31,10 @@ export function MapPost(Post: WithId<Document> | BlogPost | null): BlogPost | nu
 export const postSchema = z.object({
   title: z.string().min(1, "Title is required"),
   slug: z.string().min(1, "Slug is required"),
-  content: z.string().min(1, "Content is required"),
+  content: z.string().min(1, "Content is required").transform((val) =>val.trim()),
   excerpt: z.string().optional(),
   coverImage: z.string().optional(),
-  published: z.boolean().default(false),
-  author: z.string().optional(),
+  published: z.boolean().default(false)
 })
 
 export const projectSchema = z.object({
@@ -47,3 +46,15 @@ export const projectSchema = z.object({
       coverImage: z.string().optional(),
       online: z.boolean().default(false),
 })
+
+
+export function slugify(text: string): string {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-") // Replace spaces with -
+    .replace(/&/g, "-and-") // Replace & with 'and'
+    .replace(/[^\w-]+/g, "") // Remove all non-word characters
+    .replace(/--+/g, "-") // Replace multiple - with single -
+}

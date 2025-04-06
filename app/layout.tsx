@@ -3,13 +3,11 @@ import "./globals.css";
 import { siteMetaData } from "@/lib/constants";
 import { Inter } from "next/font/google";
 import { ThemesProvider } from "@/components/theme-provider";
-import SiteHeader from "@/components/site-header";
+import SiteHeader, { AdminHeader } from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
-
 const inter = Inter({ subsets: ["latin"] });
-
 
 export const metadata: Metadata= {
     metadataBase: new URL(siteMetaData.siteUrl),
@@ -51,7 +49,7 @@ export default function RootLayout({children} : { children: React.ReactNode}) {
             <body className={inter.className} suppressHydrationWarning>
                 <ThemesProvider attribute="class" defaultTheme="system" enableSystem>
                     <div className="flex flex-col min-h-screen">
-                        <SiteHeader />
+                        <AdminHeader />
                         {children}
                         <SiteFooter />
                     </div>

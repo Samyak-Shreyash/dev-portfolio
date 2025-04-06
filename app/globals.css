@@ -71,14 +71,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.bg-foreground {
-  background-color: hsl(var(--foreground));
-}
-
-.bg-primary {
-  background-color: hsl(var(--primary));
-}
-
 .bg-secondary {
   background-color: hsl(var(--secondary));
 }

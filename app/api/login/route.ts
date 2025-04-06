@@ -5,6 +5,8 @@ import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import { connectToDatabase } from '@/lib/mongodb';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/dist/server/api-utils';
+import { siteURL } from '@/lib/constants';
 
 const userSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -61,7 +63,6 @@ export async function POST(req: NextRequest) {
       path: '/',
       maxAge: TOKEN_EXPIRY,
     });
-
     return NextResponse.json({ success: true, message: 'Login successful'}, {status: 200 });
   } catch (err) {
     console.error('Login error:', err);

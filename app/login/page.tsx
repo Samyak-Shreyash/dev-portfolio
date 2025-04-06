@@ -4,8 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useEffect, useState } from "react";
-import { Toast } from "@/components/ui/toast";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { siteURL } from "@/lib/constants";
 
 const userSchema = z.object({
@@ -19,10 +18,8 @@ const userSchema = z.object({
 const apiUrl = process.env.NEXT_PUBLIC_API_URL?? siteURL+"/api";
 
 export default function Login() {
-  console.log("Login Page");
 
   const [mounted, setMounted] = useState(false);
-  const [redirectPath, setRedirectPath] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const {
@@ -32,46 +29,32 @@ export default function Login() {
   } = useForm({
     resolver: zodResolver(userSchema),
   });
+  
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (redirectPath) redirect(redirectPath);
-
+  
   const onSubmit = async (data: { email: string; password: string }) => {
     setLoading(true);
     try {
-      const res = await fetch(`{${apiUrl}/api/login}`, {
+        const res = await fetch(`${apiUrl}/login`, {
         method: "POST",
-        headers: { "Content-Types": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
       const result = await res.json();
-      
-      console.log(result);
 
-      if (result.success) {
-        Toast({
-          title: "User Authorised!",
-          content: "Taking you to Admin Board",
-        });
-        setTimeout(() => setRedirectPath("/contact"), 1500);
+      if (res.ok) {
+        setTimeout(() => router.replace("/admin"), 1500);
       } else {
-        Toast({
-          title: "Credentials Invalid",
-          content: "Are you sure you want to go this path!",
-          variant: "destructive",
-        });
+        setTimeout(() => router.replace("/"), 1500);
       }
     } catch (error) {
-      console.log(error);
-      Toast({
-        title: "Login Error",
-        content: "Are you sure you want to go this path!",
-        variant: "destructive",
-      });
+      console.error(error);
     } finally {
       setLoading(false);
     }

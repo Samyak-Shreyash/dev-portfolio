@@ -1,6 +1,6 @@
 import { Briefcase, GraduationCap, Laptop } from "lucide-react";
 
-export const siteURL = "https://samyakshreyash.vercel.app";
+export const siteURL = "http://localhost:3000";
 export const DEV_NAME = "Samyak Shreyash";
 export const DEV_TITLE = "Software Engineer | Full Stack Developer | Open Source Contributor";
 export const DEV_GITHUB= "github.com/Samyak-Shreyash";
