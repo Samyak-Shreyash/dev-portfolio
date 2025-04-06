@@ -7,15 +7,12 @@ import { z } from "zod"
 // This is a route handler for the /api/blog endpoint
 export async function GET() {
     // Connect to the database
-    console.log("Connecting to Projects DB");
     try {
       const { db } = await connectToDatabase()
-      console.log(db.collections.length)
       const projects = await db.collection("projects").find({}).sort({ createdAt: -1 }).toArray()
   
       return NextResponse.json(projects)
     } catch (error) {
-      console.error("Error fetching posts:", error)
       return NextResponse.json({ error: "Failed to fetch posts" }, { status: 500 })
     }
 }

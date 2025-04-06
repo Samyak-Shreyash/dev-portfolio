@@ -12,7 +12,6 @@ import readingTime from "reading-time";
 export const dynamic = "force-dynamic"
 
 async function fetchBySlug(slug: string) {
-  console.log("Fetching blog post by slug:",slug)
   if (!slug || slug=== undefined|| slug.length === 0) {
     return {
       title: "Post Not Found",

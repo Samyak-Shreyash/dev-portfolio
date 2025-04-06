@@ -48,9 +48,6 @@ export default function ContactForm() {
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
     try {
-      // Log form data to console (for demonstration)
-      console.log("Form submitted:", values)
-
       // Reset form and show success message
       form.reset()
       setSubmitted(true)
@@ -68,7 +65,7 @@ export default function ContactForm() {
         variant: "destructive",
       })
       // Log form data to console (for demonstration)
-      console.log("Form not submitted:", error)
+      console.error("Form not submitted:", error)
     } finally {
       setIsSubmitting(false)
     }
