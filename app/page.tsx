@@ -1,6 +1,6 @@
 import ContactIcons from "@/components/contact-icons";
 import { Button } from "@/components/ui/button";
-import { CURR_IMG, DEV_NAME, siteURL, TECH_STACK } from "@/lib/constants";
+import { CURR_IMG, DEV_GITHUB, DEV_LINKEDIN, DEV_NAME, DEV_TITLE, siteURL, TECH_STACK } from "@/lib/constants";
 import { ArrowRight, ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,10 +8,29 @@ import { format } from "date-fns";
 import { Suspense } from "react";
 import BlogLoading from "@/components/BlogLoading";
 import { BlogPost, Project } from "@/lib/types";
+import Script from "next/script";
 
 export const dynamic = "force-dynamic"
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL?? siteURL+"/api"
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": DEV_NAME,
+  "url": siteURL,
+  "sameAs": [
+    DEV_GITHUB,
+    DEV_LINKEDIN
+  ],
+  "jobTitle": DEV_TITLE,
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Mphasis"
+  },
+  "knowsAbout": ["Java", "SQL", "Web Development", "React", "Next.js", "Kafka"],
+};
+
 
 async function fetchPosts() {
   const response = await fetch(`${apiUrl}/blogs`);
@@ -42,6 +61,12 @@ export default async function Home() {
   const blogs = (await fetchPosts()).slice(0, 2); // Get only the latest 2 posts
   return (
     <div>
+       <Script
+        id="schema-person"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
         <div className="container px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_500px]">

@@ -119,11 +119,11 @@ export const TECH_STACK = [
           role: "Software Developer",
           period: "July'2018-Aug'2021",
           description:
-            " - Developed portal with **Spring **to revamp entire *Final Security Review Process* achieving enhanced *Application Security* practices using Java and Oracle Database."+
+            " - Developed portal with **Spring** to revamp entire *Final Security Review Process* achieving enhanced *Application Security* practices using Java and Oracle Database."+
             "\n - Worked on development of **Penalty Box** with Java for timely audit of security trainings in the Organization."+
             "\n - Created System to track and generate **Consequence Model** of all Applications used and developed in Wells Fargo with **Java**."+
             "\n - **Created** *Wells Fargo-Cisco Bridge tool* for data mapping and validation by Network Security Team with Python and JavaScript."+
-            "\n - Developed System in **Python **for *Automated tracking and Management of software patches*, increasing the efficiency by **38%**, Contributed to the development of the company's main product, learning and implementing best practices in web development.",
+            "\n - Developed System in **Python** for *Automated tracking and Management of software patches*, increasing the efficiency by **38%**, Contributed to the development of the company's main product, learning and implementing best practices in web development.",
           technologies: ["Java", "Spring", "Python", "Shell", "Phantomjs", "Oracle"],
         },
       ];
@@ -204,9 +204,9 @@ export const TECH_STACK = [
     },
   ]
   export const siteMetaData = {
-    title: DEV_TITLE,
+    title: DEV_NAME,
     author: DEV_NAME,
-    headerTitle: DEV_NAME,
+    headerTitle: DEV_TITLE,
     description: `Developer Portfolio made by and for ${DEV_NAME}`,
     language: 'en-US',
     interests: 'technology, Coding, travelling, food and fitness',

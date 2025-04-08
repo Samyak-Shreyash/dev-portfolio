@@ -59,9 +59,9 @@ export default function AboutImageSection() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-background mb-4">
               {DEV_NAME}
             </h1>
-            <h1 className="text-xl md:text-2xl text-muted-foreground mb-6">
+            <h2 className="text-xl md:text-2xl text-muted-foreground mb-6">
               {DEV_TITLE}
-            </h1>
+            </h2>
             <div className="flex ">
               <Button asChild className="inline-flex items-center gap-2">
                 <a href={DEV_RESUME} download>

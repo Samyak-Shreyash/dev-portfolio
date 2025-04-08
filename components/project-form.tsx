@@ -1,6 +1,6 @@
 "use client";
 
-import { BlogPost } from "@/lib/types";
+import { Project } from "@/lib/types";
 import {
   Form,
   FormControl,
@@ -13,7 +13,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { postSchema, slugify } from "@/lib/utils";
+import { projectSchema, slugify } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Toast } from "./ui/toast";
@@ -22,91 +22,84 @@ import { Textarea } from "./ui/textarea";
 import { Switch } from "./ui/switch";
 import { ImageUpload } from "./image-upload";
 import { Button } from "./ui/button";
-import { MarkdownEditor } from "./markdown-editor";
 
-interface BlogPostFormProps {
-  post?: BlogPost;
+interface ProjectFormProps {
+  project?: Project;
 }
 
-export function BlogPostForm({ post }: BlogPostFormProps) {
+export function ProjectForm({ project }: ProjectFormProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const form = useForm<z.infer<typeof postSchema>>({
-    // resolver: zodResolver(postSchema),
-    defaultValues: post
+  const form = useForm<z.infer<typeof projectSchema>>({
+    // resolver: zodResolver(projectSchema),
+    defaultValues: project
       ? {
-          title: post.title,
-          slug: post.slug,
-          content: post.content,
-          excerpt: post.excerpt ?? "",
-          coverImage: post.coverImage ?? "",
-          published: post.published ?? false,
+          title: project.title,
+          excerpt: project.excerpt ?? "",
+          coverImage: project.coverImage ?? "",
+          online: project.online ?? false,
+          link: project.link?.toString() || "",
+          github: project.github?.toString() || ""
         }
       : {
           title: "",
-          slug: "",
-          content: "",
           excerpt: "",
           coverImage: "",
-          published: false,
+          online: false,
+          link:"",
+          github:""
         },
   });
 
-  async function onSubmit(values: z.infer<typeof postSchema>) {
+  async function onSubmit(values: z.infer<typeof projectSchema>) {
     try {
       setIsSubmitting(true);
 
-      // Ensure content is properly formatted as markdown
-      const formData = {
-        ...values,
-        content: values.content.trim(), // Trim any extra whitespace but preserve markdown formatting
-      };
-
-      if (post) {
-        // Update existing post
-        const response = await fetch(`/api/posts/${post._id}`, {
+      if (project) {
+        // Update existing project
+        const response = await fetch(`/api/projects/${project._id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(values),
         });
 
         if (!response.ok) {
           const error = await response.json();
-          throw new Error(error.error || "Failed to update post");
+          throw new Error(error.error || "Failed to update project");
         }
 
         Toast({
-          title: "Post updated",
-          content: "Your post has been updated successfully.",
+          title: "project updated",
+          content: "Your project has been updated successfully.",
         });
       } else {
-        // Create new post
-        const response = await fetch("/api/posts", {
-          method: "POST",
+        // Create new project
+        const response = await fetch("/api/projects", {
+          method: "project",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(FormData),
         });
 
         if (!response.ok) {
           const error = await response.json();
-          throw new Error(error.error || "Failed to create post");
+          throw new Error(error.error || "Failed to create project");
         }
 
         Toast({
-          title: "Post created",
-          content: "Your post has been created successfully.",
+          title: "project created",
+          content: "Your project has been created successfully.",
         });
       }
 
       router.push("/admin");
       router.refresh();
     } catch (error) {
-      console.error("Error submitting post:", error);
+      console.error("Error submitting project:", error);
       Toast({
         title: "Error",
         content: error instanceof Error ? error.message : "An error occurred",
@@ -130,13 +123,8 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
                   <FormLabel>Title</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="My Awesome Blog Post"
+                      placeholder="My Awesome Blog project"
                       {...field}
-                      onChange={(e) => {
-                        field.onChange(e);
-                        // Auto-generate slug if slug is empty
-                        form.setValue("slug", slugify(e.target.value));
-                      }}
                     />
                   </FormControl>
                   <FormMessage />
@@ -146,12 +134,12 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
 
             <FormField
               control={form.control}
-              name="slug"
+              name="link"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Slug</FormLabel>
+                  <FormLabel>Link</FormLabel>
                   <FormControl>
-                    <Input placeholder="my-awesome-blog-post" {...field} />
+                    <Input placeholder="my-awesome-blog-project" {...field} />
                   </FormControl>
                   <FormDescription>
                     The URL-friendly version of the title
@@ -169,7 +157,7 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
                   <FormLabel>Excerpt</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="A brief summary of your blog post"
+                      placeholder="A brief summary of your blog project"
                       {...field}
                     />
                   </FormControl>
@@ -185,9 +173,9 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
           <div className="space-y-6">
             <FormField
               control={form.control}
-              name="published"
+              name="online"
               render={({ field }) => (
-                <FormItem className="flex flex-row-reverse justify-between rounded-lg p-4">
+                <FormItem className="flex flex-row-reverse items-right rounded-lg p-4">
                     <FormControl>
                     <Switch
                       checked={field.value}
@@ -195,7 +183,10 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
                     />
                   </FormControl>
                   <div className="space-y-0.5 px-4">
-                    {!field.value? <FormDescription>Make this post visible to visitors</FormDescription>:<></>}
+                    {field.value? <FormLabel className="text-base">Published</FormLabel> :
+                    <FormDescription>
+                      Make this project visible to visitors
+                    </FormDescription>}
                   </div>
                 </FormItem>
               )}
@@ -218,13 +209,12 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
             />
           </div>
         </div>
-        <div className="py-4 md:py-8">
-        <FormField
+        {/* <FormField
           control={form.control}
           name="content"
           render={({ field }) => (
             <FormItem>
-              <FormLabel >Content</FormLabel>
+              <FormLabel>Content</FormLabel>
               <FormControl>
                 <MarkdownEditor value={field.value} onChange={field.onChange} />
               </FormControl>
@@ -232,19 +222,19 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
             </FormItem>
           )}
         />
-        </div>
+
         <div className="flex gap-4 justify-end">
           <Button
             type="button"
             variant="outline"
-            onClick={() => router.push("/admin/blogs")}
+            onClick={() => router.push("/admin")}
           >
             Cancel
           </Button>
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Saving..." : post ? "Update Post" : "Create Post"}
+            {isSubmitting ? "Saving..." : project ? "Update project" : "Create project"}
           </Button>
-        </div>
+        </div> */}
       </form>
     </Form>
   );

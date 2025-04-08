@@ -199,14 +199,15 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
   };
 
   return (
-    <div className="border rounded-lg shadow-sm">
-      <div className="p-2 border-b bg-muted/50">
+    <div className="border border-[hsl(var(--muted-foreground))]/30 rounded-lg shadow-sm">
+      <div className="p-2 bg-[hsl(var(--muted))]">
         <div className="flex flex-wrap gap-1">
           <Button
             type="button"
             variant="ghost"
             size="icon"
             onClick={handleBold}
+            className="hover:bg-[hsl(var(--muted-foreground))]/30"
             title="Bold"
           >
             <Bold className="h-4 w-4" />
@@ -216,6 +217,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
             variant="ghost"
             size="icon"
             onClick={handleItalic}
+            className="hover:bg-[hsl(var(--muted-foreground))]/30"
             title="Italic"
           >
             <Italic className="h-4 w-4" />
@@ -225,6 +227,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
             variant="ghost"
             size="icon"
             onClick={handleStrikethrough}
+            className="hover:bg-[hsl(var(--muted-foreground))]/30"
             title="Strikethrough"
           >
             <Strikethrough className="h-4 w-4" />
@@ -235,6 +238,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
             variant="ghost"
             size="icon"
             onClick={handleH1}
+            className="hover:bg-[hsl(var(--muted-foreground))]/30"
             title="Heading 1"
           >
             <Heading1 className="h-4 w-4" />
@@ -244,6 +248,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
             variant="ghost"
             size="icon"
             onClick={handleH2}
+            className="hover:bg-[hsl(var(--muted-foreground))]/30"
             title="Heading 2"
           >
             <Heading2 className="h-4 w-4" />
@@ -253,6 +258,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
             variant="ghost"
             size="icon"
             onClick={handleH3}
+            className="hover:bg-[hsl(var(--muted-foreground))]/30"
             title="Heading 3"
           >
             <Heading3 className="h-4 w-4" />
@@ -263,6 +269,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
             variant="ghost"
             size="icon"
             onClick={handleUnorderedList}
+            className="hover:bg-[hsl(var(--muted-foreground))]/30"
             title="Bullet List"
           >
             <List className="h-4 w-4" />
@@ -272,6 +279,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
             variant="ghost"
             size="icon"
             onClick={handleOrderedList}
+            className="hover:bg-[hsl(var(--muted-foreground))]/30"
             title="Numbered List"
           >
             <ListOrdered className="h-4 w-4" />
@@ -282,13 +290,14 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
             variant="ghost"
             size="icon"
             onClick={handleLink}
+            className="hover:bg-[hsl(var(--muted-foreground))]/30"
             title="Link"
           >
             <Link className="h-4 w-4" />
           </Button>
           <Dialog open={isImageDialogOpen} onOpenChange={setIsImageDialogOpen}>
             <DialogTrigger asChild>
-              <Button type="button" variant="ghost" size="icon" title="Image">
+              <Button type="button" variant="ghost" className="hover:bg-[hsl(var(--muted-foreground))]/30" size="icon" title="Image">
                 <ImageIcon className="h-4 w-4" />
               </Button>
             </DialogTrigger>
@@ -308,6 +317,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                     placeholder="https://example.com/image.jpg"
+                    className="hover:bg-[hsl(var(--muted-foreground))]/30"
                   />
                 </div>
                 <div className="grid gap-2">
@@ -317,6 +327,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
                     value={imageAlt}
                     onChange={(e) => setImageAlt(e.target.value)}
                     placeholder="Description of the image"
+                    className="hover:bg-[hsl(var(--muted-foreground))]/30"
                   />
                 </div>
                 <div className="grid gap-2">
@@ -341,12 +352,14 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
                   type="button"
                   variant="outline"
                   onClick={() => setIsImageDialogOpen(false)}
+                  className="hover:bg-[hsl(var(--muted-foreground))]/30"
                 >
                   Cancel
                 </Button>
                 <Button
                   type="button"
                   onClick={handleInsertImage}
+                  className="hover:bg-[hsl(var(--muted-foreground))]/30"    
                   disabled={!imageUrl}
                 >
                   Insert Image
@@ -357,6 +370,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
           <Button
             type="button"
             variant="ghost"
+            className="hover:bg-[hsl(var(--muted-foreground))]/30"
             size="icon"
             onClick={handleCode}
             title="Inline Code"
@@ -366,8 +380,8 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
           <Button
             type="button"
             variant="ghost"
+            className="px=2 text-xs hover:bg-[hsl(var(--muted-foreground))]/30"
             onClick={handleCodeBlock}
-            className="px-2 text-xs"
             title="Code Block"
           >
             <Code className="h-4 w-4 mr-1" />
@@ -378,6 +392,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
             variant="ghost"
             size="icon"
             onClick={handleBlockquote}
+            className="hover:bg-[hsl(var(--muted-foreground))]/30"
             title="Blockquote"
           >
             <Quote className="h-4 w-4" />
@@ -386,17 +401,17 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
       </div>
 
       <Tabs defaultValue="write">
-        <div className="border-b px-3">
+        <div className="border-b border-b-[hsl(var(--muted-foreground))]/40 px-3">
           <TabsList className="h-9 w-full justify-start rounded-none bg-transparent p-0">
             <TabsTrigger
               value="write"
-              className="rounded-none border-b-2 border-transparent bg-transparent px-4 py-2 font-medium text-muted-foreground shadow-none transition-none data-[state=active]:border-b-[hsl(var(--primary))] data-[state=active]:text-[hsl(var(--foreground))] data-[state=active]:shadow-none"
+              className="rounded-none border-b-2 border-transparent bg-transparent px-4 py-2 font-medium text-foreground shadow-none transition-none data-[state=active]:border-b-[hsl(var(--primary))] data-[state=active]:text-[hsl(var(--foreground))] data-[state=active]:shadow-none"
             >
               Write
             </TabsTrigger>
             <TabsTrigger
               value="preview"
-              className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 py-2 font-medium text-muted-foreground shadow-none transition-none data-[state=active]:border-b-[hsl(var(--primary))] data-[state=active]:text-text-[hsl(var(--foreground))] data-[state=active]:shadow-none"
+              className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 py-2 font-medium text-foreground shadow-none transition-none data-[state=active]:border-b-[hsl(var(--primary))] data-[state=active]:text-[hsl(var(--foreground))] data-[state=active]:shadow-none"
             >
               Preview
             </TabsTrigger>

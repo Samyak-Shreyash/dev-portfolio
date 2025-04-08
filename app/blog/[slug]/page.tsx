@@ -8,6 +8,7 @@ import type { Metadata } from "next"
 import { JSX, Suspense } from "react"
 import BlogLoading from "@/components/BlogLoading"
 import readingTime from "reading-time";
+import Script from "next/script"
 
 export const dynamic = "force-dynamic"
 
@@ -87,6 +88,25 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <Suspense fallback={<BlogLoading />}>
+      <Script
+  id="schema-article"
+  type="application/ld+json"
+  strategy="afterInteractive"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "description": post.excerpt,
+      "datePublished": post.date,
+      "author": {
+        "@type": "Person",
+        "name": DEV_NAME
+      },
+      "url": `${siteURL}}/blog/${post.slug}`,
+    }),
+  }}
+/>
     <article className="container mx-auto px-4 py-12 max-w-4xl">
         {post.coverImage && (
             <div className="relative w-full h-[400px] mb-8 rounded-lg overflow-hidden">
