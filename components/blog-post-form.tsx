@@ -23,6 +23,10 @@ import { Switch } from "./ui/switch";
 import { ImageUpload } from "./image-upload";
 import { Button } from "./ui/button";
 import { MarkdownEditor } from "./markdown-editor";
+import { siteURL } from "@/lib/constants";
+import { BlogApiService } from "@/lib/api-services";
+
+const apiUrl = (process.env.NEXT_PUBLIC_API_URL?? siteURL+'/api')+"/blogs";
 
 interface BlogPostFormProps {
   post?: BlogPost;
@@ -65,18 +69,7 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
 
       if (post) {
         // Update existing post
-        const response = await fetch(`/api/posts/${post._id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
-
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error || "Failed to update post");
-        }
+        const response = await BlogApiService.updateBlog(post._id, post)
 
         Toast({
           title: "Post updated",
@@ -84,17 +77,10 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
         });
       } else {
         // Create new post
-        const response = await fetch("/api/posts", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        const response = BlogApiService.createBlog(formData)
 
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error || "Failed to create post");
+        if (!response) {
+          throw new Error(response || "Failed to create post");
         }
 
         Toast({
@@ -103,7 +89,7 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
         });
       }
 
-      router.push("/admin");
+      router.push("/admin/blog");
       router.refresh();
     } catch (error) {
       console.error("Error submitting post:", error);

@@ -1,4 +1,4 @@
-import { connectToDatabase } from "@/lib/mongodb";
+import { ProjectDBService } from "@/lib/mongodb";
 import { projectSchema } from "@/lib/utils";
 import { NextResponse } from "next/server";
 import { z } from "zod"
@@ -8,8 +8,7 @@ import { z } from "zod"
 export async function GET() {
     // Connect to the database
     try {
-      const { db } = await connectToDatabase()
-      const projects = await db.collection("projects").find({}).sort({ createdAt: -1 }).toArray()
+      const projects = await ProjectDBService.getAllProjects()
   
       return NextResponse.json(projects)
     } catch (error) {
@@ -24,22 +23,12 @@ export async function POST(req: Request) {
 
   
   const validatedData = projectSchema.parse(project);
-
   try {
-    const { db } = await connectToDatabase();
-  // Check if slug already exists
-  const existingPost = await db.collection("projects").findOne({ _id: project._id }); 
-  if (existingPost) {
-    return NextResponse.json({ error: "A post with this slug already exists" }, { status: 400 })
-  }
-
-  // Insert the new blog post into the database
   
-  const result = await db.collection("projects").insertOne({
-    ...validatedData,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  })
+    const result = await ProjectDBService.addNewProject({
+      ...validatedData,
+      link: validatedData.link ?? "", // Provide a default empty string if link is undefined
+    });
 
   return NextResponse.json(
     {
@@ -56,5 +45,24 @@ export async function POST(req: Request) {
   console.error("Error creating post:", error)
   return NextResponse.json({ error: "Failed to create post" }, { status: 500 })
 }
+}
+
+
+export async function DELETE(req: Request) {
+  const project = await req.json()
+  try {
+    // Check if Blog exists
+    const existingBlog = await ProjectDBService.getProjectById(project._id)
+    if (!existingBlog) {
+      return NextResponse.json({ error: "Project not found" }, { status: 404 })
+    }
+
+    await ProjectDBService.deleteProject(project._id)
+
+    return NextResponse.json({ message: "Project deleted successfully" })
+  } catch (error) {
+    console.error("Error deleting Project:", error)
+    return NextResponse.json({ error: "Failed to delete Project" }, { status: 500 })
+  }
 }
 

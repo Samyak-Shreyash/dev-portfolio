@@ -1,5 +1,6 @@
 // pages/sitemap.xml.ts
 
+import { BlogApiService } from '@/lib/api-services';
 import { siteURL } from '@/lib/constants';
 import { GetServerSideProps } from 'next';
 
@@ -9,7 +10,7 @@ interface Post {
 }
 
 async function generateSiteMap(): Promise<string> {
-    const posts: Post[] = await fetch(`${siteURL}/api/blog`).then(res => res.json());
+    const posts: Post[] = await BlogApiService.getAllBlogs()
 
     const blogUrls = posts.map(
         (post) => `

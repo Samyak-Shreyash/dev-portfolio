@@ -1,29 +1,23 @@
 import { DeletePostButton } from "@/components/delete-post-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { siteURL } from "@/lib/constants";
+import { BlogApiService } from "@/lib/api-services";
 import { BlogPost } from "@/lib/types";
 import { format } from "date-fns";
 import { Edit } from "lucide-react";
 import Link from "next/link";
-
-
-async function fetchPosts() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? siteURL + "/api";
-  const response = await fetch(`${apiUrl}/blogs`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch posts");
-  }
-  const data = await response.json();
-  if (!data) {
-    throw new Error("Failed to fetch posts");
-  }
-  return data;
-}
+import { getCurrentUser } from "@/lib/auth"
+import { redirect } from "next/navigation";
 
 export default async function BlogsDashBoard() 
-{
-    const blogs = await fetchPosts()
+{ 
+    const currentUser = await getCurrentUser();
+
+    if (!currentUser) {
+        redirect('/login');
+    }
+
+    const blogs = await BlogApiService.getAllBlogs()
     return (
         <div className="container mx-auto px-6 md:px-12 sm:px-8 py-12 ">
             <div className="flex justify-between mb-8">
@@ -59,7 +53,7 @@ export default async function BlogsDashBoard()
                                 <td className="text-right font-base p-2">
                                     <div className="flex justify-end gap-2">
                                         <Button asChild size="sm" variant="ghost" className="text-green-700 hover:bg-green-500 hover:text-[hsl(var(--background))]">
-                                            <Link href={`/admin/edit/${post.slug}`}>
+                                            <Link href={`/admin/blogs/edit/${post.slug}`}>
                                             <Edit className="h-4 w-4 mr1" />
                                                 Edit
                                             </Link>

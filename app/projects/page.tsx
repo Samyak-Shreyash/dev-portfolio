@@ -1,26 +1,15 @@
 import BlogLoading from "@/components/BlogLoading";
 import { ProjectCard } from "@/components/project-card";
+import { ProjectApiService } from "@/lib/api-services";
 import { siteURL } from "@/lib/constants";
 import { Project } from "@/lib/types";
 import { Suspense } from "react";
 // Use server-side rendering
 export const dynamic = "force-dynamic";
 
-async function fetchProjects() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? siteURL + "/api";
-  const response = await fetch(`${apiUrl}/project`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch projects");
-  }
-  const data = await response.json();
-  if (!data) {
-    throw new Error("Failed to fetch projects");
-  }
-  return data;
-}
 
 export default async function ProjectPage() {
-  const projects = await fetchProjects();
+  const projects = await ProjectApiService.getAllProjects();
 
   return (
     <div className="container mx-auto px-4 py-12">

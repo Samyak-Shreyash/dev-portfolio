@@ -66,8 +66,8 @@ export function AboutMeTab() {
         <h2 className="text-3xl font-bold mb-6">Tech Stack</h2>
         <TooltipProvider>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {TECH_STACK.map((tech, index) => (
-              <Tooltip key={index}>
+            {Object.entries(TECH_STACK).map(([key, tech], index) => (
+              <Tooltip key={key}>
                 <TooltipTrigger asChild>
                   <div
                     className={cn(

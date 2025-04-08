@@ -39,14 +39,29 @@ export const postSchema = z.object({
 
 export const projectSchema = z.object({
   title: z.string().min(1, "Title is required"),
-      excerpt: z.string().optional(),
-      link: z.string().optional(),
-      github: z.string().min(1, "Github Link is required"),
-      specs: z.array(z.string()),
-      coverImage: z.string().optional(),
-      online: z.boolean().default(false),
+  excerpt: z.string().optional(),
+  link: z.string().url("Invalid URL").optional(),
+  github: z.string().url("Invalid URL").min(1, "Github Link is required"),
+  specs: z.array(z.string()),
+  coverImage: z.string().optional(),
+  online: z.boolean().default(false),
 })
 
+export const messageSchema = z.object({
+  name: z.string().min(2, {
+      message: "Name must be at least 2 characters.",
+    }),
+    email: z.string().email({
+      message: "Please enter a valid email address.",
+    }),
+    subject: z.string().min(5, {
+      message: "Subject must be at least 5 characters.",
+    }),
+    message: z.string().min(10, {
+      message: "Message must be at least 10 characters.",
+    }).transform((val) =>val.trim()),
+
+})
 
 export function slugify(text: string): string {
   return text

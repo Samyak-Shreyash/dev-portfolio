@@ -9,33 +9,14 @@ import { JSX, Suspense } from "react"
 import BlogLoading from "@/components/BlogLoading"
 import readingTime from "reading-time";
 import Script from "next/script"
+import { BlogApiService } from "@/lib/api-services"
 
 export const dynamic = "force-dynamic"
 
-async function fetchBySlug(slug: string) {
-  if (!slug || slug=== undefined|| slug.length === 0) {
-    return {
-      title: "Post Not Found",
-      description: "The blog post you're looking for doesn't exist",
-    }
-  }
-
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL?? siteURL+"/api"
-  const response = await fetch(`${apiUrl}/blogs/${slug.trim()}`);
-  
-  if (!response.ok) { 
-      throw new Error('Failed to fetch posts')
-  }
-  const data = await response.json()
-  if (!data) { 
-      throw new Error('Failed to fetch posts')
-  }
-  return data;
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await (params)
-  const blog = await fetchBySlug(slug)
+  const blog = await BlogApiService.getBlogBySlug(slug)
 
   if (!blog) {
     return {
@@ -79,10 +60,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }): Promise<JSX.Element>  {
   const { slug } = await params
+  const post = await BlogApiService.getBlogBySlug(slug)
 
-  const post = await fetchBySlug(slug)
-
-  if (!(post??post._id)) {
+  if (!post || !post._id) {
     return notFound()
   }
 
@@ -98,7 +78,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       "@type": "BlogPosting",
       "headline": post.title,
       "description": post.excerpt,
-      "datePublished": post.date,
+      "datePublished": post.createdAt,
       "author": {
         "@type": "Person",
         "name": DEV_NAME

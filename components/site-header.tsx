@@ -1,11 +1,9 @@
-"use client"
-
 import Link from "next/link"
 import { Sheet, SheetContent, SheetTrigger } from "./ui/Sheet"
 import { Button } from "./ui/button"
 import { Menu } from "lucide-react"
 
-export const pages = [
+const pages = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
@@ -18,11 +16,10 @@ export const pages = [
     { name: "About", href: "/admin/me" },
     { name: "Projects", href: "/admin/projects" },
     { name: "Blogs", href: "/admin/blogs" },
-    { name: "Contact", href: "/admin/contact" }
+    { name: "Contact", href: "/admin/messages" }
   ];
-  
 
-export default function SiteHeader() {
+export function SiteHeader() {
     return(
         <header className="sticky top-0 z-50 w-full px-8 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container flex h-16 items-center justify-between">

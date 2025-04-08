@@ -15,9 +15,15 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
+import { siteURL } from "@/lib/constants"
+import { BlogApiService, ContactApiService } from "@/lib/api-services"
 
 interface DeletePostButtonProps {
   postId: string
+}
+
+interface DeleteMessageButtonProps {
+  msgId: string
 }
 
 export function DeletePostButton({ postId }: DeletePostButtonProps) {
@@ -28,14 +34,7 @@ export function DeletePostButton({ postId }: DeletePostButtonProps) {
     try {
       setIsDeleting(true)
 
-      const response = await fetch(`/api/posts/${postId}`, {
-        method: "DELETE",
-      })
-
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.error || "Failed to delete post")
-      }
+      const response = await BlogApiService.deleteBlog(postId);
 
       router.refresh()
     } catch (error) {
@@ -45,7 +44,6 @@ export function DeletePostButton({ postId }: DeletePostButtonProps) {
       setIsDeleting(false)
     }
   }
-
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -74,5 +72,53 @@ export function DeletePostButton({ postId }: DeletePostButtonProps) {
       </AlertDialogContent>
     </AlertDialog>
   )
-}
+  }
 
+  
+export function DeleteMessageButton({ msgId }: DeleteMessageButtonProps) {
+  const router = useRouter()
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  const handleDelete = async () => {
+    try {
+      setIsDeleting(true)
+
+      const response = await ContactApiService.deleteMessage(msgId);
+
+      router.refresh()
+    } catch (error) {
+      console.error("Error deleting post:", error)
+      alert(error instanceof Error ? error.message : "An error occurred")
+    } finally {
+      setIsDeleting(false)
+    }
+  }
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button size="sm" variant="ghost" className="text-[hsl(var(--destructive))] hover:bg-[hsl(var(--destructive))]">
+          <Trash2 className="h-4 w-4 mr-1" />
+          Delete
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete this message.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction
+            onClick={handleDelete}
+            disabled={isDeleting}
+            className="bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))] hover:bg-[hsl(var(--destructive))]/90"
+          >
+            {isDeleting ? "Deleting..." : "Delete"}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+  }

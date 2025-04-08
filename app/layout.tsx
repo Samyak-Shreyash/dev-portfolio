@@ -3,9 +3,10 @@ import "./globals.css";
 import { siteMetaData } from "@/lib/constants";
 import { Inter } from "next/font/google";
 import { ThemesProvider } from "@/components/theme-provider";
-import SiteHeader, { AdminHeader } from "@/components/site-header";
+import { SiteHeader, AdminHeader } from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { getCurrentUser } from "@/lib/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,13 +44,14 @@ export const metadata: Metadata= {
       images: [siteMetaData.socialBanner],
     },
   };
-export default function RootLayout({children} : { children: React.ReactNode}) {
+export default async function RootLayout({children} : { children: React.ReactNode}) {
+  const currentUser = await getCurrentUser();
     return(
         <html lang="en">
             <body className={inter.className} suppressHydrationWarning>
                 <ThemesProvider attribute="class" defaultTheme="system" enableSystem>
                     <div className="flex flex-col min-h-screen">
-                        <AdminHeader />
+                            { (!currentUser) ? <SiteHeader /> :<AdminHeader /> }
                         {children}
                         <SiteFooter />
                     </div>

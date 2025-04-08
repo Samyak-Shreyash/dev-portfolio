@@ -1,26 +1,13 @@
-import { connectToDatabase } from "@/lib/mongodb";
+import { BlogDBService } from "@/lib/mongodb";
+import { postSchema } from "@/lib/utils";
 import { NextResponse } from "next/server";
 import { z } from "zod"
-
-const postSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  slug: z.string().min(1, "Slug is required"),
-  content: z.string().min(1, "Content is required"),
-  excerpt: z.string().optional(),
-  coverImage: z.string().optional(),
-  published: z.boolean().default(false),
-  author: z.string().optional(),
-})
-
 
 // This is a route handler for the /api/blog endpoint
 export async function GET() {
     // Connect to the database
     try {
-      const { db } = await connectToDatabase()
-  
-      const posts = await db.collection("posts").find({}).sort({ createdAt: -1 }).toArray()
-  
+      const posts = await BlogDBService.getAllBlogs();
       return NextResponse.json(posts)
     } catch (error) {
       console.error("Error fetching posts:", error)
@@ -37,20 +24,14 @@ export async function POST(req: Request) {
   const validatedData = postSchema.parse(blog);
 
   try {
-    const { db } = await connectToDatabase();
-  // Check if slug already exists
-  const existingPost = await db.collection("posts").findOne({ slug: blog.slug }); 
+  const existingPost = await BlogDBService.getBlogBySlug(blog.slug ); 
   if (existingPost) {
     return NextResponse.json({ error: "A post with this slug already exists" }, { status: 400 })
   }
 
   // Insert the new blog post into the database
   
-  const result = await db.collection("posts").insertOne({
-    ...validatedData,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  })
+  const result = await BlogDBService.addNewBlog(validatedData);
 
   return NextResponse.json(
     {

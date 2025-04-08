@@ -9,10 +9,10 @@ import { Suspense } from "react";
 import BlogLoading from "@/components/BlogLoading";
 import { BlogPost, Project } from "@/lib/types";
 import Script from "next/script";
+import { BlogApiService, ProjectApiService } from "@/lib/api-services";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const dynamic = "force-dynamic"
-
-const apiUrl = process.env.NEXT_PUBLIC_API_URL?? siteURL+"/api"
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -32,33 +32,13 @@ const jsonLd = {
 };
 
 
-async function fetchPosts() {
-  const response = await fetch(`${apiUrl}/blogs`);
-  if (!response.ok) {
-      throw new Error('Failed to fetch posts')
-  }
-  const data = await response.json()
-  if (!data) {
-    throw new Error('Failed to fetch posts')
-}
-  return data;
-}
 
-async function fetchProjects() {
-  const response = await fetch(`${apiUrl}/project`);
-  if (!response.ok) {
-      throw new Error('Failed to fetch projects')
-  }
-  const data = await response.json()
-  if (!data) {
-    throw new Error('Failed to fetch projects')
-}
-  return data;
-}
 
 export default async function Home() {
-  const projects = (await fetchProjects()).slice(0, 3); // Get only the latest 3 projects
-  const blogs = (await fetchPosts()).slice(0, 2); // Get only the latest 2 posts
+  
+const blogs = await BlogApiService.getAllBlogs();
+const projects = await ProjectApiService.getAllProjects();
+
   return (
     <div>
        <Script
@@ -119,13 +99,12 @@ export default async function Home() {
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mt-8">
+            <TooltipProvider>
               {TECH_STACK.map((tech) => {
                 return (
-                  <div
-                    className="flex flex-col items-center gap-2"
-                    key={tech.tech}
-                  >
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[hsl(var(--background))]/90">
+                <Tooltip key={tech.tech}>
+                <TooltipTrigger asChild>
+                  <div className="flex flex-col items-center gap-2"><div className="flex h-20 w-20 items-center justify-center rounded-full bg-[hsl(var(--background))]/90">
                       <Image
                         src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
                         alt={tech.tech}
@@ -133,10 +112,15 @@ export default async function Home() {
                         height={40}
                       />
                     </div>
-                    <p className="font-medium">{tech.tech}</p>
-                  </div>
+                    </div>
+                </TooltipTrigger>
+                <TooltipContent side="top">
+                <p className="font-medium">{tech.tech}</p>
+                </TooltipContent>
+                </Tooltip>               
                 );
               })}
+              </TooltipProvider>
             </div>
           </div>
         </div>
@@ -155,6 +139,7 @@ export default async function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
               <Suspense fallback={<BlogLoading />}>
                  {projects
+                 .slice(0,3)
                  .sort((a: { updatedAt: string | number | Date; }, b: { updatedAt: string | number | Date; }) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()) // Sort by date (newest first)
                  .map((project: Project) => (
                   <div
@@ -199,6 +184,7 @@ export default async function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
               <Suspense fallback={<BlogLoading />}>
                 {blogs
+                .slice(0,2)
                 .map((post: BlogPost) => (
                   <div
                   key={post?._id}

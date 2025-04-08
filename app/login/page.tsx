@@ -6,6 +6,7 @@ import { z } from "zod";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { siteURL } from "@/lib/constants";
+import { UserApiService } from "@/lib/api-services";
 
 const userSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -14,13 +15,19 @@ const userSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters" }),
 });
 
-
-const apiUrl = process.env.NEXT_PUBLIC_API_URL?? siteURL+"/api";
-
 export default function Login() {
-
+  const router = useRouter()
   const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.replace("/admin"); // Redirect if already logged in
+    }
+    setMounted(true);
+  }, []);
 
   const {
     register,
@@ -30,28 +37,15 @@ export default function Login() {
     resolver: zodResolver(userSchema),
   });
   
-  const router = useRouter();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  
   const onSubmit = async (data: { email: string; password: string }) => {
     setLoading(true);
     try {
-        const res = await fetch(`${apiUrl}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
+        const res = await UserApiService.getUserByEmail(data);
 
       if (res.ok) {
-        setTimeout(() => router.replace("/admin"), 1500);
+        router.push("/admin");
       } else {
-        setTimeout(() => router.replace("/"), 1500);
+        router.push("/");
       }
     } catch (error) {
       console.error(error);
@@ -73,6 +67,7 @@ export default function Login() {
             </label>
             <input
               type="email"
+              autoComplete="email"
               {...register("email")}
               className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))]"
             />
@@ -104,7 +99,7 @@ export default function Login() {
             className="w-full bg-[hsl(var(--primary))]/60 text-foreground py-2 rounded-xl hover:bg-[hsl(var(--primary))] transition"
             disabled={loading}
           >
-            {loading ? "Logging In" : "Login"}
+            {loading ? <span className="animate-pulse">Logging In...</span> : "Login"}
           </button>
         </form>
       </div>

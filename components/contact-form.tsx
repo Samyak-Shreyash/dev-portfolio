@@ -11,28 +11,15 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Toaster } from "@/components/ui/toaster"
 import { Toast } from "./ui/toast"
-
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  subject: z.string().min(5, {
-    message: "Subject must be at least 5 characters.",
-  }),
-  message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
-  }),
-})
+import { ContactApiService } from "@/lib/api-services"
+import { messageSchema } from "@/lib/utils"
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof messageSchema>>({
+    resolver: zodResolver(messageSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -41,7 +28,7 @@ export default function ContactForm() {
     },
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof messageSchema>) {
     setIsSubmitting(true)
 
     // Simulate form submission delay
@@ -49,6 +36,7 @@ export default function ContactForm() {
 
     try {
       // Reset form and show success message
+      await ContactApiService.createMessage(values)
       form.reset()
       setSubmitted(true)
       Toast({

@@ -3,10 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
-import { connectToDatabase } from '@/lib/mongodb';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/dist/server/api-utils';
-import { siteURL } from '@/lib/constants';
+import { UserDBService } from '@/lib/mongodb';
 
 const userSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -29,9 +27,8 @@ export async function POST(req: NextRequest) {
     }
 
     const { email, password } = result.data;
-    const { db } = await connectToDatabase();
 
-    const user = await db.collection('userOne').findOne({ email });
+    const user = await UserDBService.getUserByEmail(email);
 
     if (!user) {
       return NextResponse.json(
@@ -39,7 +36,7 @@ export async function POST(req: NextRequest) {
         { status: 401 }
       );
     }
-    
+    console.log(user)
     const isValid = await argon2.verify( await argon2.hash(password) , user.password);
 
     if (!isValid) {
