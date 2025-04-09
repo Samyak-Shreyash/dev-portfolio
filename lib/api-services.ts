@@ -234,7 +234,6 @@ export const ContactApiService = {
    * Create a new blog
    */
   async createMessage(msgData: Omit<ContactMsg, "_id" | "createdAt">): Promise<{ msgId: string }> {
-    console.log(msgData)
     try {
       const response = await fetch(`${config.api.baseUrl}${config.api.endpoints.messages}`, {
         method: "POST",
