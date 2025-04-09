@@ -31,19 +31,45 @@ export function MapPost(Post: WithId<Document> | BlogPost | null): BlogPost | nu
 export const postSchema = z.object({
   title: z.string().min(1, "Title is required"),
   slug: z.string().min(1, "Slug is required"),
-  content: z.string().min(1, "Content is required"),
+  content: z.string().min(1, "Content is required").transform((val) =>val.trim()),
   excerpt: z.string().optional(),
   coverImage: z.string().optional(),
-  published: z.boolean().default(false),
-  author: z.string().optional(),
+  published: z.boolean().default(false)
 })
 
 export const projectSchema = z.object({
   title: z.string().min(1, "Title is required"),
-      excerpt: z.string().optional(),
-      link: z.string().optional(),
-      github: z.string().min(1, "Github Link is required"),
-      specs: z.array(z.string()),
-      coverImage: z.string().optional(),
-      online: z.boolean().default(false),
+  excerpt: z.string().optional(),
+  link: z.string().url("Invalid URL").optional(),
+  github: z.string().url("Invalid URL").min(1, "Github Link is required"),
+  specs: z.array(z.string()),
+  coverImage: z.string().optional(),
+  online: z.boolean().default(false),
 })
+
+export const messageSchema = z.object({
+  name: z.string().min(2, {
+      message: "Name must be at least 2 characters.",
+    }),
+    email: z.string().email({
+      message: "Please enter a valid email address.",
+    }),
+    subject: z.string().min(5, {
+      message: "Subject must be at least 5 characters.",
+    }),
+    message: z.string().min(10, {
+      message: "Message must be at least 10 characters.",
+    }).transform((val) =>val.trim()),
+
+})
+
+export function slugify(text: string): string {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-") // Replace spaces with -
+    .replace(/&/g, "-and-") // Replace & with 'and'
+    .replace(/[^\w-]+/g, "") // Remove all non-word characters
+    .replace(/--+/g, "-") // Replace multiple - with single -
+}
