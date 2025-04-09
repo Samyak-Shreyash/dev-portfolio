@@ -5,7 +5,7 @@ export default async function Admin() {
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
-        redirect('/login');
+        redirect('/');
     }
 
     return (

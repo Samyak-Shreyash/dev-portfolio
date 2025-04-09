@@ -9,7 +9,7 @@ export default async function BlogsDashBoard()
   const currentUser = await getCurrentUser();
       
     if (!currentUser) {
-        redirect('/login');
+        redirect('/blog');
     }
       
     const messages = await ContactApiService.getAllMessages()

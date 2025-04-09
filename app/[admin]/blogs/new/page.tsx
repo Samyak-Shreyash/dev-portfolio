@@ -6,7 +6,7 @@ export default async function AddNewBlog() {
     const currentUser = await getCurrentUser();
     
         if (!currentUser) {
-            redirect('/login');
+            redirect('/blog');
         }
     
     return (
