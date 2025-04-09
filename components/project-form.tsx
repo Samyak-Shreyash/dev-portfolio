@@ -11,9 +11,8 @@ import {
   FormMessage,
 } from "./ui/form";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { projectSchema, slugify } from "@/lib/utils";
+import { projectSchema } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Toast } from "./ui/toast";
@@ -209,19 +208,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
             />
           </div>
         </div>
-        {/* <FormField
-          control={form.control}
-          name="content"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Content</FormLabel>
-              <FormControl>
-                <MarkdownEditor value={field.value} onChange={field.onChange} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {
 
         <div className="flex gap-4 justify-end">
           <Button
@@ -234,7 +221,8 @@ export function ProjectForm({ project }: ProjectFormProps) {
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Saving..." : project ? "Update project" : "Create project"}
           </Button>
-        </div> */}
+        </div>
+        }
       </form>
     </Form>
   );

@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { siteURL } from "@/lib/constants";
 import { UserApiService } from "@/lib/api-services";
 
 const userSchema = z.object({
@@ -27,7 +26,7 @@ export default function Login() {
       router.replace("/admin"); // Redirect if already logged in
     }
     setMounted(true);
-  }, []);
+  }, [router]);
 
   const {
     register,

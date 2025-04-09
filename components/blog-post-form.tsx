@@ -11,7 +11,6 @@ import {
   FormMessage,
 } from "./ui/form";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { postSchema, slugify } from "@/lib/utils";
 import { useRouter } from "next/navigation";
@@ -23,10 +22,7 @@ import { Switch } from "./ui/switch";
 import { ImageUpload } from "./image-upload";
 import { Button } from "./ui/button";
 import { MarkdownEditor } from "./markdown-editor";
-import { siteURL } from "@/lib/constants";
 import { BlogApiService } from "@/lib/api-services";
-
-const apiUrl = (process.env.NEXT_PUBLIC_API_URL?? siteURL+'/api')+"/blogs";
 
 interface BlogPostFormProps {
   post?: BlogPost;
@@ -69,7 +65,7 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
 
       if (post) {
         // Update existing post
-        const response = await BlogApiService.updateBlog(post._id, post)
+        await BlogApiService.updateBlog(post._id, post)
 
         Toast({
           title: "Post updated",

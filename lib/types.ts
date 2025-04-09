@@ -1,5 +1,3 @@
-import { Url } from "url"
-
 export interface BlogPost {
     _id: string
     title: string

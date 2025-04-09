@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
-import { siteURL } from "@/lib/constants"
 import { BlogApiService, ContactApiService } from "@/lib/api-services"
 
 interface DeletePostButtonProps {
@@ -34,7 +33,7 @@ export function DeletePostButton({ postId }: DeletePostButtonProps) {
     try {
       setIsDeleting(true)
 
-      const response = await BlogApiService.deleteBlog(postId);
+       await BlogApiService.deleteBlog(postId);
 
       router.refresh()
     } catch (error) {
@@ -83,7 +82,7 @@ export function DeleteMessageButton({ msgId }: DeleteMessageButtonProps) {
     try {
       setIsDeleting(true)
 
-      const response = await ContactApiService.deleteMessage(msgId);
+      await ContactApiService.deleteMessage(msgId);
 
       router.refresh()
     } catch (error) {

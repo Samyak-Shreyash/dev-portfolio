@@ -1,7 +1,6 @@
 import BlogLoading from "@/components/BlogLoading";
 import { ProjectCard } from "@/components/project-card";
 import { ProjectApiService } from "@/lib/api-services";
-import { siteURL } from "@/lib/constants";
 import { Project } from "@/lib/types";
 import { Suspense } from "react";
 // Use server-side rendering

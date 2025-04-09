@@ -1,5 +1,5 @@
 
-import { DeleteMessageButton, DeletePostButton } from "@/components/delete-post-button";
+import { DeleteMessageButton } from "@/components/delete-post-button";
 import { ContactApiService } from "@/lib/api-services";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";

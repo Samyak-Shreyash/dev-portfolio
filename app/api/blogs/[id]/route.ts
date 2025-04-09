@@ -2,61 +2,77 @@ import { BlogDBService } from "@/lib/mongodb";
 import { postSchema } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-// The GET handler for fetching a  Blog by slug
-export async function GET(_request: NextRequest, { params }: { params: { id: string } }) {
+
+export async function GET( _req: NextRequest, { params }: {params: Promise<{ id: string }> })  : Promise<NextResponse>
+{
+  const { id } = await params;
   
   try {
-    const Blog = await BlogDBService.getBlogById(params.id)
-    
-    if (!Blog) {
-      return NextResponse.json({ error: "Blog not found" }, { status: 404 })
+    const blog = await BlogDBService.getBlogById(id);
+
+    if (!blog) {
+      return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
-    return NextResponse.json(Blog)
+
+    return NextResponse.json(blog);
   } catch (error) {
-    console.error("Error fetching Blog:", error)
-    return NextResponse.json({ error: "Failed to fetch Blog" }, { status: 500 })
+    console.error("Error fetching Blog:", error);
+    return NextResponse.json({ error: "Failed to fetch Blog" }, { status: 500 });
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+// PUT: Update a Blog by ID
+export async function PUT(request: NextRequest, { params }: {params: Promise<{ id: string }> })  : Promise<NextResponse>
+{
   try {
-    const data = await request.json()
+    const data = await request.json();
 
-    const validatedData = postSchema.parse(data)
+    const validatedData = postSchema.parse(data);
 
-    // Check if slug already exists for a different Blog
+    // Check if slug already exists for a different blog
     const existingBlog = await BlogDBService.getBlogBySlug(validatedData.slug);
-    if (existingBlog?._id?.toString() === params?.id) {
-      return NextResponse.json({ error: "A Blog with this slug already exists" }, { status: 400 })
+    const { id } = await params
+    if (existingBlog && existingBlog._id.toString() !== id) {
+      return NextResponse.json({ error: "A blog with this slug already exists" }, { status: 400 });
     }
-    const result = await BlogDBService.updateBlog({
-      ...validatedData, createdAt: data.createdAt,
-      _id: data._id
+
+    await BlogDBService.updateBlog({
+      ...validatedData,
+      createdAt: data.createdAt,
+      _id: data._id,
     });
-    
-    return NextResponse.json({ message: "Blog updated successfully" })
+
+    const updatedBlog = await BlogDBService.getBlogById(id);
+
+    return NextResponse.json({
+      message: "Blog updated successfully",
+      blog: updatedBlog,
+    });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 })
+      return NextResponse.json({ error: error.errors }, { status: 400 });
     }
-    console.error("Error updating Blog:", error)
-    return NextResponse.json({ error: "Failed to update Blog" }, { status: 500 })
+
+    console.error("Error updating Blog:", error);
+    return NextResponse.json({ error: "Failed to update Blog" }, { status: 500 });
   }
 }
 
-export async function DELETE(_request: NextRequest, { params }: { params: { id: string } }) {
+// DELETE: Delete a Blog by ID
+export async function DELETE(_request: NextRequest,  { params }: {params: Promise<{ id: string }> })  : Promise<NextResponse>
+{
+  const { id } = await params;
   try {
-    // Check if Blog exists
-    const existingBlog = await BlogDBService.getBlogById(params.id)
+    const existingBlog = await BlogDBService.getBlogById(id);
     if (!existingBlog) {
-      return NextResponse.json({ error: "Blog not found" }, { status: 404 })
+      return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
 
-    await BlogDBService.deleteBlog(params.id)
+    await BlogDBService.deleteBlog(id);
 
-    return NextResponse.json({ message: "Blog deleted successfully" })
+    return NextResponse.json({ message: "Blog deleted successfully" });
   } catch (error) {
-    console.error("Error deleting Blog:", error)
-    return NextResponse.json({ error: "Failed to delete Blog" }, { status: 500 })
+    console.error("Error deleting Blog:", error);
+    return NextResponse.json({ error: "Failed to delete Blog" }, { status: 500 });
   }
 }

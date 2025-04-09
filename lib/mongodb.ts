@@ -9,8 +9,6 @@ if (!process.env.MONGODB_URI) {
 const uri = process.env.MONGODB_URI
 const options = {}
 
-let db_collections: Record<string, any>;
-
 
 let client: MongoClient
 let clientPromise: Promise<MongoClient>
@@ -36,7 +34,7 @@ if (process.env.NODE_ENV === "development") {
 
 async function connectToDatabase() {
   // Connect to the database
-  let client = await clientPromise;
+  const client = await clientPromise;
   const db = client.db("samyakShreyash");
   return {db, client};
 }

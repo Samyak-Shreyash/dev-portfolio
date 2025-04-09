@@ -1,5 +1,3 @@
-
-import { ContactApiService } from "@/lib/api-services";
 import { MessageDBService } from "@/lib/mongodb";
 import { messageSchema } from "@/lib/utils";
 import { NextResponse } from "next/server";
@@ -15,7 +13,7 @@ export async function GET() {
       return NextResponse.json(msg)
     } catch (error) {
       console.error("Error fetching posts:", error)
-      return NextResponse.json({ error: "Failed to fetch posts" }, { status: 500 })
+      return NextResponse.json({ error: error }, { status: 500 })
     }
 }
 
