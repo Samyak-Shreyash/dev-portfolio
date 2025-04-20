@@ -1,4 +1,4 @@
-import { ABOUT_ME, WORK_EXP, TECH_STACK, ACCOMPLISHMENTS } from "@/lib/constants";
+import { WORK_EXP, TECH_STACK, ACCOMPLISHMENTS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@radix-ui/react-tooltip";
 import { Badge } from "./ui/badge"; 

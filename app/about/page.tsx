@@ -28,12 +28,12 @@ export default function About() {
                   life easier for people.
                 </p>
                 <p>
-                  Throughout my career, I've worked with startups, agencies, and enterprise companies, helping them
-                  build scalable and maintainable software solutions. I'm passionate about clean code, performance
+                  Throughout my career, I&apos;ve worked with startups, agencies, and enterprise companies, helping them
+                  build scalable and maintainable software solutions. I&apos;m passionate about clean code, performance
                   optimization, and creating intuitive user experiences.
                 </p>
                 <p>
-                  When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
+                  When I&apos;m not coding, you can find me exploring new technologies, contributing to open-source projects,
                   or sharing my knowledge through blog posts and community events.
                 </p>
               </div>
@@ -70,7 +70,7 @@ export default function About() {
                 <Badge variant="outline">Interests & Hobbies</Badge>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Beyond Coding</h2>
                 <p className="max-w-[700px] mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  When I'm not in front of a computer, here's what I enjoy doing.
+                  When I&apos;m not in front of a computer, here&apos;s what I enjoy doing.
                 </p>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

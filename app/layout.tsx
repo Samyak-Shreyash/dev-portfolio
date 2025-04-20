@@ -6,8 +6,6 @@ import { ThemesProvider } from "@/components/theme-provider";
 import { SiteHeader} from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { getCurrentUser } from "@/lib/auth";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata= {
@@ -60,6 +58,7 @@ export const metadata: Metadata= {
               <SiteFooter />
             </div>
           </ThemesProvider>
+          <SpeedInsights />
         </body>
       </html>
     )

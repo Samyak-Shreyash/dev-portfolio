@@ -1,14 +1,12 @@
-import ContactIcons from "@/components/contact-icons";
 import { Button } from "@/components/ui/button";
-import { CURR_IMG_DARK, DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN, DEV_NAME, DEV_TITLE, siteURL, TECH_STACK } from "@/lib/constants";
-import { ArrowRight, ArrowRightIcon } from "lucide-react";
+import { TECH_STACK } from "@/lib/constants";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 import { Suspense } from "react";
 import BlogLoading from "@/components/BlogLoading";
 import { BlogPost, Project } from "@/lib/types";
-import Script from "next/script";
 import { BlogApiService, ProjectApiService } from "@/lib/api-services";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ProjectCard } from "@/components/project-card";
@@ -18,22 +16,22 @@ import { HeroSection } from "@/components/hero-section";
 
 export const dynamic = "force-dynamic"
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": DEV_NAME,
-  "url": siteURL,
-  "sameAs": [
-    DEV_GITHUB,
-    DEV_LINKEDIN
-  ],
-  "jobTitle": DEV_TITLE,
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Mphasis"
-  },
-  "knowsAbout": ["Java", "SQL", "Web Development", "React", "Next.js", "Kafka"],
-};
+// const jsonLd = {
+//   "@context": "https://schema.org",
+//   "@type": "Person",
+//   "name": DEV_NAME,
+//   "url": siteURL,
+//   "sameAs": [
+//     DEV_GITHUB,
+//     DEV_LINKEDIN
+//   ],
+//   "jobTitle": DEV_TITLE,
+//   "worksFor": {
+//     "@type": "Organization",
+//     "name": "Mphasis"
+//   },
+//   "knowsAbout": ["Java", "SQL", "Web Development", "React", "Next.js", "Kafka"],
+// };
 
 
 
@@ -281,10 +279,10 @@ const projects = await ProjectApiService.getAllProjects();
               <div className="space-y-2">
                 <Badge variant="outline">Get In Touch</Badge>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-balance">
-                  Let's Work Together
+                  Let&apos;s Work Together
                 </h2>
                 <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-pretty">
-                  Have a project in mind or just want to say hello? I'd love to hear from you.
+                  Have a project in mind or just want to say hello? I&apos;d love to hear from you.
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">

@@ -1,14 +1,11 @@
 export const dynamic = "force-dynamic"
 
 import Link from "next/link"
-import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ExternalLink, Github } from "lucide-react"
-import { Project } from "@/lib/types"
 import { ProjectApiService } from "@/lib/api-services"
+import { ProjectCard } from "@/components/project-card"
 
 export const metadata = {
   title: "Projects - Samyak Shreyash",
@@ -86,61 +83,17 @@ export default async function ProjectsPage() {
                 <Badge variant="outline">Collaboration</Badge>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Have a project in mind?</h2>
                 <p className="max-w-[700px] mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  I'm always open to discussing new projects, creative ideas, or opportunities to be part of your
+                  I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your
                   vision.
                 </p>
               </div>
               <Button asChild size="lg">
-                <Link href="/contact">Let's Work Together</Link>
+                <Link href="/contact">Let&apos;s Work Together</Link>
               </Button>
             </div>
           </div>
         </section>
       </main>
     </div>
-  )
-}
-
-
-function ProjectCard({ project }: { project: Project }) {
-  return (
-    <Card className="overflow-hidden group h-full flex flex-col">
-      <div className="aspect-video relative overflow-hidden">
-        <Image
-          src={project.image || "/placeholder.svg"}
-          alt={project.title}
-          width={600}
-          height={400}
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-          {project.demoUrl && (
-            <Button variant="secondary" size="sm" asChild>
-              <Link href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-              </Link>
-            </Button>
-          )}
-          {project.repoUrl && (
-            <Button variant="outline" size="sm" asChild>
-              <Link href={project.repoUrl} target="_blank" rel="noopener noreferrer">
-                <Github className="mr-2 h-4 w-4" /> Code
-              </Link>
-            </Button>
-          )}
-        </div>
-      </div>
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="font-bold text-xl mb-2">{project.title}</h3>
-        <p className="text-sm text-muted-foreground mb-4 flex-grow">{project.description}</p>
-        <div className="flex flex-wrap gap-2 mt-auto">
-          {project.technologies.map((tech, index) => (
-            <Badge key={index} variant="secondary">
-              {tech}
-            </Badge>
-          ))}
-        </div>
-      </div>
-    </Card>
   )
 }
