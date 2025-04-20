@@ -17,12 +17,6 @@ return(
             <span className="sr-only">LinkedIn</span>
         </Button>
         </a>
-        <a href={`https://${DEV_TWITTER}`} target="_blank" rel="noopener noreferrer">
-        <Button variant="ghost" size="icon">
-            <Twitter className="h-5 w-5" />
-            <span className="sr-only">Twitter</span>
-        </Button>
-        </a>
         <a href={`mailto:${DEV_EMAIL}`} target="_blank" rel="noopener noreferrer">
         <Button variant="ghost" size="icon">
             <Mail className="h-5 w-5" />

@@ -4,13 +4,12 @@ export const siteURL = "http://localhost:3000";
 export const DEV_NAME = "Samyak Shreyash";
 export const DEV_TITLE = "Software Engineer | Full Stack Developer | Open Source Contributor";
 export const DEV_GITHUB= "github.com/Samyak-Shreyash";
+export const DEV_LOCATION ="https://maps.app.goo.gl/byM5X639NYpyAan26"
 export const DEV_LINKEDIN= "linkedin.com/in/samyak-shreyash";
-export const DEV_TWITTER= "x.com/Samyak_shreyash";
 export const DEV_EMAIL="sam.shreyash@gmail.com";
 export const DEV_IMAGE="/profile_img.jpg";
-export const CURR_IMG="/ghibli_image.png"
-export const BG_IMAGE_DARK="/bg_image_dark.jpg";
-export const BG_IMAGE_LIGHT="/bg_image_light.jpg";
+export const CURR_IMG_DARK="/ghibli_image.png"
+export const CURR_IMG_LIGHT="/light_img.png"
 
 export const DEV_RESUME = "/Samyak-Shreyash-7yrs-Java.pdf";
 export const ABOUT_ME=[
@@ -18,14 +17,30 @@ export const ABOUT_ME=[
     "I have a strong foundation in both front-end and back-end development, with expertise in Java, Python, and JavaScript. I am proficient in using frameworks like React and Next.js to build dynamic web applications. I also have experience with cloud technologies like AWS and containerization tools like Docker and Kubernetes.",
     "When I'm not coding, you can find me working out, playing Badminton, reading science fiction novels, or experimenting with new recipes in the kitchen."
 ]
-export const PAGES = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
-    { name: "Blogs", href: "/blog" },
-    { name: "Contact", href: "/login" }
-];
 
+export const FAQS = [
+  {
+      question: "What services do you offer?",
+      answer:
+      "I offer a range of services including web development, mobile app development, UI/UX design, and technical consulting. My expertise spans frontend and backend technologies, with a focus on creating exceptional digital experiences.",
+  },
+  {
+      question: "How do you handle project pricing?",
+      answer:
+      "Project pricing depends on the scope, complexity, and timeline. I offer both fixed-price quotes for well-defined projects and hourly rates for ongoing work. I'm happy to discuss your specific needs and provide a detailed estimate.",
+  },
+  {
+      question: "What is your typical project timeline?",
+      answer:
+      "Project timelines vary based on scope and complexity. A simple website might take 2-4 weeks, while a complex web application could take 2-3 months. I'll provide a detailed timeline during our initial consultation.",
+  },
+  {
+      question: "Do you offer ongoing maintenance and support?",
+      answer:
+      "Yes, I offer maintenance packages to keep your project running smoothly after launch. This includes regular updates, security patches, performance optimization, and technical support.",
+  },
+  ]
+  
 export const TECH_STACK = [
     {
         tech: "Java",
@@ -218,7 +233,6 @@ export const TECH_STACK = [
     email: DEV_EMAIL,
     socialLinks: {
       github: DEV_GITHUB,
-      linkedIn: DEV_LINKEDIN,
-      twitter: DEV_TWITTER,
+      linkedIn: DEV_LINKEDIN
   },
   }
