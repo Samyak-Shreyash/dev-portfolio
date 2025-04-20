@@ -1,13 +1,8 @@
 import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+  Card} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
-import { format } from "date-fns";
 import type { Project } from "@/lib/types";
 import { ExternalLink, Github } from "lucide-react";
 import { Button } from "./ui/button";
@@ -18,71 +13,43 @@ interface ProjectProps {
 
 export function ProjectCard({ project }: ProjectProps) {
   return (
-    <Card className="overflow-hidden">
-      <div className="aspect-video relative">
+    <Card className="overflow-hidden group h-full flex flex-col">
+      <div className="aspect-video relative overflow-hidden">
         <Image
-          src={
-            project.coverImage?.toString() ??
-            "/placeholder.svg?height=192&width=384"
-          }
+          src={project.image || "/placeholder.svg"}
           alt={project.title}
-          fill
-          className="object-cover"
+          width={600}
+          height={400}
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
-      </div>
-      <CardHeader className="flex-1">
-        <div className="flex items-center justify-between mb-2">
-          <div className="text-sm text-muted-foreground">
-            {format(new Date(project.createdAt), "MMM d, yyyy")}
-          </div>
-          {!project.online ? (
-            <Badge variant="outline" className="bg-[hsl(var(--secondary))]/40">
-              In-Development
-            </Badge>
-          ) : (
-            <Badge variant="outline" className="bg-[hsl(var(--primary))]/40">
-              Online
-            </Badge>
+        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+          {project.demoUrl && (
+            <Button variant="secondary" size="sm" asChild>
+              <Link href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
+              </Link>
+            </Button>
+          )}
+          {project.repoUrl && (
+            <Button variant="outline" size="sm" asChild>
+              <Link href={project.repoUrl} target="_blank" rel="noopener noreferrer">
+                <Github className="mr-2 h-4 w-4" /> Code
+              </Link>
+            </Button>
           )}
         </div>
-        <Link href={project.link} className="hover:underline">
-          <h3 className="text-xl font-bold tracking-tight">{project.title}</h3>
-        </Link>
-      </CardHeader>
-      <CardContent className="flex-1">
-        <p className="text-muted-foreground line-clamp-3">
-          {project.excerpt ?? ""}
-        </p>
-      </CardContent>
-      <CardContent>
-      <div className="flex flex-wrap gap-2">
-                    {project.specs.map((tech, index) => (
-                      <Badge 
-                      key={index}
-                      className="bg-hsl(var(--primary-foreground)) border-outline text-hsl(var(--secondary-foreground)) hover:bg-hsl(var(--secondary))/80"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-      </CardContent>
-      <CardFooter className="flex flex-row-reverse justify-between">
-        <Button asChild variant="outline" size="sm" className="bg-[hsl(var(--primary))/50]">
-              <Link href={project.github} target="_none" className="text-sm font-medium text-primary hover:underline">
-                  <Github className="text-primary" /> Code
-              </Link>
-              </Button>
-             {project.online &&
-             <Button asChild variant="outline" size="sm">
-             <Link 
-             href={project.link} 
-             target="_none" 
-             className="text-sm font-medium text-primary hover:underline">
-                 <ExternalLink className="text-primary" /> Demo
-             </Link>
-             </Button>
-              }
-            </CardFooter>
+      </div>
+      <div className="p-6 flex flex-col flex-grow">
+        <h3 className="font-bold text-xl mb-2">{project.title}</h3>
+        <p className="text-sm text-muted-foreground mb-4 flex-grow">{project.description}</p>
+        <div className="flex flex-wrap gap-2 mt-auto">
+          {project.technologies.map((tech, index) => (
+            <Badge key={index} variant="secondary">
+              {tech}
+            </Badge>
+          ))}
+        </div>
+      </div>
     </Card>
   );
 }

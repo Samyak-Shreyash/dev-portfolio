@@ -1,6 +1,6 @@
-import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN, DEV_TWITTER } from "@/lib/constants";
+import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN } from "@/lib/constants";
 import { Button } from "./ui/button";
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 export default function ContactIcons() {
 return(
@@ -15,12 +15,6 @@ return(
         <Button variant="ghost" size="icon">
             <Linkedin className="h-5 w-5 hover:"  />
             <span className="sr-only">LinkedIn</span>
-        </Button>
-        </a>
-        <a href={`https://${DEV_TWITTER}`} target="_blank" rel="noopener noreferrer">
-        <Button variant="ghost" size="icon">
-            <Twitter className="h-5 w-5" />
-            <span className="sr-only">Twitter</span>
         </Button>
         </a>
         <a href={`mailto:${DEV_EMAIL}`} target="_blank" rel="noopener noreferrer">

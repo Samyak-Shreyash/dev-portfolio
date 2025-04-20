@@ -12,11 +12,12 @@ export interface BlogPost {
 export interface Project {
     _id: string
     title: string
-    excerpt?: string
-    link: string
-    github: string
-    specs: Array<string>
-    coverImage?: string
+    description: string
+    demoUrl: string
+    repoUrl: string
+    technologies: Array<string>
+    image?: string
+    category: string
     online: boolean
     createdAt: string
     updatedAt: string

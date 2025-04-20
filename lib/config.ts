@@ -18,13 +18,13 @@ export const config = {
        * API endpoints
        */
       endpoints: {
-        blogs: "/blogs",
-        projects: "/project",
+        blogs: "/post",
+        projects: "/projects",
         messages: "/contact",
-        blogBySlug: (slug: string) => `/blogs/slug/${slug}`,
-        blogById: (id: string) => `/blogs/${id}`,
+        blogBySlug: (slug: string) => `/post/${slug}`,
+        blogById: (id: string) => `/post/id/${id}`,
         msgById: (id: string) => `/contact/${id}`,
-        projectById: (id: string) => `/project/${id}`,
+        projectById: (id: string) => `/projects/${id}`,
         user: "/login",
       },
   

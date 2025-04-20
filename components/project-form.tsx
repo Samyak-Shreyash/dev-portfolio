@@ -35,19 +35,23 @@ export function ProjectForm({ project }: ProjectFormProps) {
     defaultValues: project
       ? {
           title: project.title,
-          excerpt: project.excerpt ?? "",
-          coverImage: project.coverImage ?? "",
+          description: project.description ?? "",
+          image: project.image ?? "",
           online: project.online ?? false,
-          link: project.link?.toString() || "",
-          github: project.github?.toString() || ""
+          demoUrl: project.demoUrl?.toString() || "",
+          technologies: project.technologies?? [],
+          category: project.category?.toString() || "",
+          repoUrl: project.repoUrl?.toString() || ""
         }
       : {
           title: "",
-          excerpt: "",
-          coverImage: "",
+          description: "",
+          image: "",
           online: false,
-          link:"",
-          github:""
+          demoUrl:"",
+          repoUrl:"",
+          technologies:[],
+          category:""
         },
   });
 
@@ -133,10 +137,10 @@ export function ProjectForm({ project }: ProjectFormProps) {
 
             <FormField
               control={form.control}
-              name="link"
+              name="demoUrl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Link</FormLabel>
+                  <FormLabel>demoUrl</FormLabel>
                   <FormControl>
                     <Input placeholder="my-awesome-blog-project" {...field} />
                   </FormControl>
@@ -150,10 +154,10 @@ export function ProjectForm({ project }: ProjectFormProps) {
 
             <FormField
               control={form.control}
-              name="excerpt"
+              name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Excerpt</FormLabel>
+                  <FormLabel>description</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="A brief summary of your blog project"
@@ -192,7 +196,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
             />
             <FormField
               control={form.control}
-              name="coverImage"
+              name="image"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Cover Image</FormLabel>

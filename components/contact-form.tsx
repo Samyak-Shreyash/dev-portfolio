@@ -136,7 +136,7 @@ export default function ContactForm() {
               />
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-[hsl(var(--primary))/80] toe-[hsl(var(--primary))] hover:from-[hsl(var(--primary))]/90 hover:to-[hsl(var(--primary))]/70 transition-all duration-300"
+                className="w-full bg-gradient-to-r from-[hsl(var(--primary))/80] to-[hsl(var(--primary))] hover:from-[hsl(var(--primary))]/90 hover:to-[hsl(var(--primary))]/70 transition-all duration-300"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (

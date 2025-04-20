@@ -27,7 +27,7 @@ export async function POST(req: Request) {
   
     const result = await ProjectDBService.addNewProject({
       ...validatedData,
-      link: validatedData.link ?? "", // Provide a default empty string if link is undefined
+      demoUrl: validatedData.demoUrl ?? "", // Provide a default empty string if demoUrl is undefined
     });
 
   return NextResponse.json(

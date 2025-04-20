@@ -1,4 +1,4 @@
-import { ABOUT_ME, WORK_EXP, TECH_STACK, ACCOMPLISHMENTS } from "@/lib/constants";
+import { WORK_EXP, TECH_STACK, ACCOMPLISHMENTS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@radix-ui/react-tooltip";
 import { Badge } from "./ui/badge"; 
@@ -6,16 +6,6 @@ import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
 import '@/app/globals.css';
 import { MDXRemote } from "next-mdx-remote/rsc";
-
-export function AboutMeTab() {
-    return (
-      <div className="max-w-none prose prose-lg dark:prose-invert">
-        <h2 className="text-3xl font-bold mb-6">About Me</h2>
-        {ABOUT_ME.map((para, key) => {
-          return <p key={key}>{para}</p>;
-        })}
-      </div>);
-  }
 
   export function ExperienceTab() {
     return (
@@ -65,7 +55,7 @@ export function AboutMeTab() {
       <div>
         <h2 className="text-3xl font-bold mb-6">Tech Stack</h2>
         <TooltipProvider>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {Object.entries(TECH_STACK).map(([key, tech]) => (
               <Tooltip key={key}>
                 <TooltipTrigger asChild>
