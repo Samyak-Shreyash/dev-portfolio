@@ -39,11 +39,12 @@ export const postSchema = z.object({
 
 export const projectSchema = z.object({
   title: z.string().min(1, "Title is required"),
-  excerpt: z.string().optional(),
-  link: z.string().url("Invalid URL").optional(),
-  github: z.string().url("Invalid URL").min(1, "Github Link is required"),
-  specs: z.array(z.string()),
-  coverImage: z.string().optional(),
+  description: z.string(),
+  demoUrl: z.string().url("Invalid URL").optional(),
+  repoUrl: z.string().url("Invalid URL").min(1, "Github Link is required"),
+  technologies: z.array(z.string()),
+  image: z.string().optional(),
+  category:  z.string().min(1, "Category is required"),
   online: z.boolean().default(false),
 })
 
