@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { DEV_IMAGE } from "@/lib/constants";
+import { DEV_IMAGE, DEV_RESUME } from "@/lib/constants";
 import { Card } from "@/components/ui/card";
 
 export default function About() {
@@ -44,7 +44,10 @@ export default function About() {
                   </Link>
                 </Button>
                 <Button variant="outline">
-                  <Download className="mr-2 h-4 w-4" /> Download Resume
+                  <a href={DEV_RESUME} target="_blank" rel="noopener noreferrer" download>
+                    <Download className="mr-2 h-4 w-4" /> Download Resume
+                  </a>
+                 
                 </Button>
               </div>
             </div>
@@ -76,9 +79,9 @@ export default function About() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
                   { name: "Reading", icon: "📚" },
-                  { name: "Hiking", icon: "🥾" },
+                  { name: "Gym", icon: "💪🏻" },
                   { name: "Photography", icon: "📷" },
-                  { name: "Chess", icon: "♟️" },
+                  { name: "Badminton", icon: "🏸" },
                   { name: "Cooking", icon: "🍳" },
                   { name: "Traveling", icon: "✈️" },
                   { name: "Music", icon: "🎵" },
