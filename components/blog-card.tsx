@@ -16,7 +16,7 @@ export function BlogCard({ post }: BlogCardProps) {
     <Card className="overflow-hidden flex flex-col h-full">
       <div className="relative h-48 w-full">
         <Image
-          src={post.coverImage?.toString() ?? "/placeholder.svg?height=192&width=384/placeholder.svg?height=192&width=384"}
+          src={post.coverImage?.toString() ?? "/placeholder.svg?height=192&width=384"}
           alt={post.title}
           fill
           className="object-cover"

@@ -131,7 +131,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
             </div>
 
             {/* For small screens – stacked vertically */}
-            <div className="block sm:hidden flex flex-col items-center min-w-[3rem] mb-2">
+            <div className="flex sm:hidden flex-col items-center min-w-[3rem] mb-2">
               <Badge
                 variant="outline"
                 className="text-xs font-semibold"
@@ -144,9 +144,6 @@ import { MDXRemote } from "next-mdx-remote/rsc";
             <Card className="overflow-hidden transition-all duration-300 group-hover:shadow-lg group-hover:scale-[1.01]">
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-1">{item.title}</h3>
-                {/* {item.subtitle && (
-    <p className="text-sm text-muted-foreground mb-1">{item.subtitle}</p>
-  )} */}
                 <p className="text-muted-foreground">
                   {item.description}
                 </p>
