@@ -43,7 +43,7 @@ export default function About() {
                     Get In Touch <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button variant="outline">
+                <Button asChild variant="outline">
                   <a href={DEV_RESUME} target="_blank" rel="noopener noreferrer" download>
                     <Download className="mr-2 h-4 w-4" /> Download Resume
                   </a>
