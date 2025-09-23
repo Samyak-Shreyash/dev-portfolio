@@ -11,7 +11,7 @@ export const DEV_IMAGE="/profile_img.jpg";
 export const CURR_IMG_DARK="/dark_img.png"
 export const CURR_IMG_LIGHT="/light_img.png"
 
-export const DEV_RESUME = "/Samyak-Shreyash-7yrs-Java.pdf";
+export const DEV_RESUME = "/SamyakShreyash_Resume.pdf";
 export const ABOUT_ME=[
     "Hello! I'm Samyak Shreyash, a passionate Senior Software Developer with over 6 years of experience building Web applications. I specialize in creating responsive, accessible, and performant user interfaces that provide exceptional user experiences.",
     "I have a strong foundation in both front-end and back-end development, with expertise in Java, Python, and JavaScript. I am proficient in using frameworks like React and Next.js to build dynamic web applications. I also have experience with cloud technologies like AWS and containerization tools like Docker and Kubernetes.",
