@@ -40,13 +40,27 @@ export default async function Home() {
   
 const blogs = await BlogApiService.getAllBlogs();
 const projects = await ProjectApiService.getAllProjects();
+  
+  const hasProjects = projects && (projects.length > 0);
+  const hasBlogs = blogs && (blogs.length > 0);
 
+  // Determine which sections are visible and their order
+  const sections = [
+    { type: 'hero', visible: true, bg: '' },
+    { type: 'tech', visible: true, bg: 'bg-[hsl(var(--muted))]' },
+    { type: 'what-i-do', visible: true, bg: '' },
+    { type: 'projects', visible: hasProjects, bg: 'bg-[hsl(var(--muted))]' },
+    { type: 'blogs', visible: hasBlogs, bg: hasProjects ? '' : 'bg-[hsl(var(--muted))]' },
+    { type: 'contact', visible: true, bg: hasProjects && hasBlogs ? 'bg-[hsl(var(--muted))]' : 
+                                      hasBlogs ? '' : 
+                                      hasProjects ? '' : 'bg-[hsl(var(--muted))]' }
+  ];
   return (
     <main>
       {/* Hero Section */}
       <HeroSection />
       {/* Tech Stack */}
-      <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-[hsl(var(--muted))]">
+      <section className={`w-full py-12 md:py-24 lg:py-32 xl:py-48 ${sections[1].bg}`}>
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -85,7 +99,7 @@ const projects = await ProjectApiService.getAllProjects();
         </div>
       </section>
       {/* What I work */}
-      <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
+      <section className={`w-full py-12 md:py-24 lg:py-32 xl:py-48 ${sections[2].bg}`}>
           <div className="container space-y-12">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -182,7 +196,7 @@ const projects = await ProjectApiService.getAllProjects();
           </div>
         </section>
       {/* Project Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-[hsl(var(--muted))]">
+      {hasProjects && (<section className={`w-full py-12 md:py-24 lg:py-32 xl:py-48 ${sections[3].bg}`}>
         <div className="container space-y-12 px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -228,9 +242,9 @@ const projects = await ProjectApiService.getAllProjects();
               </div>}
             </div>
         </div>
-      </section>
+      </section>)}
       {/* Blogs Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
+      {hasBlogs && (<section className={`w-full py-12 md:py-24 lg:py-32 xl:py-48 ${sections[4].bg}`}>
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -272,8 +286,9 @@ const projects = await ProjectApiService.getAllProjects();
               </div>
                 </div>
                 </div>
-      </section>
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-[hsl(var(--muted))]">
+      </section>)}
+      {/* Contacts Section */}
+      <section className={`w-full py-12 md:py-24 lg:py-32 xl:py-48 ${sections[5].bg}`}>
           <div className="container">
             <div className="mx-auto max-w-3xl space-y-8 text-center">
               <div className="space-y-2">

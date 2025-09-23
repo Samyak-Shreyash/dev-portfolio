@@ -10,7 +10,7 @@ import { DEV_RESUME } from "@/lib/constants"
 const pages = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
+    // { name: "Projects", href: "/projects" },
     { name: "Blogs", href: "/blog" },
     { name: "Contact", href: "/contact" }
   ];
