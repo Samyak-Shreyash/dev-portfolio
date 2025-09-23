@@ -39,56 +39,46 @@ async function connectToDatabase() {
   return {db, client};
 }
 
-
-  async function BlogDBCollection() {
+async function DBCollection(collection: string) {
     const { db } = await connectToDatabase();
-    return db.collection('posts');
+    return db.collection(collection);
   }
 
-  async function ProjectDBCollection() {
-    const { db } = await connectToDatabase();
-    return db.collection('projects');
-  }
-
-  async function ContactDBCollection() {
-    const { db } = await connectToDatabase();
-    return db.collection('messages');
-  }
-
-  async function UserDBCollection() {
-    const { db } = await connectToDatabase();
-    return db.collection('userOne');
-  }
-
-
-
+  const BlogCollection = await DBCollection('posts');
+  const ProjectCollection = await DBCollection('projects');
+  const MessageCollection = await DBCollection('messages');
+  const UserCollection = await DBCollection('userOne');
+  
 export const BlogDBService = {
+
+  async getBlogCount()
+  {
+    // return BlogCollection.countDocuments({}); 
+    
+    return 0;
+  },
   
   async getAllBlogs()
   { 
-    const collection = await BlogDBCollection();
-    return collection.find({}).sort({ createdAt: -1 }).toArray();
+    return BlogCollection.find({}).sort({ createdAt: -1 }).toArray();
   },
 
   async getBlogById(id: string)
   {
-    const collection = await BlogDBCollection();
-    return await collection.findOne({ _id: new ObjectId(id) });
+    return await BlogCollection.findOne({ _id: new ObjectId(id) });
   },
 
   async getBlogBySlug(slug: string)
   {
-    const collection = await BlogDBCollection();
-    return await collection.findOne({ slug: slug })
+    return await BlogCollection.findOne({ slug: slug })
   },
 
   async updateBlog(blogData: Omit<BlogPost,  "updatedAt">)
   {
     
-    const collection = await BlogDBCollection();
-    const existingBlog = await collection.findOne({ _id: new ObjectId(blogData._id) })
+    const existingBlog = await BlogCollection.findOne({ _id: new ObjectId(blogData._id) })
     if(!existingBlog)
-      return await collection.findOneAndUpdate(
+      return await BlogCollection.findOneAndUpdate(
         { _id: new ObjectId(blogData._id) }, // Filter to locate the document
         { ...blogData, updatedAt: new Date() }, // Update object with changes
         { upsert: true } // Options: upsert if not found
@@ -99,44 +89,43 @@ export const BlogDBService = {
 
   async addNewBlog(blogData: Omit<BlogPost, "_id" | "createdAt" | "updatedAt">) {
     
-    const collection = await BlogDBCollection();
-    return await collection.insertOne(
+    return await BlogCollection.insertOne(
         {  ...blogData, createdAt: new Date(), updatedAt: new Date() }, // Update object with changes
       )
   },
 
   async deleteBlog(id: string) {
-    const collection = await BlogDBCollection();
-    const existingBlog = await collection.findOne({ _id: new ObjectId(id) })
-
-    return existingBlog && collection.deleteOne({_id: new ObjectId(id)});
+    const existingBlog = await BlogCollection.findOne({ _id: new ObjectId(id) })
+    return existingBlog && BlogCollection.deleteOne({_id: new ObjectId(id)});
   }
   
 
 };
 
-
 export const ProjectDBService = {
+
+  async getProjectCount()
+  {
+    // return ProjectCollection.countDocuments({}) || 0; 
+    return 0;
+  },
   
   async getAllProjects()
   { 
-    const collection = await ProjectDBCollection();
-    return await collection.find({}).sort({ createdAt: -1 }).toArray()
+    return await ProjectCollection.find({}).sort({ createdAt: -1 }).toArray()
   },
 
   async getProjectById(id: string)
   {
-    const collection = await ProjectDBCollection();
-    return await collection.findOne({ _id: new ObjectId(id) });
+    return await ProjectCollection.findOne({ _id: new ObjectId(id) });
   },
 
   async updateProject(project: Omit<Project,  "updatedAt">)
   {
     
-    const collection = await ProjectDBCollection();
-    const existingBlog = await collection.findOne({ _id: new ObjectId(project._id) })
+    const existingBlog = await ProjectCollection.findOne({ _id: new ObjectId(project._id) })
     if(!existingBlog)
-      return await collection.findOneAndUpdate(
+      return await ProjectCollection.findOneAndUpdate(
         { _id: new ObjectId(project._id) }, // Filter to locate the document
         { ...project, updatedAt: new Date() }, // Update object with changes
         { returnDocument: "after", upsert: true } // Options: return updated document and upsert if not found
@@ -147,15 +136,13 @@ export const ProjectDBService = {
 
   async addNewProject(project: Omit<Project, "_id" | "createdAt" | "updatedAt">) {
     
-    const collection = await ProjectDBCollection();
-   return await collection.insertOne(
+   return await ProjectCollection.insertOne(
         { ...project, createdAt: new Date(), updatedAt: new Date() } // Update object with changes
    );
   },
 
   async deleteProject(id: string) {
-    const collection = await ProjectDBCollection();
-    return collection.deleteOne({_id: new ObjectId(id)});
+    return ProjectCollection.deleteOne({_id: new ObjectId(id)});
   }
 
 };
@@ -165,26 +152,22 @@ export const MessageDBService = {
   
   async getAllMessages()
   { 
-    const collection  = await ContactDBCollection();
-    return await collection.find({}).sort({ createdAt: -1 }).toArray()
+    return await MessageCollection.find({}).sort({ createdAt: -1 }).toArray()
   },
   
   async getMessageById(id: string)
   {
-    const collection = await ContactDBCollection();
-    return await collection.findOne({ _id: new ObjectId(id) });
+    return await MessageCollection.findOne({ _id: new ObjectId(id) });
   },
 
   async pushMessage(project: Omit<ContactMsg, "_id" | "createdAt" >) {
-    const collection  = await ContactDBCollection();
-    return await collection.insertOne(
+    return await MessageCollection.insertOne(
          { ...project, _id: new ObjectId(), createdAt: new Date() }, // Update object with changes
     );
    },
 
   async deleteMessage(id: string) {
-    const collection  = await ContactDBCollection();
-    return collection.deleteOne({_id: new ObjectId(id)});
+    return MessageCollection.deleteOne({_id: new ObjectId(id)});
   }
 
 };
@@ -193,8 +176,7 @@ export const MessageDBService = {
 export const UserDBService = {
   
   async getUserByEmail(email: string)
-  { 
-    const collection = await UserDBCollection();
-    return await collection.findOne({ email: email})
+  {
+    return await UserCollection.findOne({ email: email})
   }
 };
