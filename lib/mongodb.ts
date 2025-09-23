@@ -45,7 +45,7 @@ async function DBCollection(collection: string) {
   }
 
   const BlogCollection = await DBCollection('posts');
-  const ProjectCollection = await DBCollection('projects');
+  const ProjectCollection = await DBCollection('project');
   const MessageCollection = await DBCollection('messages');
   const UserCollection = await DBCollection('userOne');
   
