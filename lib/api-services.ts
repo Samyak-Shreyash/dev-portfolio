@@ -2,8 +2,8 @@ import { BlogPost, ContactMsg, Project } from "./types"
 
 export const ContactApiService = {
   baseUrl: process.env.NODE_ENV === 'development' 
-    ? 'http://localhost:3000/api/blog'
-    : `${process.env.NEXT_PUBLIC_BASE_URL}/api/messages`,
+    ? 'http://localhost:3000/api/contact'
+    : `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact`,
 
 /**
    * Create a new message
