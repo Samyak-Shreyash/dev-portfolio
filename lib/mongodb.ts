@@ -67,19 +67,22 @@ export const BlogDBService = {
   async getAllBlogs()
   { 
     const collection = await BlogDBCollection();
-    return collection.find({}).sort({ createdAt: -1 }).toArray();
+    const posts = await collection.find({}).sort({ createdAt: -1 }).toArray();
+    return posts as unknown as BlogPost[];
   },
 
   async getBlogById(id: string)
   {
     const collection = await BlogDBCollection();
-    return await collection.findOne({ _id: new ObjectId(id) });
+    const result = await collection.findOne({ _id: new ObjectId(id) });
+    return result as BlogPost | null;
   },
 
   async getBlogBySlug(slug: string)
   {
     const collection = await BlogDBCollection();
-    return await collection.findOne({ slug: slug })
+    const result =  await collection.findOne({ slug: slug })
+    return result as BlogPost | null;
   },
 
   async updateBlog(blogData: Omit<BlogPost,  "updatedAt">)
@@ -121,13 +124,15 @@ export const ProjectDBService = {
   async getAllProjects()
   { 
     const collection = await ProjectDBCollection();
-    return await collection.find({}).sort({ createdAt: -1 }).toArray()
+    const projects = await collection.find({}).sort({ createdAt: -1 }).toArray();
+    return projects as unknown as Project[];
   },
 
   async getProjectById(id: string)
   {
     const collection = await ProjectDBCollection();
-    return await collection.findOne({ _id: new ObjectId(id) });
+    const result = await collection.findOne({ _id: new ObjectId(id) });
+    return result as Project | null;
   },
 
   async updateProject(project: Omit<Project,  "updatedAt">)

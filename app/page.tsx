@@ -7,12 +7,12 @@ import { format } from "date-fns";
 import { Suspense } from "react";
 import BlogLoading from "@/components/BlogLoading";
 import { BlogPost, Project } from "@/lib/types";
-import { BlogApiService, ProjectApiService } from "@/lib/api-services";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ProjectCard } from "@/components/project-card";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { HeroSection } from "@/components/hero-section";
+import { BlogDBService, ProjectDBService } from "@/lib/mongodb";
 
 export const dynamic = "force-dynamic"
 
@@ -38,8 +38,8 @@ export const dynamic = "force-dynamic"
 
 export default async function Home() {
   
-const blogs = await BlogApiService.getAllBlogs();
-const projects = await ProjectApiService.getAllProjects();
+const blogs = await BlogDBService.getAllBlogs();
+const projects = await ProjectDBService.getAllProjects();
 
   return (
     <main>

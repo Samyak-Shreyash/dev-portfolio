@@ -11,8 +11,8 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Toaster } from "@/components/ui/toaster"
 import { Toast } from "./ui/toast"
-import { ContactApiService } from "@/lib/api-services"
 import { messageSchema } from "@/lib/utils"
+import { ContactApiService } from "@/lib/api-services"
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -33,7 +33,6 @@ export default function ContactForm() {
 
     // Simulate form submission delay
     await new Promise((resolve) => setTimeout(resolve, 1000))
-
     try {
       // Reset form and show success message
       await ContactApiService.createMessage(values)

@@ -6,16 +6,16 @@ import { BlogPost } from "@/lib/types";
 import { format } from "date-fns";
 import { Edit } from "lucide-react";
 import Link from "next/link";
-import { getCurrentUser } from "@/lib/auth"
-import { redirect } from "next/navigation";
+// import { getCurrentUser } from "@/lib/auth"
+// import { redirect } from "next/navigation";
 
 export default async function BlogsDashBoard() 
 { 
-    const currentUser = await getCurrentUser();
+    // const currentUser = await getCurrentUser();
 
-    if (!currentUser) {
-        redirect('/blog');
-    }
+    // if (!currentUser) {
+    //     redirect('/blog');
+    // }
 
     const blogs = await BlogApiService.getAllBlogs()
     return (

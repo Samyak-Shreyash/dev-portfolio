@@ -63,6 +63,3 @@ export const metadata: Metadata= {
       </html>
     )
   }
-  
-  
-  import './globals.css'

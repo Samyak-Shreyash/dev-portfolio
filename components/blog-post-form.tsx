@@ -12,7 +12,7 @@ import {
 } from "./ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { postSchema, slugify } from "@/lib/utils";
+import { blogSchema, slugify } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Toast } from "./ui/toast";
@@ -32,8 +32,8 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const form = useForm<z.infer<typeof postSchema>>({
-    // resolver: zodResolver(postSchema),
+  const form = useForm<z.infer<typeof blogSchema>>({
+    // resolver: zodResolver(blogSchema),
     defaultValues: post
       ? {
           title: post.title,
@@ -53,7 +53,7 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
         },
   });
 
-  async function onSubmit(values: z.infer<typeof postSchema>) {
+  async function onSubmit(values: z.infer<typeof blogSchema>) {
     try {
       setIsSubmitting(true);
 

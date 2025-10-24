@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function MapPost(Post: WithId<Document> | BlogPost | null): BlogPost | null {
+export function mapBlog(Post: WithId<Document> | BlogPost | null): BlogPost | null {
   if (!Post)
     return null;
 
@@ -28,7 +28,7 @@ export function MapPost(Post: WithId<Document> | BlogPost | null): BlogPost | nu
   } as BlogPost; 
 }
 
-export const postSchema = z.object({
+export const blogSchema = z.object({
   title: z.string().min(1, "Title is required"),
   slug: z.string().min(1, "Slug is required"),
   content: z.string().min(1, "Content is required").transform((val) =>val.trim()),

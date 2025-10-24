@@ -3,16 +3,17 @@ import { messageSchema } from "@/lib/utils";
 import { NextResponse } from "next/server";
 import { z } from "zod"
 
-
-// This is a route handler for the /api/blog endpoint
+// This is a route handler for the /api/contact endpoint
 export async function GET() {
+
+  console.log("In GET /contact")
     // Connect to the database
     try {
       const msg = await MessageDBService.getAllMessages()
-  
+      console.log("Messages received: "+msg.length)
       return NextResponse.json(msg)
     } catch (error) {
-      console.error("Error fetching posts:", error)
+      console.error("Error fetching messages:", error)
       return NextResponse.json({ error: error }, { status: 500 })
     }
 }
@@ -21,6 +22,7 @@ export async function GET() {
 export async function POST(req: Request) {
   
   const msg = messageSchema.parse(await req.json());
+  console.log("In POST /contact")
   console.log(msg);
   try {
     
@@ -38,7 +40,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: error.errors }, { status: 400 })
   }
 
-  console.error("Error creating post:", error)
+  console.error("Error creating Message: ", error)
   return NextResponse.json({ error: "Failed to save message" }, { status: 500 })
 }
 }
