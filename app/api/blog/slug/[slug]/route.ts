@@ -6,7 +6,6 @@ export async function GET(
   _request: NextRequest,
   context: { params: Promise<{ slug: string }> }
 ) {
-  console.log("In GET/Slug Page ");
   try {
     const { slug } = await context.params;
     // Get the blog using the BlogDBService

@@ -1,13 +1,16 @@
 import { BlogPost, ContactMsg, Project } from "./types"
 
 export const ContactApiService = {
+  baseUrl: process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:3000/api/blog'
+    : `${process.env.NEXT_PUBLIC_BASE_URL}/api/messages`,
+
 /**
    * Create a new message
    */
   async createMessage(msgData: Omit<ContactMsg, "_id" | "createdAt">): Promise<{ msgId: string }> {
-    console.log("In API Service:"+JSON.stringify(msgData));
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(`${this.baseUrl}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(msgData),
@@ -42,18 +45,13 @@ export const ContactApiService = {
   },
 
     async getAllMessages(): Promise<ContactMsg[]> {
-    console.log("In API GET Service");
     try {
       // During build time, if we can't access the API, return empty array
       if (process.env.NODE_ENV === "production" && process.env.NEXT_PHASE === "build") {
         console.warn("Building in production without API access, returning empty blogs array")
         return []
       }
-      const url = process.env.NODE_ENV === 'development' 
-        ? 'http://localhost:3000/api/contact'
-        : `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact`;
-
-      const response = await fetch(url, {
+      const response = await fetch(this.baseUrl, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         // headers: ApiService.getHeaders(),
@@ -86,11 +84,7 @@ export const ContactApiService = {
    */
     async deleteMessage(id: string): Promise<void> {
       try {
-        const url = process.env.NODE_ENV === 'development' 
-          ? `http://localhost:3000/api/contact/${id}`
-          : `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact/${id}`;
-
-        const response = await fetch(url, {
+        const response = await fetch(this.baseUrl, {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
         })
@@ -309,7 +303,6 @@ export const BlogApiService = {
    * Get a blog by slug
    */
   async getBlogBySlug(slug: string): Promise<BlogPost | null> {
-    console.log("Get blog for slug: "+slug);
     try {
       const response = await fetch(`${this.baseUrl}/slug/${slug}`, {
         // headers: ApiService.getHeaders(),

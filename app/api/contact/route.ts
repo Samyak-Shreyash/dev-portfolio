@@ -5,12 +5,9 @@ import { z } from "zod"
 
 // This is a route handler for the /api/contact endpoint
 export async function GET() {
-
-  console.log("In GET /contact")
     // Connect to the database
     try {
       const msg = await MessageDBService.getAllMessages()
-      console.log("Messages received: "+msg.length)
       return NextResponse.json(msg)
     } catch (error) {
       console.error("Error fetching messages:", error)
@@ -22,8 +19,6 @@ export async function GET() {
 export async function POST(req: Request) {
   
   const msg = messageSchema.parse(await req.json());
-  console.log("In POST /contact")
-  console.log(msg);
   try {
     
     const result = await MessageDBService.pushMessage(msg);
