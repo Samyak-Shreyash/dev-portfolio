@@ -1,13 +1,13 @@
 import { BlogPostForm } from "@/components/blog-post-form";
-import { getCurrentUser } from "@/lib/auth"
-import { redirect } from "next/navigation";
+// import { getCurrentUser } from "@/lib/auth"
+// import { redirect } from "next/navigation";
 
 export default async function AddNewBlog() {
-    const currentUser = await getCurrentUser();
+    // const currentUser = await getCurrentUser();
     
-        if (!currentUser) {
-            redirect('/blog');
-        }
+        // if (!currentUser) {
+        //     redirect('/blog');
+        // }
     
     return (
     <div className="container mx-auto py-12 px-8 md:px-20 sm:py-12 ">

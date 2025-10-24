@@ -3,12 +3,12 @@ export const dynamic = "force-dynamic"
 
 import { BlogCard } from "@/components/blog-card";
 import BlogLoading from "@/components/BlogLoading";
-import { BlogApiService } from "@/lib/api-services";
+import { BlogDBService } from "@/lib/mongodb";
 import { BlogPost } from "@/lib/types";
 import { Suspense } from "react";
 
 export default async function BlogsPage() {
-  const posts = await BlogApiService.getAllBlogs()
+  const posts = await BlogDBService.getAllBlogs()
   return (
     <div className="container mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold tracking-tight mb-6">Blog Posts</h1>

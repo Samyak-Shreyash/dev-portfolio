@@ -24,7 +24,7 @@ export interface Project {
 }
 
 export interface ContactMsg {
-    _id: string,
+    _id?: string,
     name: string,
     email: string,
     subject: string
