@@ -12,7 +12,6 @@ export default async function MessageDashBoard()
   //   }
       
     const messages = await ContactApiService.getAllMessages()
-    console.log(messages.length)
     return (
         <div className="container mx-auto px-6 md:px-12 sm:px-8 py-12 ">
             <div className="flex justify-between mb-8">

@@ -5,12 +5,9 @@ import { z } from "zod"
 
 // This is a route handler for the /api/blog endpoint
 export async function GET() {
-
-  console.log("In GET /blog")
     // Connect to the database
     try {
       const msg = await BlogDBService.getAllBlogs()
-      console.log("Messages received"+msg.length)
       return NextResponse.json(msg)
     } catch (error) {
       console.error("Error fetching posts:", error)
@@ -22,12 +19,8 @@ export async function GET() {
 export async function POST(req: Request) {
   
   const blog = blogSchema.parse(await req.json());
-  console.log("In POST /blog")
-  console.log(blog);
   try {
-    
     const result = await BlogDBService.addNewBlog(blog);
-
   return NextResponse.json(
     {
       message: "BlogPost Saved successfully",

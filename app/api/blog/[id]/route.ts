@@ -10,8 +10,6 @@ export async function PUT(
     context: { params: Promise<{ id: string }> }
  ) {
     const blog = blogSchema.parse(await _req.json());
-    console.log("In PUT /blog")
-    console.log(blog);
     try {
         const { id } = await context.params;
         const existingBlog = await BlogDBService.getBlogById(id);
