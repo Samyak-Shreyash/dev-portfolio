@@ -3,43 +3,43 @@ import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import Link from "next/link"
 import { format } from "date-fns"
-import type { BlogPost } from "@/lib/types"
+import type { Blog } from "@/lib/types"
 import readingTime from "reading-time";
 
 interface BlogCardProps {
-  post: BlogPost
+  blog: Blog
 }
 
-export function BlogCard({ post }: BlogCardProps) {
+export function BlogCard({ blog }: BlogCardProps) {
   return (
     
     <Card className="overflow-hidden flex flex-col h-full">
       <div className="relative h-48 w-full">
         <Image
-          src={post.coverImage?.toString() ?? "/placeholder.svg?height=192&width=384"}
-          alt={post.title}
+          src={blog.coverImage?.toString() ?? "/placeholder.svg?height=192&width=384"}
+          alt={blog.title}
           fill
           className="object-cover"
         />
       </div>
       <CardHeader className="flex-1">
         <div className="flex items-center justify-between mb-2">
-          <div className="text-sm text-muted-foreground">{format(new Date(post.createdAt), "MMM d, yyyy")}</div>
-          {!post.published && <Badge variant="outline">Draft</Badge>}
+          <div className="text-sm text-muted-foreground">{format(new Date(blog.createdAt), "MMM d, yyyy")}</div>
+          {!blog.published && <Badge variant="outline">Draft</Badge>}
         </div>
-        <Link href={`/blog/${post.slug}`} className="hover:underline">
-          <h3 className="text-xl font-bold tracking-tight">{post.title}</h3>
+        <Link href={`/blog/${blog.slug}`} className="hover:underline">
+          <h3 className="text-xl font-bold tracking-tight">{blog.title}</h3>
         </Link>
       </CardHeader>
       <CardContent className="flex-1">
         
-        <p className="text-muted-foreground line-clamp-3">{post.excerpt?? post.content.substring(0, 150)}</p>
+        <p className="text-muted-foreground line-clamp-3">{blog.excerpt?? blog.content.substring(0, 150)}</p>
       </CardContent>
       <CardFooter className="flex flex-row justify-between">
-        <Link href={`/blog/${post.slug}`} className="text-sm font-medium text-primary hover:underline">
+        <Link href={`/blog/${blog.slug}`} className="text-sm font-medium text-primary hover:underline">
           Read More
         </Link>
-        <span>{readingTime(post.content).text}</span>
+        <span>{readingTime(blog.content).text}</span>
       </CardFooter>
     </Card>
   )

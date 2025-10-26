@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { CURR_IMG_DARK, CURR_IMG_LIGHT, DEV_NAME } from "@/lib/constants";
 import { ArrowRightIcon } from "lucide-react";
-import ContactIcons from "./contact-icons";
+import ContactIcons from "./ui/contact-icons";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 

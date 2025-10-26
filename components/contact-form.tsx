@@ -60,8 +60,8 @@ export default function ContactForm() {
 
   return (
     <div className="relative group">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--secondary))] rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-      <div className="relative rounded-lg border border-[hsl(var(--primary))]/10 bg-[hsl(var(--background))]/80 backdrop-blur-sm p-6 shadow-sm">
+      <div className="absolute -inset-0.5 bg-linear-to-r from-primary to-secondary rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+      <div className="relative rounded-lg border border-primary/10 bg-background/80 backdrop-blur-sm p-6 shadow-sm">
         <h2 className="text-2xl text-primary font-semibold mb-6">Send me a message</h2>
         {submitted ? (
           <div className="text-center py-8">
@@ -84,7 +84,7 @@ export default function ContactForm() {
                     <FormItem>
                       <FormLabel>Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your name" {...field} className="bg-[hsl(var(--background))]/50 " />
+                        <Input placeholder="Your name" {...field} className="bg-background/50 " />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -97,7 +97,7 @@ export default function ContactForm() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="your.email@example.com" {...field} className="bg-[hsl(var(--background))]/50" />
+                        <Input placeholder="your.email@example.com" {...field} className="bg-background/50" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -110,7 +110,7 @@ export default function ContactForm() {
                   <FormItem>
                     <FormLabel>Subject</FormLabel>
                     <FormControl>
-                      <Input placeholder="What is this regarding?" {...field} className="bg-[hsl(var(--background))]/50" />
+                      <Input placeholder="What is this regarding?" {...field} className="bg-background/50" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -125,7 +125,7 @@ export default function ContactForm() {
                     <FormControl>
                       <Textarea
                         placeholder="Your message here..."
-                        className="min-h-[120px] bg-[hsl(var(--background))]/50"
+                        className="min-h-[120px] bg-background/50"
                         {...field}
                       />
                     </FormControl>
@@ -135,13 +135,13 @@ export default function ContactForm() {
               />
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-[hsl(var(--primary))/80] to-[hsl(var(--primary))] hover:from-[hsl(var(--primary))]/90 hover:to-[hsl(var(--primary))]/70 transition-all duration-300"
+                className="w-full bg-linear-to-r from-primary))/80] to-primary hover:from-primary/90 hover:to-primary/70 transition-all duration-300"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
                   <>
                     <svg
-                      className="animate-spin -ml-1 mr-2 h-4 w-4 text-[hsl(var(--background))]"
+                      className="animate-spin -ml-1 mr-2 h-4 w-4 text-background"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"

@@ -4,7 +4,7 @@ import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@radix
 import { Badge } from "./ui/badge"; 
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
-import '@/app/globals.css';
+// import '@/app/globals.css';
 import { MDXRemote } from "next-mdx-remote/rsc";
 
   export function ExperienceTab() {
@@ -37,7 +37,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
                   {job.technologies.map((tech, techIndex) => (
                     <Badge
                       key={techIndex}
-                      className="bg-hsl(var(--primary-foreground)) border-outline text-hsl(var(--secondary-foreground)) hover:bg-hsl(var(--secondary))/80"
+                      className="bg-primary-foreground border-outline text-secondary-foreground hover:bg-secondary/80"
                     >
                       {tech}
                     </Badge>
@@ -61,14 +61,14 @@ import { MDXRemote } from "next-mdx-remote/rsc";
                 <TooltipTrigger asChild>
                   <div
                     className={cn(
-                      "relative p-4 rounded-lg border bg-[hsl(var(--card))] text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.03] group cursor-pointer",
+                      "relative p-4 rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.03] group cursor-pointer",
                       tech.skill >= 4
-                        ? "border-[hsl(var(--primary))]/50"
+                        ? "border-primary/50"
                         : ""
                     )}
                   >
                     <div className="flex items-center space-x-3">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[hsl(var(--primary))]/10 text-primary font-semibold border-2 border-[hsl(var(--primary))]/20 group-hover:ring-2 group-hover:ring-[hsl(var(--primary))]/40 transition-all duration-300">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary font-semibold border-2 border-primary/20 group-hover:ring-2 group-hover:ring-primary/40 transition-all duration-300">
                         <Image
                           src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
                           alt={tech.tech}
@@ -77,20 +77,20 @@ import { MDXRemote } from "next-mdx-remote/rsc";
                       </div>
                       <div>
                         <h3 className="font-medium">{tech.tech}</h3>
-                        <div className="flex mt-1">
+                      </div>
+                    </div>
+                    <div className="flex mt-1">
                           {Array.from({ length: 5 }).map((_, i) => (
                             <div
                               key={i}
                               className={cn(
                                 "w-5 h-1.5 rounded-full mr-1",
                                 i < tech.skill
-                                  ? "bg-[hsl(var(--primary))]"
-                                  : "bg-[hsl(var(--muted))]"
+                                  ? "bg-primary"
+                                  : "bg-muted"
                               )} />
                           ))}
                         </div>
-                      </div>
-                    </div>
                   </div>
                 </TooltipTrigger>
                 <TooltipContent side="top">
@@ -112,16 +112,16 @@ import { MDXRemote } from "next-mdx-remote/rsc";
           <div key={index} className="relative group">
 
             {/* Timeline dot */}
-            <div className="absolute -left-[48px] top-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-[hsl(var(--primary))]/10 text-primary border-2 border-hsl(var(--primary)) ring-2 ring-hsl(var(--primary))/30 transition-all duration-300 group-hover:ring-2 group-hover:ring-hsl(var(--primary))/50 group-hover:scale-110">
+            <div className="absolute -left-12 top-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary border-2 border-primary ring-2 ring-primary/30 transition-all duration-300 group-hover:ring-2 group-hover:ring-primary/50 group-hover:scale-110">
               <span>{item.icon}</span>
             </div>
 
             {/* Bottom line segment */}
             {index !== ACCOMPLISHMENTS.length - 1 && (
-              <div className="absolute left-[-2rem] top-4/5 h-[calc(100%+1rem)] w-1 bg-[hsl(var(--primary))] -z-[-1]" />
+              <div className="absolute -left-8.5 top-4/5 h-[calc(100%+1rem)] w-1 bg-primary -z-[-1]" />
             )}
 
-            <div className="hidden sm:block absolute top-11 -left-[7.5rem] w-16 text-center">
+            <div className="hidden sm:block absolute top-11 -left-30 w-16 text-center">
               <Badge
                 variant="outline"
                 className="text-sm font-semibold"
@@ -131,7 +131,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
             </div>
 
             {/* For small screens – stacked vertically */}
-            <div className="flex sm:hidden flex-col items-center min-w-[3rem] mb-2">
+            <div className="flex sm:hidden flex-col items-center min-w-12 mb-2">
               <Badge
                 variant="outline"
                 className="text-xs font-semibold"

@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { BlogPost } from "./types";
+import { Blog } from "./types";
 import { WithId } from "mongodb";
 import readingTime from "reading-time";
 import { z } from "zod";
@@ -9,15 +9,16 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function mapBlog(Post: WithId<Document> | BlogPost | null): BlogPost | null {
+export function mapBlog(Post: WithId<Document> | Blog | null): Blog | null {
   if (!Post)
     return null;
 
-  const typedPost = Post as WithId<Document> & BlogPost
+  const typedPost = Post as WithId<Document> & Blog
   return {
     _id: typedPost._id?.toString(),
     title: typedPost.title,
     slug: typedPost.slug,
+    tags: typedPost.tags,
     excerpt: typedPost.excerpt,
     content: typedPost.content,
     coverImage: typedPost.coverImage?.toString(),
@@ -25,12 +26,13 @@ export function mapBlog(Post: WithId<Document> | BlogPost | null): BlogPost | nu
     createdAt: typedPost.createdAt,
     updatedAt: typedPost.updatedAt,
     readingTime: readingTime(typedPost.content).text
-  } as BlogPost; 
+  } as Blog; 
 }
 
 export const blogSchema = z.object({
   title: z.string().min(1, "Title is required"),
   slug: z.string().min(1, "Slug is required"),
+  tags: z.array(z.string()),
   content: z.string().min(1, "Content is required").transform((val) =>val.trim()),
   excerpt: z.string().optional(),
   coverImage: z.string().optional(),

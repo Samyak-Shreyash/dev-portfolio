@@ -1,6 +1,7 @@
-export interface BlogPost {
+export interface Blog {
     _id: string
     title: string
+    tags: Array<string>
     excerpt?: string
     slug: string
     content: string
@@ -13,7 +14,7 @@ export interface Project {
     _id: string
     title: string
     description: string
-    demoUrl: string
+    demoUrl?: string
     repoUrl: string
     technologies: Array<string>
     image?: string

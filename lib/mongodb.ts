@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb"
 import { ObjectId } from "mongodb";
-import { BlogPost, ContactMsg, Project } from "./types";
+import { Blog, ContactMsg, Project } from "./types";
 
 if (!process.env.MONGODB_URI) {
   throw new Error("Please add your MongoDB URI to .env.local")
@@ -68,24 +68,24 @@ export const BlogDBService = {
   { 
     const collection = await BlogDBCollection();
     const posts = await collection.find({}).sort({ createdAt: -1 }).toArray();
-    return posts as unknown as BlogPost[];
+    return posts as unknown as Blog[];
   },
 
   async getBlogById(id: string)
   {
     const collection = await BlogDBCollection();
     const result = await collection.findOne({ _id: new ObjectId(id) });
-    return result as BlogPost | null;
+    return result as Blog | null;
   },
 
   async getBlogBySlug(slug: string)
   {
     const collection = await BlogDBCollection();
     const result =  await collection.findOne({ slug: slug })
-    return result as BlogPost | null;
+    return result as Blog | null;
   },
 
-  async updateBlog(blogData: Omit<BlogPost,  "updatedAt">)
+  async updateBlog(blogData: Omit<Blog,  "updatedAt">)
   {
     
     const collection = await BlogDBCollection();
@@ -100,7 +100,7 @@ export const BlogDBService = {
       return null;
   },
 
-  async addNewBlog(blogData: Omit<BlogPost, "_id" | "createdAt" | "updatedAt">) {
+  async addNewBlog(blogData: Omit<Blog, "_id" | "createdAt" | "updatedAt">) {
     
     const collection = await BlogDBCollection();
     return await collection.insertOne(
@@ -194,12 +194,11 @@ export const MessageDBService = {
 
 };
 
-
-export const UserDBService = {
+// export const UserDBService = {
   
-  async getUserByEmail(email: string)
-  { 
-    const collection = await UserDBCollection();
-    return await collection.findOne({ email: email})
-  }
-};
+//   async getUserByEmail(email: string)
+//   { 
+//     const collection = await UserDBCollection();
+//     return await collection.findOne({ email: email})
+//   }
+// };
