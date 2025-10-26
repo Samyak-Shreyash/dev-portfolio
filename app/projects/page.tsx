@@ -20,8 +20,9 @@ export default async function ProjectsPage() {
             redirect('/');
       }
 
-      const categories =[...new Set(projects.map(project => project.category).values())]
-  return (
+      const categories =["all"].concat([...new Set(projects.map(project => project.category).values())])
+      
+      return (
       <section className="w-full">
             <div className="container px-4 md:px-6">
     <div className="flex flex-col min-h-screen">
@@ -38,17 +39,13 @@ export default async function ProjectsPage() {
               </p>
             </div>
 
-            <Tabs defaultValue="all" className="w-full">
-              <TabsList className={`w-full max-w-md mx-auto grid grid-cols-${categories.length+1}`}>
-                <TabsTrigger value="all">All</TabsTrigger>
+             <Tabs defaultValue="all" className="w-full">
+              <TabsList className={`w-full max-w-md mx-auto grid grid-cols-${categories.length}`}>
                 {
                 categories.map(category => (
-                  <TabsTrigger key={category} value={category}>
-                    {Capitalize(category)}
-                  </TabsTrigger>
-                ))
-              }
-             </TabsList>
+                <TabsTrigger key={category} value={category}>{Capitalize(category)}</TabsTrigger>
+                ))}               
+                </TabsList>
               <TabsContent value="all" className="mt-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {projects.map((project, index) => (
