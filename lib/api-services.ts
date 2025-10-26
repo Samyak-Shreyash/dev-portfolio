@@ -1,4 +1,4 @@
-import { BlogPost, ContactMsg, Project } from "./types"
+import { Blog, ContactMsg, Project } from "./types"
 
 export const ContactApiService = {
   baseUrl: process.env.NODE_ENV === 'development' 
@@ -151,32 +151,32 @@ export const ProjectApiService = {
   /**
    * Get a blog by ID
    */
-  async getProjectyById(id: string): Promise<Project | null> {
-    try {
-      const response = await fetch(`${this.baseUrl}/${id}`, {
-        // headers: ApiService.getHeaders(),
-      })
+  // async getProjectyById(id: string): Promise<Project | null> {
+  //   try {
+  //     const response = await fetch(`${this.baseUrl}/${id}`, {
+  //       // headers: ApiService.getHeaders(),
+  //     })
 
-      if (response.status === 404) {
-        return null
-      }
+  //     if (response.status === 404) {
+  //       return null
+  //     }
 
-      if (response.status === 401) {
-        console.error("API authentication failed. Check your API_KEY environment variable.")
-        return null
-      }
+  //     if (response.status === 401) {
+  //       console.error("API authentication failed. Check your API_KEY environment variable.")
+  //       return null
+  //     }
 
-      if (!response.ok) {
-        throw new Error(`Failed to fetch project: ${response.status}`)
-      }
+  //     if (!response.ok) {
+  //       throw new Error(`Failed to fetch project: ${response.status}`)
+  //     }
 
-      const data = await response.json()
-      return data
-    } catch (error) {
-      console.error(`Error fetching project with id ${id}:`, error)
-      return null
-    }
-  },
+  //     const data = await response.json()
+  //     return data
+  //   } catch (error) {
+  //     console.error(`Error fetching project with id ${id}:`, error)
+  //     return null
+  //   }
+  // },
 
   /**
    * Create a new blog
@@ -267,7 +267,7 @@ export const BlogApiService = {
   /**
    * Get all blogs
    */
-  async getAllBlogs(): Promise<BlogPost[]> {
+  async getAllBlogs(): Promise<Blog[]> {
     try {
       // During build time, if we can't access the API, return empty array
       if (process.env.NODE_ENV === "production" && process.env.NEXT_PHASE === "build") {
@@ -302,7 +302,7 @@ export const BlogApiService = {
   /**
    * Get a blog by slug
    */
-  async getBlogBySlug(slug: string): Promise<BlogPost | null> {
+  async getBlogBySlug(slug: string): Promise<Blog | null> {
     try {
       const response = await fetch(`${this.baseUrl}/slug/${slug}`, {
         // headers: ApiService.getHeaders(),
@@ -332,7 +332,7 @@ export const BlogApiService = {
   /**
    * Get a blog by ID
    */
-  async getBlogById(id: string): Promise<BlogPost | null> {
+  async getBlogById(id: string): Promise<Blog | null> {
     try {
       const response = await fetch(`${this.baseUrl}/${id}`, {
         // headers: ApiService.getHeaders(),
@@ -362,7 +362,7 @@ export const BlogApiService = {
   /**
    * Create a new blog
    */
-  async createBlog(blogData: Omit<BlogPost, "_id" | "createdAt" | "updatedAt">): Promise<{ blogId: string }> {
+  async createBlog(blogData: Omit<Blog, "_id" | "createdAt" | "updatedAt">): Promise<{ blogId: string }> {
     try {
       const response = await fetch(`${this.baseUrl}`, {
         method: "POST",
@@ -390,7 +390,7 @@ export const BlogApiService = {
   /**
    * Update an existing blog
    */
-  async updateBlog(id: string, blogData: Omit<BlogPost, "_id" | "createdAt" | "updatedAt">): Promise<void> {
+  async updateBlog(id: string, blogData: Omit<Blog, "_id" | "createdAt" | "updatedAt">): Promise<void> {
     try {
       const response = await fetch(`${this.baseUrl}/${id}`, {
         method: "PUT",

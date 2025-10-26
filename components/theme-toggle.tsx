@@ -1,9 +1,9 @@
 "use client"
+
 import { Laptop, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
-
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { Button } from "./ui/button"
 
 
 const themes = [
@@ -12,9 +12,7 @@ const themes = [
   { name: 'System', value: 'system', icon: Laptop }
 ]
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
-
-  
+  const { theme, setTheme } = useTheme()  
   const currentThemeIcon = {
     light: <Sun className="w-5 h-5" />,
     dark: <Moon className="w-5 h-5" />,

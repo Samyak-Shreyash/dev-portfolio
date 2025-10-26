@@ -2,14 +2,14 @@ import { notFound } from "next/navigation"
 import Image from "next/image"
 import { format } from "date-fns"
 import { MDXRemote } from "next-mdx-remote/rsc"
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar'
-import { DEV_IMAGE, DEV_NAME, siteMetaData, siteURL } from "@/lib/constants"
+import { DEV_IMAGE, DEV_NAME, siteMetaData } from "@/lib/constants"
 import type { Metadata } from "next"
 import { JSX, Suspense } from "react"
-import BlogLoading from "@/components/BlogLoading"
 import readingTime from "reading-time";
 import Script from "next/script"
 import { BlogApiService } from "@/lib/api-services"
+import PageLoading from "@/components/ui/page-loading"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export const dynamic = "force-dynamic"
 
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       publishedTime: new Date(blog.createdAt).toISOString(),
       modifiedTime: new Date(blog.updatedAt).toISOString(),
       authors: [siteMetaData.author],
-      siteName: siteURL,
+      siteName: siteMetaData.siteUrl,
     },
     twitter: {
       card: "summary_large_image",
@@ -67,7 +67,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   return (
-    <Suspense fallback={<BlogLoading />}>
+    <Suspense fallback={<PageLoading />}>
       <Script
   id="schema-article"
   type="application/ld+json"
@@ -83,7 +83,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         "@type": "Person",
         "name": DEV_NAME
       },
-      "url": `${siteURL}}/blog/${post.slug}`,
+      "url": `${siteMetaData.siteUrl}}/blog/${post.slug}`,
     }),
   }}
 />

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ProjectApiService } from "@/lib/api-services"
 import { ProjectCard } from "@/components/project-card"
+import { redirect } from "next/navigation"
 
 export const metadata = {
   title: "Projects - Samyak Shreyash",
@@ -15,16 +16,22 @@ export const metadata = {
 
 export default async function ProjectsPage() {
     const projects = await ProjectApiService.getAllProjects()
+    if (!projects || projects.length==0) {
+            redirect('/');
+      }
 
+      const categories =[...new Set(projects.map(project => project.category).values())]
   return (
+      <section className="w-full">
+            <div className="container px-4 md:px-6">
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
         <section className="container py-12 md:py-24">
           <div className="space-y-6">
             <div className="space-y-2">
-              <Badge className="inline-block" variant="outline">
+              {/* <Badge className="inline-block" variant="outline">
                 My Work
-              </Badge>
+              </Badge> */}
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Projects</h1>
               <p className="max-w-[700px] text-muted-foreground md:text-xl">
                 A collection of my work, side projects, and open-source contributions.
@@ -32,12 +39,16 @@ export default async function ProjectsPage() {
             </div>
 
             <Tabs defaultValue="all" className="w-full">
-              <TabsList className="w-full max-w-md mx-auto grid grid-cols-4">
+              <TabsList className={`w-full max-w-md mx-auto grid grid-cols-${categories.length+1}`}>
                 <TabsTrigger value="all">All</TabsTrigger>
-                <TabsTrigger value="web">Web</TabsTrigger>
-                <TabsTrigger value="mobile">Mobile</TabsTrigger>
-                <TabsTrigger value="open-source">Open Source</TabsTrigger>
-              </TabsList>
+                {
+                categories.map(category => (
+                  <TabsTrigger key={category} value={category}>
+                    {Capitalize(category)}
+                  </TabsTrigger>
+                ))
+              }
+             </TabsList>
               <TabsContent value="all" className="mt-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {projects.map((project, index) => (
@@ -45,7 +56,20 @@ export default async function ProjectsPage() {
                   ))}
                 </div>
               </TabsContent>
-              <TabsContent value="web" className="mt-8">
+              {
+                categories.map(category => (
+                  <TabsContent key={category} value={category} className="mt-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {projects
+                    .filter((project) => project.category === category)
+                    .map((project, index) => (
+                      <ProjectCard key={index} project={project} />
+                    ))}
+                </div>
+              </TabsContent>
+                ))
+              }
+              {/* <TabsContent value="web" className="mt-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {projects
                     .filter((project) => project.category === "web")
@@ -71,7 +95,7 @@ export default async function ProjectsPage() {
                       <ProjectCard key={index} project={project} />
                     ))}
                 </div>
-              </TabsContent>
+              </TabsContent> */}
             </Tabs>
           </div>
         </section>
@@ -95,5 +119,19 @@ export default async function ProjectsPage() {
         </section>
       </main>
     </div>
+    </div>
+    </section>
   )
+}
+
+function Capitalize(word : String) {
+  if (!word) {
+    return "";
+  }
+  let formattedWord = word.replace(/-/g, ' ');
+  formattedWord = formattedWord.toLowerCase();
+  formattedWord = formattedWord.replace(/\b\w/g, (char) => char.toUpperCase());
+
+  return formattedWord;
+return word;
 }

@@ -11,15 +11,15 @@ import { Card } from "@/components/ui/card";
 export default function About() {
 
   return (
-    <div className="bg-gradient-to-b from-[hsl(var(--background))] to-[hsl(var(--muted))]/50">
+    <div className="bg-linear-to-b from-background to-muted/50">
       <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
             <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_500px]">
                 <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
-                <Badge className="inline-block" variant="outline">
+                {/* <Badge className="inline-block" variant="outline">
                   About Me
-                </Badge>
+                </Badge> */}
               </div>
               <div className="space-y-4 text-muted-foreground">
                 <p>
@@ -66,7 +66,7 @@ export default function About() {
             </div>
           </div>
         </section>
-        <section className="py-12 md:py-24 lg:py-32 bg-[hsl(var(--muted))]/50">
+        <section className="py-12 md:py-24 lg:py-32 bg-muted/50">
           <div className="container">
             <div className="mx-auto max-w-3xl space-y-8 text-center">
               <div className="space-y-2">

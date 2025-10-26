@@ -1,5 +1,4 @@
-import {
-  Card} from "@/components/ui/card";
+import { Card} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
@@ -39,9 +38,9 @@ export function ProjectCard({ project }: ProjectProps) {
           )}
         </div>
       </div>
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-6 flex flex-col grow">
         <h3 className="font-bold text-xl mb-2">{project.title}</h3>
-        <p className="text-sm text-muted-foreground mb-4 flex-grow">{project.description}</p>
+        <p className="text-sm text-muted-foreground mb-4 grow">{project.description}</p>
         <div className="flex flex-wrap gap-2 mt-auto">
           {project.technologies.map((tech, index) => (
             <Badge key={index} variant="secondary">

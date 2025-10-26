@@ -1,6 +1,5 @@
 import { Briefcase, GraduationCap, Laptop } from "lucide-react";
 
-export const siteURL = "http://localhost:3000";
 export const DEV_NAME = "Samyak Shreyash";
 export const DEV_TITLE = "Software Engineer | Full Stack Developer | Open Source Contributor";
 export const DEV_GITHUB= "github.com/Samyak-Shreyash";
@@ -10,7 +9,13 @@ export const DEV_EMAIL="sam.shreyash@gmail.com";
 export const DEV_IMAGE="/profile_img.jpg";
 export const CURR_IMG_DARK="/dark_img.png"
 export const CURR_IMG_LIGHT="/light_img.png"
-
+export const NAV_LINK= [
+      { name: "Home", href: "/" },
+      { name: "About", href: "/about" },
+      { name: "Projects", href: "/projects" },
+      { name: "Blogs", href: "/blog" },
+      { name: "Contact", href: "/contact" }
+    ];
 export const DEV_RESUME = "/SamyakShreyash_Resume.pdf";
 export const ABOUT_ME=[
     "Hello! I'm Samyak Shreyash, a passionate Senior Software Developer with over 6 years of experience building Web applications. I specialize in creating responsive, accessible, and performant user interfaces that provide exceptional user experiences.",
@@ -227,9 +232,9 @@ export const TECH_STACK = [
     interests: 'technology, Coding, travelling, food and fitness',
     locale: 'en-US',
     theme: 'system',
-    siteUrl: siteURL,
-    siteLogo: `${siteURL}/uploads/${DEV_IMAGE}`,
-    socialBanner: `${siteURL}/uploads/${DEV_IMAGE}`,
+    siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}`,
+    siteLogo: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/uploads/${DEV_IMAGE}`,
+    socialBanner: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/uploads/${DEV_IMAGE}`,
     email: DEV_EMAIL,
     socialLinks: {
       github: DEV_GITHUB,

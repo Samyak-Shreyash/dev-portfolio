@@ -1,5 +1,5 @@
 import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN } from "@/lib/constants";
-import { Button } from "./ui/button";
+import { Button } from "./button";
 import { Github, Linkedin, Mail } from "lucide-react";
 
 export default function ContactIcons() {
