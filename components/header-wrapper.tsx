@@ -6,7 +6,7 @@ export default async function HeaderWrapper() {
     let navLink = NAV_LINK
     const blogs = await BlogDBService.getAllBlogs()?? [];
     const projects = await ProjectDBService.getAllProjects()?? [];
-    console.log(blogs.length)
+
     navLink = blogs.length!=0?navLink: navLink.filter(item => item.name !== "Blogs");
     navLink = projects.length!=0?navLink: navLink.filter(item => item.name !== "Projects");
     return (< SiteHeader navLink = {navLink}/>)
