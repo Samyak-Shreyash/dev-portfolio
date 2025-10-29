@@ -20,7 +20,7 @@ export default async function ProjectsPage() {
             redirect('/');
       }
 
-      const categories =["all"].concat([...new Set(projects.map(project => project.category).values())])
+      const categories = [...new Set(projects.map(project => project.category).values())]
       
       return (
       <section className="w-full">
@@ -40,11 +40,15 @@ export default async function ProjectsPage() {
             </div>
 
              <Tabs defaultValue="all" className="w-full">
-              <TabsList className={`w-full max-w-md mx-auto grid grid-cols-${categories.length}`}>
-                {
-                categories.map(category => (
-                <TabsTrigger key={category} value={category}>{Capitalize(category)}</TabsTrigger>
-                ))}               
+              <TabsList className="w-full max-w-md mx-auto grid"
+              style={{ 
+                gridTemplateColumns: `repeat(${categories.length+1}, minmax(0, 1fr))` 
+              }}>
+              <TabsTrigger key={"all"} value={"all"}>{capitalize("all")}</TabsTrigger>
+              {
+              categories.map(category => (
+              <TabsTrigger key={category} value={category}>{capitalize(category)}</TabsTrigger>
+              ))}               
                 </TabsList>
               <TabsContent value="all" className="mt-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -121,7 +125,7 @@ export default async function ProjectsPage() {
   )
 }
 
-function Capitalize(word : String) {
+function capitalize(word : String) {
   if (!word) {
     return "";
   }
