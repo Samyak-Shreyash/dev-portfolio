@@ -3,7 +3,8 @@ import { Briefcase, GraduationCap, Laptop } from "lucide-react";
 export const DEV_NAME = "Samyak Shreyash";
 export const DEV_TITLE = "Software Engineer | Full Stack Developer | Open Source Contributor";
 export const DEV_GITHUB= "github.com/Samyak-Shreyash";
-export const DEV_LOCATION ="https://maps.app.goo.gl/byM5X639NYpyAan26"
+export const DEV_LOCATION ="https://maps.app.goo.gl/g11x1oCWJWMESvhY6"
+export const DEV_CITY = "Hyderabad"
 export const DEV_LINKEDIN= "linkedin.com/in/samyak-shreyash";
 export const DEV_EMAIL="sam.shreyash@gmail.com";
 export const DEV_IMAGE="/profile_img.jpg";

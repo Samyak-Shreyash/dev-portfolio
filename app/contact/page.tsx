@@ -1,7 +1,7 @@
 import ContactForm from "@/components/contact-form"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN, DEV_LOCATION, FAQS } from "@/lib/constants"
+import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN, DEV_LOCATION, DEV_CITY, FAQS } from "@/lib/constants"
 import { Github, Linkedin, Mail, MapPin } from "lucide-react"
   
 export default function ContactPage() {
@@ -81,7 +81,7 @@ export default function ContactPage() {
                                                     href={DEV_LOCATION}
                                                     className="text-primary hover:underline transition-colors"
                                                     >
-                                                        Bengaluru, India
+                                                        {DEV_CITY}, India
                                                     </a>                                                        
                                                 </div>
                                             </div>
