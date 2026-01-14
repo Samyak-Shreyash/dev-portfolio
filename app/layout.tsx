@@ -51,7 +51,7 @@ export const metadata: Metadata= {
     return (
       <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
-          <ThemesProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <ThemesProvider attribute="class" enableSystem disableTransitionOnChange>
             <div className="relative flex min-h-screen flex-col">
               <HeaderWrapper />
               {children}
