@@ -85,7 +85,7 @@ function TechSection() {
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl xl:text-5xl">
           My Tech Stack
         </h2>
-        <p className="max-w-[900px] text-muted-foreground md:text-xl/related lg:text-base/relaxed xl:text-xl/relaxed">
+        <p className="max-w-225 text-muted-foreground md:text-xl/related lg:text-base/relaxed xl:text-xl/relaxed">
           I work with a variety of technologies to create robust and scalable applications
         </p>
       </div>
@@ -96,7 +96,7 @@ function TechSection() {
               <Tooltip key={tech.tech}>
                 <TooltipTrigger asChild>
                   <div className="flex flex-col items-center gap-2"><div className="flex h-20 w-20 items-center justify-center rounded-full bg-background/60">
-                    <Image
+                    <Image 
                       src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
                       alt={tech.tech}
                       width={40}
@@ -126,7 +126,7 @@ function WorkSection() {
       <div className="space-y-2">
         <Badge variant="outline">Skills & Expertise</Badge>
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-balance">What I Do</h2>
-        <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-pretty">
+        <p className="max-w-175 text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-pretty">
           I leverage modern technologies to build scalable, user-friendly applications.
         </p>
       </div>
@@ -232,7 +232,7 @@ function ProjectSection({ projects, muted }: ProjectSectionProp) {
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
           Featured Projects
         </h2>
-        <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+        <p className="max-w-175 text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
           Check out some of my latest work and contributions.
         </p>
       </div>
@@ -269,7 +269,7 @@ function BlogSection({blogs, muted}: BlogSectionProp) {
     <div className="flex flex-col items-center justify-center space-y-4 text-center">
       <div className="space-y-2">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Latest Blog Posts</h2>
-        <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+        <p className="max-w-225 text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
           Thoughts, insights, and tutorials on software development.
         </p>
       </div>
@@ -323,7 +323,7 @@ function ContactSection({ muted }: ContactSectionProp) {
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-balance">
           Let&apos;s Work Together
         </h2>
-        <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-pretty">
+        <p className="max-w-175 text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-pretty">
           Have a project in mind or just want to say hello? I&apos;d love to hear from you.
         </p>
       </div>

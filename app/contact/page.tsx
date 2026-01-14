@@ -117,7 +117,7 @@ export default function ContactPage() {
                     <div className="space-y-2">
                         <Badge variant="outline">FAQ</Badge>
                         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl bg-clip-text text-transparent bg-linear-to-r from-primary to-primary))/90]">Frequently Asked Questions</h2>
-                        <p className="max-w-[700px] mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                        <p className="max-w-175 mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                         Here are some common questions about my services and work process.
                         </p>
                     </div>

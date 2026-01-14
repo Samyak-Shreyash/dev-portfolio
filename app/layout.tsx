@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import './globals.css';
 import { siteMetaData } from "@/lib/constants";
 import { Inter } from "next/font/google";
 import { ThemesProvider } from "@/components/theme-provider"
@@ -50,6 +50,7 @@ export const metadata: Metadata= {
   }) {
     return (
       <html lang="en" suppressHydrationWarning>
+        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
         <body className={inter.className}>
           <ThemesProvider attribute="class" enableSystem disableTransitionOnChange>
             <div className="relative flex min-h-screen flex-col">

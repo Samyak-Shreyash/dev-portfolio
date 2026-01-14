@@ -37,7 +37,7 @@ export default function About() {
                   or sharing my knowledge through blog posts and community events.
                 </p>
               </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row pt-4">
+              <div className="flex flex-col gap-2 min-w-100:flex-row pt-4">
                 <Button asChild>
                   <Link href="/contact">
                     Get In Touch <ArrowRight className="ml-2 h-4 w-4" />
@@ -52,7 +52,7 @@ export default function About() {
               </div>
             </div>
             <div className="flex items-center justify-center">
-              <div className="relative aspect-square w-full max-w-[400px] overflow-hidden rounded-xl border shadow-xl">
+              <div className="relative aspect-square w-full max-w-100 overflow-hidden rounded-xl border shadow-xl">
                 <Image
                   src={DEV_IMAGE}
                   alt="Samyak Shreyash"
@@ -72,7 +72,7 @@ export default function About() {
               <div className="space-y-2">
                 <Badge variant="outline">Interests & Hobbies</Badge>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Beyond Coding</h2>
-                <p className="max-w-[700px] mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="max-w-175 mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   When I&apos;m not in front of a computer, here&apos;s what I enjoy doing.
                 </p>
               </div>

@@ -27,7 +27,7 @@ export function HeroSection() {
                         <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                         Hi, I&apos;m <span className="text-primary">{DEV_NAME}</span>
                     </h1>
-                    <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                    <p className="max-w-150 text-muted-foreground md:text-xl">
                     Senior Software Developer specializing in building exceptional
                     digital experiences that make people&#39;s lives simpler.
                     </p>
@@ -47,6 +47,7 @@ export function HeroSection() {
                 <div className="flex items-center justify-center">
                 <div className="relative aspect-square overflow-hidden rounded-full border-8 border-muted">
                     <Image
+                    fetchPriority="high"
                     src={backgroundImage}
                     alt={DEV_NAME}
                     width={600}

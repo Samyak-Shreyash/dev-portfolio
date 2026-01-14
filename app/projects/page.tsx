@@ -34,7 +34,7 @@ export default async function ProjectsPage() {
                 My Work
               </Badge> */}
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Projects</h1>
-              <p className="max-w-[700px] text-muted-foreground md:text-xl">
+              <p className="max-w-175 text-muted-foreground md:text-xl">
                 A collection of my work, side projects, and open-source contributions.
               </p>
             </div>
@@ -107,7 +107,7 @@ export default async function ProjectsPage() {
               <div className="space-y-2">
                 <Badge variant="outline">Collaboration</Badge>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Have a project in mind?</h2>
-                <p className="max-w-[700px] mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="max-w-175 mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your
                   vision.
                 </p>
