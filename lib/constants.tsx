@@ -154,7 +154,7 @@ export const ACCOMPLISHMENTS = [
   {
     date: "Oct 2023",
     title: "Lead Engineer At Mphasis",
-    description: "Started Working at Mphasis",
+    description: "Working with Goldman Sachs",
     icon: <Briefcase className="h-6 w-6" />,
   },
   {
