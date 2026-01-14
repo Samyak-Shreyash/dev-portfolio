@@ -5,69 +5,88 @@
 /* Removed unsupported @custom-variant — define custom variants in tailwind.config.js or via a plugin */
 
 :root {
-  /* Store RAW HSL values: Hue, Saturation, Lightness */
-  --background: 210 20% 98%;
-  --foreground: 220 15% 18%;
+  /* --- LIGHT MODE --- */
+  
+  /* Background: A very subtle cool gray, not pure white, to let cards pop */
+  --background: 210 20% 98%; 
+  --foreground: 224 71% 4%;
 
-  --primary: 220 90% 55%;            /* Vivid royal blue (great for light backgrounds) */
-  --primary-foreground: 0 0% 100%;   /* Pure white for best contrast on blue */
+ /* Primary: Vivid Royal Blue */
+  --primary: 220 90% 55%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 0 0% 100%;
+  /* Secondary: Light blue-gray (Fixes the "invisible button" issue) */
+  --secondary: 210 20% 96%;
   --secondary-foreground: 220 15% 18%;
 
-  --muted: 220 15% 94%;
-  --muted-foreground: 220 10% 45%;
+  /* Card: Pure white to stand out against the 98% lightness background */
+  --card: 0 0% 100%;
+  --card-foreground: 224 71% 4%;
 
-  --card: 210 30% 96%;
-  --card-foreground: 220 15% 20%;
+  /* Muted: Used for disabled states or subtle text */
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 8% 46%;
 
+  /* Accent: Bright Orange */
   --accent: 35 95% 56%;
-  --accent-foreground: 220 15% 18%;
+  /* CHANGED: Dark text on orange is much easier to read than white on orange */
+  --accent-foreground: 220 15% 13%; 
 
-  --destructive: 0 75% 55%;
-  --destructive-foreground: 0 0% 100%;
+  /* Destructive: Standard Red */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
 
+  /* UI Elements */
   --popover: 0 0% 100%;
-  --popover-foreground: 220 15% 18%;
+  --popover-foreground: 224 71% 4%;
+  
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
 
-  --border: 215 20% 85%;
-  --input: 215 20% 85%;
-
-  --ring: 220 90% 60%;
+  --ring: 220 90% 55%; /* Matches Primary */
   --radius: 0.5rem;
 }
 
 .dark {
-  /* Store RAW HSL values for dark mode */
-  --background: 230 20% 8%;
-  --foreground: 210 15% 85%;
+  /* --- DARK MODE --- */
+  
+  /* Background: Deep Blue-Black (Rich, not washed out) */
+  --background: 224 71% 4%;
+  --foreground: 210 20% 98%;
 
-  --primary: 220 100% 65%;
-  --primary-foreground: 0 0% 98%;
+  /* Primary: Slightly lighter blue to glow against dark bg */
+  --primary: 217 91% 60%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 215 25% 20%;
-  --secondary-foreground: 210 20% 90%;
+  /* Secondary: Dark slate for secondary elements */
+  --secondary: 215 28% 17%;
+  --secondary-foreground: 210 20% 98%;
 
-  --muted: 220 10% 30%;
-  --muted-foreground: 0 0% 75%;
+  /* Card: Slightly lighter than bg to create elevation */
+  --card: 224 71% 8%; 
+  --card-foreground: 210 20% 98%;
 
-  --card: 228 20% 12%;
-  --card-foreground: 210 15% 88%;
+  /* Muted */
+  --muted: 215 28% 17%;
+  --muted-foreground: 215 20% 65%;
 
+  /* Accent: Maintained Orange */
   --accent: 35 95% 55%;
-  --accent-foreground: 0 0% 98%;
+  /* CHANGED: Keep dark text on orange even in dark mode for contrast */
+  --accent-foreground: 224 71% 4%;
 
-  --destructive: 0 80% 40%;
+  /* Destructive: Slightly desaturated red for dark mode eyes */
+  --destructive: 0 63% 31%;
   --destructive-foreground: 0 0% 98%;
 
-  --popover: 225 25% 12%;
-  --popover-foreground: 210 20% 90%;
+  /* UI Elements */
+  --popover: 224 71% 8%;
+  --popover-foreground: 210 20% 98%;
 
-  --border: 218 20% 18%;
-  --input: 218 20% 18%;
+  --border: 215 28% 17%;
+  --input: 215 28% 17%;
 
-  --ring: 220 100% 60%;
-  --ring-primary: 220 100% 60%;
+  --ring: 217 91% 60%;
 }
 
 @theme {

@@ -28,16 +28,11 @@ import { MDXRemote } from "next-mdx-remote/rsc";
                 <div className="prose prose-neutral dark:prose-invert max-w-none">
                           <MDXRemote source={job?.description} />
                     </div>
-                {/* <ul>
-                  {job.description.split("\n").map((work, index) => (
-                    <li key={index}>{`${work}`}</li>
-                  ))}
-                </ul> */}
                 <div className="flex flex-wrap gap-2">
                   {job.technologies.map((tech, techIndex) => (
                     <Badge
                       key={techIndex}
-                      className="bg-primary-foreground border-outline text-secondary-foreground hover:bg-secondary/80"
+                      className="bg-secondary border-outline text-secondary-foreground hover:bg-primary/80"
                     >
                       {tech}
                     </Badge>
