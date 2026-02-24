@@ -17,7 +17,7 @@ export const NAV_LINK = [
   { name: "Blogs", href: "/blog" },
   { name: "Contact", href: "/contact" }
 ]
-export const DEV_RESUME = "/SamyakShreyash_Resume.pdf"
+export const DEV_RESUME = "/Samyak_Shreyash_Resume_v2.pdf"
 export const ABOUT_ME = [
   "Hello! I'm Samyak Shreyash, a passionate Senior Software Developer with over 6 years of experience building Web applications. I specialize in creating responsive, accessible, and performant user interfaces that provide exceptional user experiences.",
   "I have a strong foundation in both front-end and back-end development, with expertise in Java, Python, and JavaScript. I am proficient in using frameworks like React and Next.js to build dynamic web applications. I also have experience with cloud technologies like AWS and containerization tools like Docker and Kubernetes.",
