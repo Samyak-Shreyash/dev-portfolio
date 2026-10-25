@@ -36,7 +36,7 @@ export default function ContactForm() {
 
     try {
       // Reset form and show success message
-      await ContactApiService.createMessage({ ...values, website: honeypotRef.current?.value ?? "", startedAt })
+      await ContactApiService.createMessage({ ...values, website: honeypotRef.current?.value ?? "", elapsedMs: Date.now() - startedAt })
       form.reset()
       setSubmitted(true)
       Toast({
