@@ -34,8 +34,9 @@ export async function POST(req: Request) {
   }
 
   // Bots fill the hidden honeypot field or submit instantly: pretend success so they don't retry
-  const startedAt = Number(body.startedAt)
-  if (body.website || !startedAt || Date.now() - startedAt < MIN_FILL_MS) {
+  // elapsedMs is measured entirely on the client's clock, so server/client clock skew can't affect it
+  const elapsedMs = Number(body.elapsedMs)
+  if (body.website || !elapsedMs || elapsedMs < MIN_FILL_MS) {
     return NextResponse.json({ message: "Message Saved successfully" }, { status: 201 })
   }
 
