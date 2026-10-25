@@ -8,7 +8,7 @@ export const ContactApiService = {
 /**
    * Create a new message
    */
-  async createMessage(msgData: Omit<ContactMsg, "_id" | "createdAt">): Promise<{ msgId: string }> {
+  async createMessage(msgData: Omit<ContactMsg, "_id" | "createdAt"> & { website: string, startedAt: number }): Promise<{ msgId: string }> {
     try {
       const response = await fetch(`${this.baseUrl}`, {
         method: "POST",

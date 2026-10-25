@@ -180,7 +180,17 @@ export const MessageDBService = {
     return await collection.findOne({ _id: new ObjectId(id) });
   },
 
-  async pushMessage(project: Omit<ContactMsg, "_id" | "createdAt" >) {
+  // Messages from this IP hash or email since `since`, used for rate limiting
+  async countRecentMessages(ipHash: string, email: string, since: Date) {
+    const collection  = await ContactDBCollection();
+    const [byIp, byEmail] = await Promise.all([
+      collection.countDocuments({ ipHash, createdAt: { $gte: since } }),
+      collection.countDocuments({ email, createdAt: { $gte: since } }),
+    ]);
+    return { byIp, byEmail };
+  },
+
+  async pushMessage(project: Omit<ContactMsg, "_id" | "createdAt" > & { ipHash: string, userAgent: string }) {
     const collection  = await ContactDBCollection();
     return await collection.insertOne(
          { ...project, _id: new ObjectId(), createdAt: new Date() }, // Update object with changes
