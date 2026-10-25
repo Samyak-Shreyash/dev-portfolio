@@ -48,6 +48,20 @@ export function ProjectCard({ project }: ProjectProps) {
             </Badge>
           ))}
         </div>
+        {(project.demoUrl || project.repoUrl) && (
+          <div className="flex gap-4 mt-4 text-sm">
+            {project.demoUrl && (
+              <Link href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline">
+                <ExternalLink className="h-4 w-4" /> Live Demo
+              </Link>
+            )}
+            {project.repoUrl && (
+              <Link href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline">
+                <Github className="h-4 w-4" /> Code
+              </Link>
+            )}
+          </div>
+        )}
       </div>
     </Card>
   );

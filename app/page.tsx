@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { TECH_STACK } from "@/lib/constants";
+import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN, DEV_NAME, DEV_TITLE, TECH_STACK, siteMetaData } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,22 +16,16 @@ import { BlogDBService, ProjectDBService } from "@/lib/mongodb";
 
 export const dynamic = "force-dynamic"
 
-// const jsonLd = {
-//   "@context": "https://schema.org",
-//   "@type": "Person",
-//   "name": DEV_NAME,
-//   "url": siteURL,
-//   "sameAs": [
-//     DEV_GITHUB,
-//     DEV_LINKEDIN
-//   ],
-//   "jobTitle": DEV_TITLE,
-//   "worksFor": {
-//     "@type": "Organization",
-//     "name": "Mphasis"
-//   },
-//   "knowsAbout": ["Java", "SQL", "Web Development", "React", "Next.js", "Kafka"],
-// };
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": DEV_NAME,
+  "url": siteMetaData.siteUrl,
+  "email": DEV_EMAIL,
+  "jobTitle": DEV_TITLE,
+  "sameAs": [`https://${DEV_GITHUB}`, `https://${DEV_LINKEDIN}`],
+  "knowsAbout": TECH_STACK.map((t) => t.tech),
+};
 
 
 
@@ -43,6 +37,10 @@ const projects = await ProjectDBService.getAllProjects();
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section */}
       <HeroSection />
       {/* Tech Stack */}
@@ -238,15 +236,15 @@ function ProjectSection({ projects, muted }: ProjectSectionProp) {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         <Suspense fallback={<PageLoading />}>
-          {projects
+          {[...projects]
+            .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()) // newest first, then take top 3
             .slice(0, 3)
-            .sort((a: { updatedAt: string | number | Date; }, b: { updatedAt: string | number | Date; }) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()) // Sort by date (newest first)
             .map((project: Project) => (
               <ProjectCard key={project._id?.toString()} project={project} />
             ))}
         </Suspense>
       </div>
-      {projects.length > 2 && <div className="mt-8">
+      {projects.length > 3 && <div className="mt-8">
         <Link href="/projects">
           <Button variant="outline" className="inline-flex items-center gap-2">
             View All Projects <ArrowRight className="h-4 w-4" />
@@ -289,7 +287,7 @@ function BlogSection({blogs, muted}: BlogSectionProp) {
                 </div>
                 <Link
                   href={`/blog/${blog.slug}`}
-                  className="absolute inset-0 rounded-lg focus:outline-none focus:ring-2 focus:ringimary focus:ring-offset-2"
+                  className="absolute inset-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 >
                   <span className="sr-only">Read {blog.title}</span>
                 </Link>
@@ -334,7 +332,7 @@ function ContactSection({ muted }: ContactSectionProp) {
           </Link>
         </Button>
         <Button variant="outline" asChild>
-          <Link href={`mailto:{DEV_EMAIL}`}>Send Email</Link>
+          <Link href={`mailto:${DEV_EMAIL}`}>Send Email</Link>
         </Button>
       </div>
     </div>
