@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { CURR_IMG_DARK, CURR_IMG_LIGHT, DEV_NAME } from "@/lib/constants";
-import { ArrowRightIcon } from "lucide-react";
+import { CURR_IMG_DARK, CURR_IMG_LIGHT, DEV_NAME, DEV_RESUME } from "@/lib/constants";
+import { ArrowRightIcon, Download } from "lucide-react";
 import ContactIcons from "./ui/contact-icons";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
@@ -41,6 +41,11 @@ export function HeroSection() {
                     <Link href="/contact">
                     <Button variant="outline">Get In Touch</Button>
                     </Link>
+                    <Button variant="ghost" asChild>
+                    <a href={DEV_RESUME} target="_blank" rel="noopener noreferrer">
+                        <Download className="w-4 h-4" /> Resume
+                    </a>
+                    </Button>
                 </div>
                 <ContactIcons />
                 </div>

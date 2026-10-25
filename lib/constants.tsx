@@ -227,9 +227,9 @@ export const siteMetaData = {
   interests: "technology, Coding, travelling, food and fitness",
   locale: "en-US",
   theme: "system",
-  siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL || "samyakshreyash.in"}`,
-  siteLogo: `${process.env.NEXT_PUBLIC_BASE_URL || "samyakshreyash.in"}/uploads/${DEV_IMAGE}`,
-  socialBanner: `${process.env.NEXT_PUBLIC_BASE_URL || "samyakshreyash.in"}/uploads/${DEV_IMAGE}`,
+  siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL || "https://samyakshreyash.in"}`,
+  siteLogo: `${process.env.NEXT_PUBLIC_BASE_URL || "https://samyakshreyash.in"}/uploads/${DEV_IMAGE}`,
+  socialBanner: `${process.env.NEXT_PUBLIC_BASE_URL || "https://samyakshreyash.in"}/uploads/${DEV_IMAGE}`,
   email: DEV_EMAIL,
   socialLinks: {
     github: DEV_GITHUB,
