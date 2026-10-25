@@ -7,34 +7,32 @@ if (!process.env.MONGODB_URI) {
 }
 
 const uri = process.env.MONGODB_URI
-const options = {}
+// Fail fast instead of hanging a serverless function for minutes on a dead socket
+const options = { serverSelectionTimeoutMS: 10000, connectTimeoutMS: 10000 }
 
-
-let client: MongoClient
-let clientPromise: Promise<MongoClient>
-
-if (process.env.NODE_ENV === "development") {
-  // In development mode, use a global variable so that the value
-  // is preserved across module reloads caused by HMR (Hot Module Replacement).
-  const globalWithMongo = global as typeof globalThis & {
-    _mongoClientPromise?: Promise<MongoClient>
-  }
-
-  if (!globalWithMongo._mongoClientPromise) {
-    client = new MongoClient(uri, options)
-    globalWithMongo._mongoClientPromise = client.connect()
-  }
-  clientPromise = globalWithMongo._mongoClientPromise
-} else {
-  // In production mode, it's best to not use a global variable.
-  client = new MongoClient(uri, options)
-  clientPromise = client.connect()
+// Cached on globalThis so dev HMR and warm serverless invocations reuse one client
+const globalWithMongo = global as typeof globalThis & {
+  _mongoClientPromise?: Promise<MongoClient>
 }
 
+// Connect lazily and drop a failed connection from the cache, so the next request
+// reconnects instead of reusing a rejected promise (which also crashed the process
+// as an unhandled rejection when a frozen Vercel instance thawed with a dead socket).
+function getClient() {
+  if (!globalWithMongo._mongoClientPromise) {
+    const client = new MongoClient(uri, options)
+    globalWithMongo._mongoClientPromise = client.connect().catch((error) => {
+      globalWithMongo._mongoClientPromise = undefined
+      client.close().catch(() => {})
+      throw error
+    })
+  }
+  return globalWithMongo._mongoClientPromise
+}
 
 async function connectToDatabase() {
   // Connect to the database
-  const client = await clientPromise;
+  const client = await getClient();
   const db = client.db("samyakShreyash");
   return {db, client};
 }
