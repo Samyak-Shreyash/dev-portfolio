@@ -51,19 +51,18 @@ export const projectSchema = z.object({
 })
 
 export const messageSchema = z.object({
-  name: z.string().min(2, {
+  name: z.string().trim().min(2, {
       message: "Name must be at least 2 characters.",
-    }),
-    email: z.string().email({
+    }).max(100, { message: "Name must be at most 100 characters." }),
+    email: z.string().trim().max(254).email({
       message: "Please enter a valid email address.",
     }),
-    subject: z.string().min(5, {
+    subject: z.string().trim().min(5, {
       message: "Subject must be at least 5 characters.",
-    }),
-    message: z.string().min(10, {
+    }).max(150, { message: "Subject must be at most 150 characters." }),
+    message: z.string().trim().min(10, {
       message: "Message must be at least 10 characters.",
-    }).transform((val) =>val.trim()),
-
+    }).max(5000, { message: "Message must be at most 5000 characters." }),
 })
 
 export function slugify(text: string): string {

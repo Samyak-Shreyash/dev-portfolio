@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -17,6 +17,9 @@ import { ContactApiService } from "@/lib/api-services"
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  // Anti-bot: hidden honeypot field and time the form was shown
+  const honeypotRef = useRef<HTMLInputElement>(null)
+  const [startedAt] = useState(() => Date.now())
 
   const form = useForm<z.infer<typeof messageSchema>>({
     resolver: zodResolver(messageSchema),
@@ -31,11 +34,9 @@ export default function ContactForm() {
   async function onSubmit(values: z.infer<typeof messageSchema>) {
     setIsSubmitting(true)
 
-    // Simulate form submission delay
-    await new Promise((resolve) => setTimeout(resolve, 1000))
     try {
       // Reset form and show success message
-      await ContactApiService.createMessage(values)
+      await ContactApiService.createMessage({ ...values, website: honeypotRef.current?.value ?? "", startedAt })
       form.reset()
       setSubmitted(true)
       Toast({
@@ -76,6 +77,15 @@ export default function ContactForm() {
         ) : (
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <input
+                ref={honeypotRef}
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute -left-[9999px] h-0 w-0 opacity-0"
+              />
               {/* <div className="grid gap-6 sm:grid-cols-2"> */}
                 <FormField
                   control={form.control}
