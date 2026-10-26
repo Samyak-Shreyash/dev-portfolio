@@ -1,8 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@pluign "tailwindcss-animate";
+@plugin "tailwindcss-animate";
 
-/* Removed unsupported @custom-variant — define custom variants in tailwind.config.js or via a plugin */
+/* dark: follows the theme toggle (next-themes sets .dark on <html>), not the OS setting */
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   /* --- LIGHT MODE --- */

@@ -1,11 +1,8 @@
-export default {
+// Tailwind plugins (typography, animate) are loaded via @plugin in app/globals.css
+const config = {
   plugins: {
-    '@tailwindcss/postcss': {
-      plugins: [
-        // Ensure you install this package: npm install @tailwindcss/typography
-        '@tailwindcss/typography',
-        'tailwindcss-animate',  
-      ],
-    },
+    '@tailwindcss/postcss': {},
   },
 }
+
+export default config

@@ -53,11 +53,6 @@ async function connectToDatabase() {
     return db.collection('messages');
   }
 
-  async function UserDBCollection() {
-    const { db } = await connectToDatabase();
-    return db.collection('userOne');
-  }
-
 
 
 export const BlogDBService = {

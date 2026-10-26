@@ -1,7 +1,5 @@
 import { ProjectDBService } from "@/lib/mongodb";
-import { projectSchema } from "@/lib/utils";
 import { NextResponse } from "next/server";
-import { z } from "zod"
 
 // This is a route handler for the /api/project endpoint
 export async function GET() {

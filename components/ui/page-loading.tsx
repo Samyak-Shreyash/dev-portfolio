@@ -3,17 +3,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const pageVariants = {
-  animate: {
-    opacity: [0.5, 1, 0.5],
-    transition: {
-      repeat: Infinity,
-      duration: 1.5,
-      ease: 'easeInOut',
-    },
-  },
-};
-
 const PageLoading: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-4">

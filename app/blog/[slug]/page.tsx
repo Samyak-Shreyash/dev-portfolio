@@ -113,7 +113,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <AvatarFallback>S</AvatarFallback>
                 </Avatar>
             </div>
-            <div className="text-sm">{format(new Date(post.createdAt ?? Date.now()), "MMMM d, yyyy")}</div>
+            {post.createdAt && <div className="text-sm">{format(new Date(post.createdAt), "MMMM d, yyyy")}</div>}
             <div className="items-end">{readingTime(post.content).text}</div>
         </div>
 

@@ -125,7 +125,7 @@ export default async function ProjectsPage() {
   )
 }
 
-function capitalize(word : String) {
+function capitalize(word: string) {
   if (!word) {
     return "";
   }
