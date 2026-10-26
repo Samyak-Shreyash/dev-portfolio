@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 export default async function BlogsPage() {
-  const blogs = await BlogDBService.getAllBlogs()
+  const blogs = await BlogDBService.getPublishedBlogs()
    if (!blogs || blogs.length==0) {
         redirect('/');
    }
