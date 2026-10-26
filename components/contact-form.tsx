@@ -9,10 +9,9 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Toaster } from "@/components/ui/toaster"
-import { Toast } from "./ui/toast"
+import { toast } from "@/hooks/use-toast"
 import { messageSchema } from "@/lib/utils"
-import { ContactApiService } from "@/lib/api-services"
+import { ContactApiService, ContactSubmitError } from "@/lib/api-services"
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -39,21 +38,28 @@ export default function ContactForm() {
       await ContactApiService.createMessage({ ...values, website: honeypotRef.current?.value ?? "", elapsedMs: Date.now() - startedAt })
       form.reset()
       setSubmitted(true)
-      Toast({
+      toast({
         title: "Message received!",
-        content: "Thank you for reaching out. Ill get back to you soon.",
+        description: "Thank you for reaching out. Ill get back to you soon.",
       })
 
       // Reset submitted state after 5 seconds
       setTimeout(() => setSubmitted(false), 5000)
     } catch (error) {
-      Toast({
-        title: "Something went wrong!",
-        content: "Your message couldn't be sent. Please try again later.",
-        variant: "destructive",
-      })
-      // Log form data to console (for demonstration)
-      console.error("Form not submitted:", error)
+      // 4xx: the visitor can fix it (bad email domain, too many links, rate limit), so say what's wrong
+      if (error instanceof ContactSubmitError && error.status < 500) {
+        if (error.field === "email") {
+          form.setError("email", { message: error.message })
+        } else {
+          toast({ title: "Message not sent", description: error.message, variant: "destructive" })
+        }
+      } else {
+        toast({
+          title: "Something went wrong!",
+          description: "Your message couldn't be sent. Please try again later.",
+          variant: "destructive",
+        })
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -179,7 +185,6 @@ export default function ContactForm() {
             </form>
           </Form>
         )}
-        <Toaster />
       </div>
     </div>
   )

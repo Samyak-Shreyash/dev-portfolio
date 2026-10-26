@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Toast } from "./ui/toast";
+import { toast } from "@/hooks/use-toast";
 
 interface MarkdownEditorProps {
   value: string;
@@ -176,15 +176,15 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
         fileInputRef.current.value = "";
       }
 
-      Toast({
+      toast({
         title: "Image uploaded",
-        content: "Your image has been uploaded successfully.",
+        description: "Your image has been uploaded successfully.",
       });
     } catch (error) {
       console.error("Error uploading image:", error);
-      Toast({
+      toast({
         title: "Upload failed",
-        content:
+        description:
           error instanceof Error ? error.message : "Failed to upload image",
         variant: "destructive",
       });

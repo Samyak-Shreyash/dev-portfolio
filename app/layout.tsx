@@ -3,6 +3,7 @@ import './globals.css';
 import { siteMetaData } from "@/lib/constants";
 import { Inter } from "next/font/google";
 import { ThemesProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
 import SiteFooter from "@/components/ui/site-footer";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import HeaderWrapper from "@/components/header-wrapper";
@@ -58,6 +59,7 @@ export const metadata: Metadata= {
               {children}
               <SiteFooter />
             </div>
+            <Toaster />
           </ThemesProvider>
           <SpeedInsights />
         </body>

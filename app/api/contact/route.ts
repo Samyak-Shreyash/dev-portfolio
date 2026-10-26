@@ -2,7 +2,7 @@ import { MessageDBService } from "@/lib/mongodb";
 import { messageSchema } from "@/lib/utils";
 import { NextResponse } from "next/server";
 import { hashIp } from "@/lib/auth";
-import { resolveMx } from "dns/promises";
+import { resolve4, resolve6, resolveMx } from "dns/promises";
 
 const MIN_FILL_MS = 3000 // humans can't fill the form faster than this
 const WINDOW_MS = 60 * 60 * 1000
@@ -10,18 +10,23 @@ const MAX_PER_IP = 3 // per WINDOW_MS
 const MAX_PER_EMAIL = 3
 const MAX_LINKS = 2
 
-// False only when DNS says the domain doesn't exist or has no mail server.
+// False only when DNS says the domain doesn't exist, has no mail server, or opts out of mail.
 // Lookup failures/timeouts return true so real visitors are never blocked by flaky DNS.
 async function domainAcceptsMail(email: string) {
   const domain = email.split("@").pop()!
+  const withTimeout = <T,>(p: Promise<T>) =>
+    Promise.race([p, new Promise<never>((_, reject) => setTimeout(() => reject(new Error("timeout")), 3000))])
   try {
-    const timeout = new Promise<never>((_, reject) => setTimeout(() => reject(new Error("timeout")), 3000))
-    const records = await Promise.race([resolveMx(domain), timeout])
-    return records.some((r) => r.exchange && r.exchange !== ".") // "." is a null MX (RFC 7505)
+    const records = await withTimeout(resolveMx(domain))
+    if (records.length > 0) return records.some((r) => r.exchange && r.exchange !== ".") // "." is a null MX (RFC 7505): no mail
   } catch (error) {
     const code = (error as NodeJS.ErrnoException).code
-    return code !== "ENOTFOUND" && code !== "ENODATA"
+    if (code === "ENOTFOUND") return false
+    if (code !== "ENODATA") return true
   }
+  // No MX record (ENODATA or an empty list): mail goes to the domain's own A/AAAA address (RFC 5321 "implicit MX")
+  const addresses = await Promise.allSettled([withTimeout(resolve4(domain)), withTimeout(resolve6(domain))])
+  return addresses.some((r) => r.status === "fulfilled" && r.value.length > 0)
 }
 
 // POST a new Message
@@ -52,7 +57,7 @@ export async function POST(req: Request) {
   }
 
   if (!(await domainAcceptsMail(msg.email))) {
-    return NextResponse.json({ error: "This email domain doesn't accept mail. Please check the address." }, { status: 400 })
+    return NextResponse.json({ error: "This email domain doesn't accept mail. Please check the address.", field: "email" }, { status: 400 })
   }
 
   try {

@@ -16,7 +16,7 @@ import { z } from "zod";
 import { blogSchema, slugify } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Toast } from "./ui/toast";
+import { toast } from "@/hooks/use-toast";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { ImageUpload } from "./image-upload";
@@ -51,15 +51,15 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
 
       if (post) {
         await BlogApiService.updateBlog(post._id, values);
-        Toast({
+        toast({
           title: "Post updated",
-          content: "Your post has been updated successfully.",
+          description: "Your post has been updated successfully.",
         });
       } else {
         await BlogApiService.createBlog(values);
-        Toast({
+        toast({
           title: "Post created",
-          content: "Your post has been created successfully.",
+          description: "Your post has been created successfully.",
         });
       }
 
@@ -67,9 +67,9 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
       router.refresh();
     } catch (error) {
       console.error("Error submitting post:", error);
-      Toast({
+      toast({
         title: "Error",
-        content: error instanceof Error ? error.message : "An error occurred",
+        description: error instanceof Error ? error.message : "An error occurred",
         variant: "destructive",
       });
     } finally {
