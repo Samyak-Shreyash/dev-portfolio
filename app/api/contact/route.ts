@@ -1,7 +1,7 @@
 import { MessageDBService } from "@/lib/mongodb";
 import { messageSchema } from "@/lib/utils";
 import { NextResponse } from "next/server";
-import { createHash } from "crypto";
+import { hashIp } from "@/lib/auth";
 import { resolveMx } from "dns/promises";
 
 const MIN_FILL_MS = 3000 // humans can't fill the form faster than this
@@ -56,9 +56,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    // Store a salted hash, not the raw IP
-    const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown"
-    const ipHash = createHash("sha256").update(ip + (process.env.MONGODB_URI ?? "")).digest("hex")
+    const ipHash = hashIp(req)
 
     const { byIp, byEmail } = await MessageDBService.countRecentMessages(ipHash, msg.email, new Date(Date.now() - WINDOW_MS))
     if (byIp >= MAX_PER_IP || byEmail >= MAX_PER_EMAIL) {

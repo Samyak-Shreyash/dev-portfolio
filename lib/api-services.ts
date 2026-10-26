@@ -84,13 +84,13 @@ export const ContactApiService = {
    */
     async deleteMessage(id: string): Promise<void> {
       try {
-        const response = await fetch(this.baseUrl, {
+        const response = await fetch(`/api/contact/${encodeURIComponent(id)}`, { // relative: browser-only, keeps the session cookie same-origin
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
         })
   
         if (response.status === 401) {
-          throw new Error("API authentication failed. Check your API_KEY environment variable.")
+          throw new Error("Your session has expired. Please log in again.")
         }
   
         if (!response.ok) {
