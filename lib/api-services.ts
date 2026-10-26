@@ -1,5 +1,12 @@
 import { Blog, ContactMsg, Project } from "./types"
 
+// A rejected contact submission: status and (optionally) the form field it's about
+export class ContactSubmitError extends Error {
+  constructor(message: string, public status: number, public field?: string) {
+    super(message)
+  }
+}
+
 export const ContactApiService = {
   baseUrl: process.env.NODE_ENV === 'development' 
     ? 'http://localhost:3000/api/contact'
@@ -10,21 +17,20 @@ export const ContactApiService = {
    */
   async createMessage(msgData: Omit<ContactMsg, "_id" | "createdAt"> & { website: string, elapsedMs: number }): Promise<{ msgId: string }> {
     try {
-      const response = await fetch(`${this.baseUrl}`, {
+      // Relative URL: same origin whatever host/port the site is served from (www vs bare domain, dev ports)
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(msgData),
       })
       if (!response.ok) {
-        let errorMessage = `Failed to Submit Message: ${response.status}`
-        try {
-          const errorData = await response.json()
-          errorMessage = errorData?.error || errorMessage
-        } catch (parseError) {
-          /* non-json error body */
-          errorMessage += ` (Failed to parse error: ${parseError})`;
-        }
-        throw new Error(errorMessage)
+        const errorData = await response.json().catch(() => null)
+        const error = errorData?.error
+        // Validation errors arrive as a list of zod issues; anything else as a string
+        const errorMessage = Array.isArray(error)
+          ? error.map((issue: { message?: string }) => issue.message).filter(Boolean).join(" ")
+          : error || `Failed to Submit Message: ${response.status}`
+        throw new ContactSubmitError(errorMessage, response.status, errorData?.field)
       }
 
       // Expecting { message: string, messageId: <id> }
@@ -39,7 +45,8 @@ export const ContactApiService = {
       const msgId = data?.messageId ?? data?.msgId ?? data?.id
       return { msgId: msgId?.toString() ?? "" }
     } catch (error) {
-      console.error("Error Submitting Message:", error)
+      // Rejections the visitor can fix (4xx) are expected; only log real failures
+      if (!(error instanceof ContactSubmitError && error.status < 500)) console.error("Error Submitting Message:", error)
       throw error
     }
   },
