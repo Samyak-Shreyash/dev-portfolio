@@ -39,7 +39,8 @@ export default function Login() {
         router.refresh();
       } else {
         const body = await res.json().catch(() => null);
-        setError(body?.message ?? "Login failed");
+        // ref matches the "[login <ref>]" lines in the server logs
+        setError(`${body?.message ?? "Login failed"}${body?.ref ? ` (ref ${body.ref})` : ""}`);
       }
     } catch (error) {
       console.error(error);
