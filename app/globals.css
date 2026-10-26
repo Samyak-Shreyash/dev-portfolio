@@ -121,3 +121,11 @@
   --color-ring: hsl(var(--ring));
   /* ... */
 }
+
+/* The page itself needs a background: without it the browser's default canvas shows through, and that follows
+   the OS theme, so the page stayed dark/light whatever the theme toggle said */
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
