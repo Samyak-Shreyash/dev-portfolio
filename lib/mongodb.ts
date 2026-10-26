@@ -197,11 +197,17 @@ export const MessageDBService = {
 
 };
 
-// export const UserDBService = {
-  
-//   async getUserByEmail(email: string)
-//   { 
-//     const collection = await UserDBCollection();
-//     return await collection.findOne({ email: email})
-//   }
-// };
+export const LoginAttemptDBService = {
+
+  async countRecentFailures(ipHash: string, since: Date)
+  {
+    const { db } = await connectToDatabase();
+    return db.collection('loginAttempts').countDocuments({ ipHash, createdAt: { $gte: since } });
+  },
+
+  async recordFailure(ipHash: string)
+  {
+    const { db } = await connectToDatabase();
+    return db.collection('loginAttempts').insertOne({ ipHash, createdAt: new Date() });
+  }
+};
