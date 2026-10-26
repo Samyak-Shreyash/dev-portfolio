@@ -364,14 +364,15 @@ export const BlogApiService = {
    */
   async createBlog(blogData: Omit<Blog, "_id" | "createdAt" | "updatedAt">): Promise<{ blogId: string }> {
     try {
-      const response = await fetch(`${this.baseUrl}`, {
+      // Relative URL: browser-only, keeps the admin session cookie same-origin
+      const response = await fetch("/api/blog", {
         method: "POST",
-        // headers: ApiService.getHeaders(),
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(blogData),
       })
 
       if (response.status === 401) {
-        throw new Error("API authentication failed. Check your API_KEY environment variable.")
+        throw new Error("Your session has expired. Please log in again.")
       }
 
       if (!response.ok) {
@@ -392,14 +393,14 @@ export const BlogApiService = {
    */
   async updateBlog(id: string, blogData: Omit<Blog, "_id" | "createdAt" | "updatedAt">): Promise<void> {
     try {
-      const response = await fetch(`${this.baseUrl}/${id}`, {
+      const response = await fetch(`/api/blog/${encodeURIComponent(id)}`, {
         method: "PUT",
-        // headers: ApiService.getHeaders(),
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(blogData),
       })
 
       if (response.status === 401) {
-        throw new Error("API authentication failed. Check your API_KEY environment variable.")
+        throw new Error("Your session has expired. Please log in again.")
       }
 
       if (!response.ok) {
@@ -417,13 +418,12 @@ export const BlogApiService = {
    */
   async deleteBlog(id: string): Promise<void> {
     try {
-      const response = await fetch(`${this.baseUrl}/${id}`, {
+      const response = await fetch(`/api/blog/${encodeURIComponent(id)}`, {
         method: "DELETE",
-        // headers: ApiService.getHeaders(),
       })
 
       if (response.status === 401) {
-        throw new Error("API authentication failed. Check your API_KEY environment variable.")
+        throw new Error("Your session has expired. Please log in again.")
       }
 
       if (!response.ok) {
