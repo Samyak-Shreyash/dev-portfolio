@@ -1,7 +1,5 @@
 import { BlogDBService } from "@/lib/mongodb";
-import { blogSchema } from "@/lib/utils";
 import { NextResponse } from "next/server";
-import { z } from "zod"
 
 // This is a route handler for the /api/blog endpoint
 export async function GET() {
