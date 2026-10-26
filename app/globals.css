@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@pluign "tailwindcss-animate";
+@plugin "tailwindcss-animate";
 
 /* dark: follows the theme toggle (next-themes sets .dark on <html>), not the OS setting */
 @custom-variant dark (&:where(.dark, .dark *));
