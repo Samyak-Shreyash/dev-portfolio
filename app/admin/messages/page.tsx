@@ -2,7 +2,8 @@ import { redirect } from "next/navigation";
 import { format } from "date-fns";
 import { isAdmin } from "@/lib/auth";
 import { MessageDBService } from "@/lib/mongodb";
-import { DeleteMessageButton, LogoutButton } from "@/components/admin-buttons";
+import { DeleteMessageButton } from "@/components/admin-buttons";
+import { AdminNav } from "@/components/admin-nav";
 
 export const metadata = {
   title: "Messages",
@@ -21,7 +22,7 @@ export default async function MessageDashBoard()
         <div className="container mx-auto px-6 md:px-12 sm:px-8 py-12 ">
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-2xl md:text-3xl font-bold tracking-tight" >Message Dashboard</h1>
-                <LogoutButton />
+                <AdminNav />
             </div>
             {messages.length === 0 && (
         <div className="text-center py-12">

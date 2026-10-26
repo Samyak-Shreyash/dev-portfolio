@@ -7,16 +7,25 @@ import type { Metadata } from "next"
 import { JSX, Suspense } from "react"
 import readingTime from "reading-time";
 import Script from "next/script"
-import { BlogApiService } from "@/lib/api-services"
+import { BlogDBService } from "@/lib/mongodb"
+import { mapBlog } from "@/lib/utils"
+import { isAdmin } from "@/lib/auth"
 import PageLoading from "@/components/ui/page-loading"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export const dynamic = "force-dynamic"
 
+// Drafts are visible only to the logged-in admin (for previewing)
+async function getPost(slug: string) {
+  const blog = await BlogDBService.getBlogBySlug(slug)
+  if (!blog || (!blog.published && !(await isAdmin()))) return null
+  return mapBlog(blog)
+}
+
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await (params)
-  const blog = await BlogApiService.getBlogBySlug(slug)
+  const blog = await getPost(slug)
 
   if (!blog) {
     return {
@@ -60,7 +69,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }): Promise<JSX.Element>  {
   const { slug } = await params
-  const post = await BlogApiService.getBlogBySlug(slug)
+  const post = await getPost(slug)
 
   if (!post || !post._id) {
     return notFound()

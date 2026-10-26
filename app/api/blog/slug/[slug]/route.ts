@@ -11,7 +11,7 @@ export async function GET(
     // Get the blog using the BlogDBService
     const result = await BlogDBService.getBlogBySlug(slug);
 
-     if (!result) {
+     if (!result || !result.published) {
       return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
     return NextResponse.json(mapBlog(result));

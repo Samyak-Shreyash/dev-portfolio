@@ -31,7 +31,7 @@ export function mapBlog(Post: WithId<Document> | Blog | null): Blog | null {
 
 export const blogSchema = z.object({
   title: z.string().min(1, "Title is required"),
-  slug: z.string().min(1, "Slug is required"),
+  slug: z.string().min(1, "Slug is required").regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Use lowercase letters, numbers and hyphens only"),
   tags: z.array(z.string()),
   content: z.string().min(1, "Content is required").transform((val) =>val.trim()),
   excerpt: z.string().optional(),
