@@ -32,7 +32,7 @@ const jsonLd = {
 
 export default async function Home() {
   
-const blogs = await BlogDBService.getAllBlogs();
+const blogs = await BlogDBService.getPublishedBlogs();
 const projects = await ProjectDBService.getAllProjects();
 
   return (
