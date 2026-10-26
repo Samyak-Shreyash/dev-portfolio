@@ -1,5 +1,6 @@
 import { isAdmin } from "@/lib/auth";
 import { BlogDBService } from "@/lib/mongodb";
+import { blogSchema } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 // This is a route handler for the /api/blog endpoint
