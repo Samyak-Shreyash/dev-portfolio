@@ -9,6 +9,14 @@ const loginSchema = z.object({
   password: z.string().min(1).max(200),
 });
 
+if (!process.env.ADMIN_PASSWORD_HASH) {
+  throw new Error("Please Verify your Password Storage")
+}
+
+if (!process.env.JWT_SECRET) {
+  throw new Error("Please Verify your JWT Environment")
+}
+
 const MAX_FAILED = 5;
 const WINDOW_MS = 15 * 60 * 1000;
 const INVALID = { success: false, message: 'Incorrect password' };
