@@ -6,18 +6,8 @@ import { Button } from "./ui/button";
 import { CURR_IMG_DARK, CURR_IMG_LIGHT, DEV_NAME, DEV_RESUME } from "@/lib/constants";
 import { ArrowRightIcon, Download } from "lucide-react";
 import ContactIcons from "./ui/contact-icons";
-import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
 
 export function HeroSection() {
-    const { resolvedTheme } = useTheme();
-    const [backgroundImage, setBackgroundImage] = useState(CURR_IMG_LIGHT);
-  
-    useEffect(() => {
-      setBackgroundImage(
-        resolvedTheme === "dark" ? CURR_IMG_DARK : CURR_IMG_LIGHT
-      );
-    }, [resolvedTheme]);
     return(
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
             <div className="container px-4 md:px-6">
@@ -53,11 +43,20 @@ export function HeroSection() {
                 <div className="relative aspect-square overflow-hidden rounded-full border-8 border-muted">
                     <Image
                     fetchPriority="high"
-                    src={backgroundImage}
+                    src={CURR_IMG_LIGHT}
                     alt={DEV_NAME}
                     width={600}
                     height={600}
-                    className="object-cover"
+                    className="object-cover dark:hidden"
+                    priority
+                    />
+                    <Image
+                    fetchPriority="high"
+                    src={CURR_IMG_DARK}
+                    alt={DEV_NAME}
+                    width={600}
+                    height={600}
+                    className="object-cover hidden dark:block"
                     priority
                     />
                 </div>
