@@ -4,7 +4,7 @@ import { SiteHeader } from "./site-header";
 
 export default async function HeaderWrapper() {
     let navLink = NAV_LINK
-    const blogs = await BlogDBService.getAllBlogs()?? [];
+    const blogs = await BlogDBService.getPublishedBlogs()?? [];
     const projects = await ProjectDBService.getAllProjects()?? [];
 
     navLink = blogs.length!=0?navLink: navLink.filter(item => item.name !== "Blogs");

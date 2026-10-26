@@ -64,6 +64,14 @@ export const BlogDBService = {
     return posts as unknown as Blog[];
   },
 
+  // Public pages must only ever see published posts
+  async getPublishedBlogs()
+  {
+    const collection = await BlogDBCollection();
+    const posts = await collection.find({ published: true }).sort({ createdAt: -1 }).toArray();
+    return posts as unknown as Blog[];
+  },
+
   async getBlogById(id: string)
   {
     const collection = await BlogDBCollection();
@@ -78,19 +86,13 @@ export const BlogDBService = {
     return result as Blog | null;
   },
 
-  async updateBlog(blogData: Omit<Blog,  "updatedAt">)
+  async updateBlog(id: string, blogData: Omit<Blog, "_id" | "createdAt" | "updatedAt">)
   {
-    
     const collection = await BlogDBCollection();
-    const existingBlog = await collection.findOne({ _id: new ObjectId(blogData._id) })
-    if(!existingBlog)
-      return await collection.findOneAndUpdate(
-        { _id: new ObjectId(blogData._id) }, // Filter to locate the document
-        { ...blogData, updatedAt: new Date() }, // Update object with changes
-        { upsert: true } // Options: upsert if not found
-      )
-    else
-      return null;
+    return await collection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { ...blogData, updatedAt: new Date() } },
+    )
   },
 
   async addNewBlog(blogData: Omit<Blog, "_id" | "createdAt" | "updatedAt">) {
