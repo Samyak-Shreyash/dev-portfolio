@@ -16,6 +16,9 @@ export const metadata: Metadata= {
       default: siteMetaData.title, // a default is required when creating a template
     },
     description: siteMetaData.description,
+    alternates: {
+      canonical: "/",
+    },
     openGraph: {
       title: siteMetaData.title,
       description: siteMetaData.description,
@@ -31,7 +34,6 @@ export const metadata: Metadata= {
       googleBot: {
         index: true,
         follow: true,
-        noimageindex: true,
         "max-video-preview": -1,
         "max-image-preview": "large",
         "max-snippet": -1,
@@ -44,6 +46,16 @@ export const metadata: Metadata= {
     },
   };
 
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": siteMetaData.title,
+    "url": siteMetaData.siteUrl,
+    "description": siteMetaData.description,
+    "inLanguage": siteMetaData.language,
+    "author": { "@type": "Person", "name": siteMetaData.author },
+  };
+
   export default function RootLayout({
     children,
   }: {
@@ -53,6 +65,10 @@ export const metadata: Metadata= {
       <html lang="en" suppressHydrationWarning>
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
         <body className={inter.className}>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+          />
           <ThemesProvider attribute="class" enableSystem disableTransitionOnChange>
             <div className="relative flex min-h-screen flex-col">
               <HeaderWrapper />

@@ -9,9 +9,10 @@ import { ProjectCard } from "@/components/project-card"
 import { redirect } from "next/navigation"
 
 export const metadata = {
-  title: "Projects - Samyak Shreyash",
+  title: "Projects",
   description:
     "Explore the portfolio of projects developed by Samyak Shreyash, showcasing expertise in web development and software engineering.",
+  alternates: { canonical: "/projects" },
 }
 
 export default async function ProjectsPage() {

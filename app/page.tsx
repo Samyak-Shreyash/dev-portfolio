@@ -13,8 +13,15 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { HeroSection } from "@/components/hero-section";
 import { BlogDBService, ProjectDBService } from "@/lib/mongodb";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic"
+
+export const metadata: Metadata = {
+  title: { absolute: `${DEV_NAME} | Senior Software Developer & Full Stack Engineer` },
+  description: siteMetaData.description,
+  alternates: { canonical: "/" },
+};
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -23,6 +30,8 @@ const jsonLd = {
   "url": siteMetaData.siteUrl,
   "email": DEV_EMAIL,
   "jobTitle": DEV_TITLE,
+  "image": siteMetaData.socialBanner,
+  "address": { "@type": "PostalAddress", "addressLocality": "Hyderabad", "addressCountry": "IN" },
   "sameAs": [`https://${DEV_GITHUB}`, `https://${DEV_LINKEDIN}`],
   "knowsAbout": TECH_STACK.map((t) => t.tech),
 };
@@ -96,7 +105,7 @@ function TechSection() {
                   <div className="flex flex-col items-center gap-2"><div className="flex h-20 w-20 items-center justify-center rounded-full bg-background/60">
                     <Image 
                       src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
-                      alt={tech.tech}
+                      alt={`${tech.tech} logo`}
                       width={40}
                       height={40} />
                   </div>

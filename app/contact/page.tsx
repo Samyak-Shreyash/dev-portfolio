@@ -3,10 +3,32 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN, DEV_LOCATION, DEV_CITY, FAQS } from "@/lib/constants"
 import { Github, Linkedin, Mail, MapPin } from "lucide-react"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "Contact",
+    description:
+        "Get in touch with Samyak Shreyash for freelance projects, full-time opportunities or collaborations. Based in Hyderabad, India.",
+    alternates: { canonical: "/contact" },
+}
+
+const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": FAQS.map((faq) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": { "@type": "Answer", "text": faq.answer },
+    })),
+}
   
 export default function ContactPage() {
     return (
         <main className='min-h-screen bg-linear-to-b from-background-500 to-secondary/10'>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+            />
             <div className='absolute inset-0 [mask-image: radial-gradient(circle, white, transparent 85%)] pointer-events-none'></div>
 
             <section className='container relative mx-auto py-16 px-4'>
@@ -32,7 +54,7 @@ export default function ContactPage() {
                                                     <Mail className="text-primary" />
                                                 </div>
                                                 <div>
-                                                    <h3 className="text-lg font-medium">Mail me </h3>
+                                                    <h2 className="text-lg font-medium">Mail me </h2>
                                                     <a
                                                     href={`mailto:${DEV_EMAIL}`}
                                                     className="text-primary hover:underline transition-colors"
@@ -46,7 +68,7 @@ export default function ContactPage() {
                                                     <Linkedin  className="text-primary" />
                                                 </div>
                                                 <div>
-                                                    <h3 className="text-lg font-medium">Check out my LinkedIn</h3>
+                                                    <h2 className="text-lg font-medium">Check out my LinkedIn</h2>
                                                     <a
                                                     href={`https://${DEV_LINKEDIN}`}
                                                     className="text-primary hover:underline transition-colors"
@@ -60,7 +82,7 @@ export default function ContactPage() {
                                                     <Github  className="text-primary" />
                                                 </div>
                                                 <div>
-                                                    <h3 className="text-lg font-medium">Check my work</h3>
+                                                    <h2 className="text-lg font-medium">Check my work</h2>
                                                     <a
                                                     href={`https://${DEV_GITHUB}`}
                                                     className="text-primary hover:underline transition-colors"
@@ -76,7 +98,7 @@ export default function ContactPage() {
                                                     />
                                                 </div>
                                                 <div>
-                                                    <h3 className="text-lg font-medium">Based Out of</h3>
+                                                    <h2 className="text-lg font-medium">Based Out of</h2>
                                                     <a
                                                     href={DEV_LOCATION}
                                                     className="text-primary hover:underline transition-colors"
@@ -90,7 +112,7 @@ export default function ContactPage() {
                                 </Card>
                             </div>
                             <div className="relative p-6 rounded-lg bg-linear-to-b from-primary/5 to-secondary/5 border border-primary/10">
-                                <h3 className="text-xl font-semibold mb-2">Current Status</h3>
+                                <h2 className="text-xl font-semibold mb-2">Current Status</h2>
                                 <div className="flex items-center gap-2 mb-4">
                                     <span className="relative flex h-3 w-3">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>

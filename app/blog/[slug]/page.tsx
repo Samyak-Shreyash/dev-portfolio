@@ -6,7 +6,7 @@ import { DEV_IMAGE, DEV_NAME, siteMetaData } from "@/lib/constants"
 import type { Metadata } from "next"
 import { JSX, Suspense } from "react"
 import readingTime from "reading-time";
-import Script from "next/script"
+import Link from "next/link"
 import { BlogDBService } from "@/lib/mongodb"
 import { mapBlog } from "@/lib/utils"
 import { isAdmin } from "@/lib/auth"
@@ -45,18 +45,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: blog.title,
     description: blog.excerpt?? siteMetaData.description,
+    alternates: { canonical: `/blog/${blog.slug}` },
+    // Drafts are only visible to the admin; keep them out of search results
+    robots: blog.published ? undefined : { index: false, follow: false },
     // keywords: blog.tags.join(", "),
     openGraph: {
       title: blog.title,
       description: blog.excerpt?? siteMetaData.description,
-      url: siteMetaData.siteUrl + blog.slug,
+      url: `${siteMetaData.siteUrl}/blog/${blog.slug}`,
       images: ogImages,
       locale: "en_US",
       type: "article",
       publishedTime: new Date(blog.createdAt).toISOString(),
       modifiedTime: new Date(blog.updatedAt).toISOString(),
       authors: [siteMetaData.author],
-      siteName: siteMetaData.siteUrl,
+      siteName: siteMetaData.title,
     },
     twitter: {
       card: "summary_large_image",
@@ -77,32 +80,35 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <Suspense fallback={<PageLoading />}>
-      <Script
-  id="schema-article"
+      <script
   type="application/ld+json"
-  strategy="afterInteractive"
   dangerouslySetInnerHTML={{
     __html: JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": post.title,
       "description": post.excerpt,
-      "datePublished": post.createdAt,
+      "datePublished": new Date(post.createdAt).toISOString(),
+      "dateModified": new Date(post.updatedAt).toISOString(),
+      ...(post.coverImage && { "image": post.coverImage }),
       "author": {
         "@type": "Person",
-        "name": DEV_NAME
+        "name": DEV_NAME,
+        "url": siteMetaData.siteUrl
       },
-      "url": `${siteMetaData.siteUrl}}/blog/${post.slug}`,
+      "url": `${siteMetaData.siteUrl}/blog/${post.slug}`,
+      "mainEntityOfPage": `${siteMetaData.siteUrl}/blog/${post.slug}`,
     }),
   }}
 />
     <article className="container mx-auto px-4 py-12 max-w-4xl">
+        <Link href="/blog" className="text-sm text-muted-foreground hover:underline mb-6 inline-block">&larr; All posts</Link>
         {post.coverImage && (
             <div className="relative w-full h-[400px] mb-8 rounded-lg overflow-hidden">
                 <Image 
                 className="object-cover"
                 src={post.coverImage ?? "/placeholder.svg" } 
-                alt={post.title} 
+                alt={`Cover image for ${post.title}`} 
                 fill
                 priority
                 />
@@ -127,7 +133,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
 
         <div className="prose prose-neutral dark:prose-invert max-w-none">
-          <MDXRemote source={post?.content} />
+          {/* The post title is the page's only h1, so headings inside the content start at h2 */}
+          <MDXRemote source={post?.content} components={{ h1: (props) => <h2 {...props} /> }} />
     </div>
     </article>
     </Suspense>
