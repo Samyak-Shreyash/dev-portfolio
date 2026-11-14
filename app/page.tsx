@@ -7,7 +7,6 @@ import { format } from "date-fns";
 import { Suspense } from "react";
 import PageLoading from "@/components/ui/page-loading";
 import { Blog, Project } from "@/lib/types";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ProjectCard } from "@/components/project-card";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -97,27 +96,21 @@ function TechSection() {
         </p>
       </div>
       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 mt-8">
-        <TooltipProvider>
-          {TECH_STACK.map((tech) => {
-            return (
-              <Tooltip key={tech.tech}>
-                <TooltipTrigger asChild>
-                  <div className="flex flex-col items-center gap-2"><div className="flex h-20 w-20 items-center justify-center rounded-full bg-background/60">
-                    <Image 
-                      src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
-                      alt={`${tech.tech} logo`}
-                      width={40}
-                      height={40} />
-                  </div>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  <p className="font-medium">{tech.tech}</p>
-                </TooltipContent>
-              </Tooltip>
-            );
-          })}
-        </TooltipProvider>
+        {/* CSS-only hover label: Radix tooltips here caused a hydration mismatch */}
+        {TECH_STACK.map((tech) => (
+          <div key={tech.tech} className="group/tip relative flex flex-col items-center gap-2">
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-background/60">
+              <Image
+                src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
+                alt={`${tech.tech} logo`}
+                width={40}
+                height={40} />
+            </div>
+            <span role="tooltip" className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md opacity-0 transition-opacity group-hover/tip:opacity-100 group-focus-within/tip:opacity-100">
+              {tech.tech}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   </div>

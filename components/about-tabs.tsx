@@ -1,6 +1,5 @@
 import { WORK_EXP, TECH_STACK, ACCOMPLISHMENTS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@radix-ui/react-tooltip";
 import { Badge } from "./ui/badge"; 
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
@@ -49,14 +48,12 @@ import { MDXRemote } from "next-mdx-remote/rsc";
     return(
       <div>
         <h2 className="text-3xl font-bold mb-6">Tech Stack</h2>
-        <TooltipProvider>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {Object.entries(TECH_STACK).map(([key, tech]) => (
-              <Tooltip key={key}>
-                <TooltipTrigger asChild>
                   <div
+                    key={key}
                     className={cn(
-                      "relative p-4 rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.03] group cursor-pointer",
+                      "group/tip relative p-4 rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.03] group cursor-pointer",
                       tech.skill >= 4
                         ? "border-primary/50"
                         : ""
@@ -86,15 +83,12 @@ import { MDXRemote } from "next-mdx-remote/rsc";
                               )} />
                           ))}
                         </div>
+                    <span role="tooltip" className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md opacity-0 transition-opacity group-hover/tip:opacity-100 group-focus-within/tip:opacity-100">
+                      {tech.skill>4?"Advanced":tech.skill>2?"Intermediate":"Beginner"}
+                    </span>
                   </div>
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  <p>{tech.skill>4?"Advanced":tech.skill>2?"Intermediate":"Beginner"}</p>
-                </TooltipContent>
-              </Tooltip>
             ))}
           </div>
-        </TooltipProvider>
       </div>
    )
   }
