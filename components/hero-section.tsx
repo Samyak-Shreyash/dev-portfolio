@@ -44,7 +44,7 @@ export function HeroSection() {
                     <Image
                     fetchPriority="high"
                     src={CURR_IMG_LIGHT}
-                    alt={DEV_NAME}
+                    alt={`Portrait of ${DEV_NAME}, Senior Software Developer`}
                     width={600}
                     height={600}
                     className="object-cover dark:hidden"
@@ -53,7 +53,7 @@ export function HeroSection() {
                     <Image
                     fetchPriority="high"
                     src={CURR_IMG_DARK}
-                    alt={DEV_NAME}
+                    alt={`Portrait of ${DEV_NAME}, Senior Software Developer`}
                     width={600}
                     height={600}
                     className="object-cover hidden dark:block"

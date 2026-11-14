@@ -16,7 +16,7 @@ export function ProjectCard({ project }: ProjectProps) {
       <div className="aspect-video relative overflow-hidden">
         <Image
           src={project.image || "/placeholder.svg"}
-          alt={project.title}
+          alt={`Screenshot of ${project.title}`}
           width={600}
           height={400}
           className="object-cover transition-transform duration-300 group-hover:scale-105"

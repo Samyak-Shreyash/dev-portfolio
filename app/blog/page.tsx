@@ -7,6 +7,14 @@ import { BlogDBService } from "@/lib/mongodb";
 import { Blog } from "@/lib/types";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Articles, tutorials and insights on software development, web engineering and AI/ML by Samyak Shreyash.",
+  alternates: { canonical: "/blog" },
+};
 
 export default async function BlogsPage() {
   const blogs = await BlogDBService.getPublishedBlogs()

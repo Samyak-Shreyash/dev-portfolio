@@ -66,7 +66,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
                       <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary font-semibold border-2 border-primary/20 group-hover:ring-2 group-hover:ring-primary/40 transition-all duration-300">
                         <Image
                           src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
-                          alt={tech.tech}
+                          alt={`${tech.tech} logo`}
                           width={30}
                           height={30} />
                       </div>

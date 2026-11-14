@@ -7,6 +7,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DEV_IMAGE, DEV_RESUME } from "@/lib/constants";
 import { Card } from "@/components/ui/card";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Me",
+  description:
+    "Learn about Samyak Shreyash, a Hyderabad-based Senior Software Developer: experience, skills, career timeline and interests beyond coding.",
+  alternates: { canonical: "/about" },
+};
 
 export default function About() {
 
@@ -17,9 +25,7 @@ export default function About() {
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_500px]">
                 <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
-                {/* <Badge className="inline-block" variant="outline">
-                  About Me
-                </Badge> */}
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">About Me</h1>
               </div>
               <div className="space-y-4 text-muted-foreground">
                 <p>
@@ -34,7 +40,8 @@ export default function About() {
                 </p>
                 <p>
                   When I&apos;m not coding, you can find me exploring new technologies, contributing to open-source projects,
-                  or sharing my knowledge through blog posts and community events.
+                  or sharing my knowledge through <Link href="/blog" className="text-primary hover:underline">blog posts</Link> and
+                  community events. You can also browse <Link href="/projects" className="text-primary hover:underline">my projects</Link>.
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-w-100:flex-row pt-4">
@@ -55,7 +62,7 @@ export default function About() {
               <div className="relative aspect-square w-full max-w-100 overflow-hidden rounded-xl border shadow-xl">
                 <Image
                   src={DEV_IMAGE}
-                  alt="Samyak Shreyash"
+                  alt="Portrait of Samyak Shreyash"
                   width={400}
                   height={400}
                   className="object-cover"

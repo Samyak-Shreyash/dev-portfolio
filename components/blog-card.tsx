@@ -17,7 +17,7 @@ export function BlogCard({ blog }: BlogCardProps) {
       <div className="relative h-48 w-full">
         <Image
           src={blog.coverImage?.toString() ?? "/placeholder.svg?height=192&width=384"}
-          alt={blog.title}
+          alt={`Cover image for ${blog.title}`}
           fill
           className="object-cover"
         />
