@@ -8,8 +8,8 @@ export const DEV_CITY = "Hyderabad"
 export const DEV_LINKEDIN = "linkedin.com/in/samyak-shreyash"
 export const DEV_EMAIL = "sam.shreyash@gmail.com"
 export const DEV_IMAGE = "/profile_img.jpg"
-export const CURR_IMG_DARK = "/dark_img.png"
-export const CURR_IMG_LIGHT = "/light_img.png"
+export const CURR_IMG_DARK = "/dark_img.webp"
+export const CURR_IMG_LIGHT = "/light_img.webp"
 export const NAV_LINK = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
@@ -218,6 +218,13 @@ export const ACCOMPLISHMENTS = [
     icon: <GraduationCap className="h-6 w-6" />,
   },
 ]
+// NEXT_PUBLIC_BASE_URL may be set without a protocol (e.g. "localhost:3000"), which breaks URL resolution
+function normalizeSiteUrl(raw: string) {
+  const url = /^https?:\/\//.test(raw) ? raw : `${raw.startsWith("localhost") ? "http" : "https"}://${raw}`
+  return url.replace(/\/+$/, "")
+}
+const SITE_URL = normalizeSiteUrl(process.env.NEXT_PUBLIC_BASE_URL || "https://samyakshreyash.in")
+
 export const siteMetaData = {
   title: DEV_NAME,
   author: DEV_NAME,
@@ -227,9 +234,9 @@ export const siteMetaData = {
   interests: "technology, Coding, travelling, food and fitness",
   locale: "en-US",
   theme: "system",
-  siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL || "https://samyakshreyash.in"}`,
-  siteLogo: `${process.env.NEXT_PUBLIC_BASE_URL || "https://samyakshreyash.in"}${DEV_IMAGE}`,
-  socialBanner: `${process.env.NEXT_PUBLIC_BASE_URL || "https://samyakshreyash.in"}${DEV_IMAGE}`,
+  siteUrl: SITE_URL,
+  siteLogo: `${SITE_URL}${DEV_IMAGE}`,
+  socialBanner: `${SITE_URL}${DEV_IMAGE}`,
   email: DEV_EMAIL,
   socialLinks: {
     github: DEV_GITHUB,
