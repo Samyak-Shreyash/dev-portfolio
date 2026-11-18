@@ -63,10 +63,6 @@ export const metadata: Metadata= {
   }) {
     return (
       <html lang="en" suppressHydrationWarning>
-        <head>
-          {/* Tech stack SVGs load straight from this origin (next/image doesn't proxy SVGs) */}
-          <link rel="preconnect" href="https://icon.icepanel.io" />
-        </head>
         <body className={inter.className}>
           <script
             type="application/ld+json"
