@@ -10,6 +10,25 @@ const loginSchema = z.object({
   password: z.string().min(1, { message: "Password is required" }),
 });
 
+const encoder = new TextEncoder();
+
+async function hmac(key: BufferSource, message: BufferSource) {
+  const hmacKey = await crypto.subtle.importKey("raw", key, { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  return new Uint8Array(await crypto.subtle.sign("HMAC", hmacKey, message));
+}
+
+// Derives a single-use proof so the password itself is never sent to the server
+async function createLoginProof(password: string, challenge: string, salt: string, iterations: number) {
+  const passwordKey = await crypto.subtle.importKey("raw", encoder.encode(password.normalize("NFKC")), "PBKDF2", false, ["deriveBits"]);
+  const saltBytes = Uint8Array.from(atob(salt), (char) => char.charCodeAt(0));
+  const saltedPassword = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: saltBytes, iterations }, passwordKey, 256);
+
+  const clientKey = await hmac(saltedPassword, encoder.encode("Client Key"));
+  const storedKey = await crypto.subtle.digest("SHA-256", clientKey);
+  const signature = await hmac(storedKey, encoder.encode(challenge));
+  return btoa(String.fromCharCode(...clientKey.map((byte, i) => byte ^ signature[i])));
+}
+
 export default function Login() {
   const router = useRouter()
   const [loading, setLoading] = useState(false);
@@ -27,11 +46,19 @@ export default function Login() {
     setLoading(true);
     setError("");
     try {
+      const challengeRes = await fetch("/api/login/challenge", { method: "POST" });
+      if (!challengeRes.ok) {
+        setError("Login failed");
+        return;
+      }
+      const { challenge, salt, iterations } = await challengeRes.json();
+      const proof = await createLoginProof(data.password, challenge, salt, iterations);
+
       // Session is set as an HTTP-only cookie by the server; nothing is stored client-side
       const res = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ challenge, proof }),
       });
 
       if (res.ok) {

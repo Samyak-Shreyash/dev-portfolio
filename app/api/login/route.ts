@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import argon2 from 'argon2';
 import { cookies } from 'next/headers';
 import { LoginAttemptDBService } from '@/lib/mongodb';
-import { hashIp, SESSION_COOKIE, SESSION_MAX_AGE, signSession } from '@/lib/auth';
+import { hashIp, SESSION_COOKIE, SESSION_MAX_AGE, signSession, verifyLoginProof } from '@/lib/auth';
 
 const loginSchema = z.object({
-  password: z.string().min(1).max(200),
+  challenge: z.string().min(1).max(1000),
+  proof: z.string().min(1).max(100),
 });
 
-if (!process.env.ADMIN_PASSWORD_HASH) {
+if (!process.env.ADMIN_LOGIN_VERIFIER) {
   throw new Error("Please Verify your Password Storage")
 }
 
@@ -23,24 +23,20 @@ const INVALID = { success: false, message: 'Incorrect password' };
 
 export async function POST(req: NextRequest) {
   try {
-    const passwordHash = process.env.ADMIN_PASSWORD_HASH;
-    if (!passwordHash) {
-      throw new Error('ADMIN_PASSWORD_HASH is not set');
-    }
-
     const result = loginSchema.safeParse(await req.json().catch(() => null));
     if (!result.success) {
       return NextResponse.json(INVALID, { status: 401 });
     }
-    const { password } = result.data;
+    const { challenge, proof } = result.data;
 
     const ipHash = hashIp(req);
     if (await LoginAttemptDBService.countRecentFailures(ipHash, new Date(Date.now() - WINDOW_MS)) >= MAX_FAILED) {
       return NextResponse.json({ success: false, message: 'Too many attempts. Try again later.' }, { status: 429 });
     }
 
-    // verify(storedHash, plainPassword); a malformed hash throws, which counts as a failure
-    const isValid = await argon2.verify(passwordHash, password).catch(() => false);
+    // Challenges are single use, so a captured proof cannot be replayed
+    const verified = verifyLoginProof(challenge, proof);
+    const isValid = verified && await LoginAttemptDBService.consumeChallenge(verified.nonce, verified.expiresAt);
 
     if (!isValid) {
       await LoginAttemptDBService.recordFailure(ipHash);
