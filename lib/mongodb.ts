@@ -130,19 +130,20 @@ export const ProjectDBService = {
     return result as Project | null;
   },
 
-  async updateProject(project: Omit<Project,  "updatedAt">)
+  async getProjectBySlug(slug: string)
   {
-    
     const collection = await ProjectDBCollection();
-    const existingBlog = await collection.findOne({ _id: new ObjectId(project._id) })
-    if(!existingBlog)
-      return await collection.findOneAndUpdate(
-        { _id: new ObjectId(project._id) }, // Filter to locate the document
-        { ...project, updatedAt: new Date() }, // Update object with changes
-        { returnDocument: "after", upsert: true } // Options: return updated document and upsert if not found
-      )
-    else
-      return null;
+    const result = await collection.findOne({ slug: slug });
+    return result as Project | null;
+  },
+
+  async updateProject(id: string, projectData: Omit<Project, "_id" | "createdAt" | "updatedAt">)
+  {
+    const collection = await ProjectDBCollection();
+    return await collection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { ...projectData, updatedAt: new Date() } },
+    )
   },
 
   async addNewProject(project: Omit<Project, "_id" | "createdAt" | "updatedAt">) {

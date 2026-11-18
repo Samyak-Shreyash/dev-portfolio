@@ -115,6 +115,26 @@ export const ContactApiService = {
 /**
  * Service for interacting with the project API
  */
+type ProjectInput = Omit<Project, "_id" | "createdAt" | "updatedAt">
+
+// Relative URL: browser-only, keeps the admin session cookie same-origin
+async function sendProject(url: string, method: "POST" | "PUT" | "DELETE", project?: ProjectInput) {
+  const response = await fetch(url, {
+    method,
+    headers: project ? { "Content-Type": "application/json" } : undefined,
+    body: project ? JSON.stringify(project) : undefined,
+  })
+
+  if (response.status === 401) {
+    throw new Error("Your session has expired. Please log in again.")
+  }
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null)
+    throw new Error(typeof errorData?.error === "string" ? errorData.error : `Failed to save project: ${response.status}`)
+  }
+}
+
 export const ProjectApiService = {
   baseUrl: process.env.NODE_ENV === 'development' 
     ? 'http://localhost:3000/api/project'
@@ -186,80 +206,24 @@ export const ProjectApiService = {
   // },
 
   /**
-   * Create a new blog
+   * Create a new project
    */
-  async createProject(project: Omit<Project, "_id" | "createdAt" | "updatedAt">): Promise<{ blogId: string }> {
-    try {
-      const response = await fetch(`${this.baseUrl}`, {
-        method: "POST",
-        // headers: ApiService.getHeaders(),
-        body: JSON.stringify(project),
-      })
-
-      if (response.status === 401) {
-        throw new Error("API authentication failed. Check your API_KEY environment variable.")
-      }
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || `Failed to create project: ${response.status}`)
-      }
-
-      const data = await response.json()
-      return data
-    } catch (error) {
-      console.error("Error creating project:", error)
-      throw error
-    }
+  async createProject(project: ProjectInput): Promise<void> {
+    await sendProject("/api/project", "POST", project)
   },
 
   /**
    * Update an existing project
    */
-  async updateProject(id: string, project: Omit<Project, "_id" | "createdAt" | "updatedAt">): Promise<void> {
-    try {
-      const response = await fetch(`${this.baseUrl}/${id}`, {
-        method: "PUT",
-        // headers: ApiService.getHeaders(),
-        body: JSON.stringify(project),
-      })
-
-      if (response.status === 401) {
-        throw new Error("API authentication failed. Check your API_KEY environment variable.")
-      }
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || `Failed to update project: ${response.status}`)
-      }
-    } catch (error) {
-      console.error(`Error updating project with id ${id}:`, error)
-      throw error
-    }
+  async updateProject(id: string, project: ProjectInput): Promise<void> {
+    await sendProject(`/api/project/${encodeURIComponent(id)}`, "PUT", project)
   },
 
   /**
    * Delete a project
    */
   async deleteProject(id: string): Promise<void> {
-    try {
-      const response = await fetch(`${this.baseUrl}/${id}`, {
-        method: "DELETE",
-        // headers: ApiService.getHeaders(),
-      })
-
-      if (response.status === 401) {
-        throw new Error("API authentication failed. Check your API_KEY environment variable.")
-      }
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || `Failed to delete project: ${response.status}`)
-      }
-    } catch (error) {
-      console.error(`Error deleting project with id ${id}:`, error)
-      throw error
-    }
+    await sendProject(`/api/project/${encodeURIComponent(id)}`, "DELETE")
   },
 }
 

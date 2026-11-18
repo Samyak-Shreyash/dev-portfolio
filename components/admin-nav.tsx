@@ -6,6 +6,7 @@ export function AdminNav() {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <Button asChild size="sm" variant="ghost"><Link href="/admin/blogs">Blogs</Link></Button>
+      <Button asChild size="sm" variant="ghost"><Link href="/admin/projects">Projects</Link></Button>
       <Button asChild size="sm" variant="ghost"><Link href="/admin/messages">Messages</Link></Button>
       <LogoutButton />
     </div>
