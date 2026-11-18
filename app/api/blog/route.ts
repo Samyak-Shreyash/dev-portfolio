@@ -1,5 +1,6 @@
 import { isAdmin } from "@/lib/auth";
 import { BlogDBService } from "@/lib/mongodb";
+import { revalidateBlogs } from "@/lib/cached-data";
 import { blogSchema } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
@@ -32,6 +33,7 @@ export async function POST(req: Request) {
     }
 
     const result = await BlogDBService.addNewBlog(parsed.data);
+    revalidateBlogs()
     return NextResponse.json(
       {
         message: "BlogPost Saved successfully",

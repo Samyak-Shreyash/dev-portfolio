@@ -1,5 +1,6 @@
 import { isAdmin } from "@/lib/auth";
 import { BlogDBService } from "@/lib/mongodb";
+import { revalidateBlogs } from "@/lib/cached-data";
 import { blogSchema } from "@/lib/utils";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
@@ -37,6 +38,7 @@ export async function PUT(req: NextRequest, context: Context) {
     if (result.matchedCount === 0) {
       return NextResponse.json({ error: "Blog not found" }, { status: 404 })
     }
+    revalidateBlogs()
     return NextResponse.json({ message: "BlogPost updated successfully" })
   } catch (error) {
     console.error("Error updating post:", error)
@@ -54,6 +56,7 @@ export async function DELETE(_req: NextRequest, context: Context) {
     if (!result) {
       return NextResponse.json({ error: "Blog not found" }, { status: 404 })
     }
+    revalidateBlogs()
     return NextResponse.json({ message: "Blog deleted successfully" })
   } catch (error) {
     console.error("Error deleting blog", error)
