@@ -42,11 +42,11 @@ interface SiteHeaderProps {
                   </nav>
                   <div className="hidden md:flex gap-3">
                   <ThemeToggle />
-            <Button variant="link" size="sm" asChild>
+            {/* <Button variant="link" size="sm" asChild>
               <a href={DEV_RESUME} target="_blank" rel="noopener noreferrer">
                 Resume
               </a>
-            </Button>
+            </Button> */}
             </div>
 
                   <Sheet>
