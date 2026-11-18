@@ -53,32 +53,36 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center">
       <div className="p-8 rounded-2xl shadow-xl w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-muted-foreground">
-              Password
+            <label htmlFor="password" className="block text-sm font-medium text-muted-foreground">
+              Password <span aria-hidden="true">*</span>
             </label>
             <input
+              id="password"
               type="password"
               autoComplete="current-password"
+              required
+              aria-invalid={errors.password || error ? true : undefined}
+              aria-describedby={errors.password ? "password-error" : error ? "login-error" : undefined}
               {...register("password")}
-              className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))]"
+              className="w-full px-4 py-2 border rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]"
             />
             {errors.password && (
-              <p className="text-red-500 text-sm">
+              <p id="password-error" className="text-destructive text-sm">
                 {errors.password.message?.toString()}
               </p>
             )}
           </div>
 
-          {error && <p role="alert" className="text-red-500 text-sm">{error}</p>}
+          {error && <p id="login-error" role="alert" className="text-destructive text-sm">{error}</p>}
 
           <button
             type="submit"
             className="w-full bg-[hsl(var(--primary))]/60 text-foreground py-2 rounded-xl hover:bg-[hsl(var(--primary))] transition"
             disabled={loading}
           >
-            {loading ? <span className="animate-pulse">Logging In...</span> : "Login"}
+            {loading ? <span className="motion-safe:animate-pulse">Logging In...</span> : "Login"}
           </button>
         </form>
       </div>

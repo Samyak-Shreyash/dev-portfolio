@@ -44,7 +44,7 @@ const blogs = await BlogDBService.getPublishedBlogs();
 const projects = await ProjectDBService.getAllProjects();
 
   return (
-    <main>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -77,7 +77,7 @@ const projects = await ProjectDBService.getAllProjects();
       <ContactSection muted = {false}/> :
       <ContactSection muted = {true}/>
       }
-    </main>
+    </div>
   );
 }
 
@@ -106,7 +106,7 @@ function TechSection() {
                 width={40}
                 height={40} />
             </div>
-            <span role="tooltip" className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md opacity-0 transition-opacity group-hover/tip:opacity-100 group-focus-within/tip:opacity-100">
+            <span aria-hidden="true" className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md opacity-0 transition-opacity group-hover/tip:opacity-100 group-focus-within/tip:opacity-100">
               {tech.tech}
             </span>
           </div>
@@ -247,11 +247,11 @@ function ProjectSection({ projects, muted }: ProjectSectionProp) {
         </Suspense>
       </div>
       {projects.length > 3 && <div className="mt-8">
-        <Link href="/projects">
-          <Button variant="outline" className="inline-flex items-center gap-2">
-            View All Projects <ArrowRight className="h-4 w-4" />
-          </Button>
-        </Link>
+        <Button variant="outline" className="inline-flex items-center gap-2" asChild>
+            <Link href="/projects">
+              View All Projects <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
+        </Button>
       </div>}
     </div>
   </div>
@@ -289,7 +289,7 @@ function BlogSection({blogs, muted}: BlogSectionProp) {
                 </div>
                 <Link
                   href={`/blog/${blog.slug}`}
-                  className="absolute inset-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="absolute inset-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 >
                   <span className="sr-only">Read {blog.title}</span>
                 </Link>
@@ -298,11 +298,11 @@ function BlogSection({blogs, muted}: BlogSectionProp) {
         </Suspense>
       </div>
       <div className="mt-8">
-        <Link href="/blog">
-          <Button variant="outline" className="inline-flex items-center gap-2">
-            Read All Posts <ArrowRight className="h-4 w-4" />
-          </Button>
-        </Link>
+        <Button variant="outline" className="inline-flex items-center gap-2" asChild>
+            <Link href="/blog">
+              Read All Posts <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
+        </Button>
       </div>
     </div>
   </div>

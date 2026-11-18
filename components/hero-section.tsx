@@ -6,28 +6,31 @@ import { Button } from "./ui/button";
 import { CURR_IMG_DARK, CURR_IMG_LIGHT, DEV_NAME, DEV_RESUME } from "@/lib/constants";
 import { ArrowRightIcon, Download } from "lucide-react";
 import ContactIcons from "./ui/contact-icons";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
 
 // next-themes' disableTransitionOnChange blocks CSS transitions, so the fade is driven by framer-motion.
 // Until mounted the theme is unknown, so the dark: classes pick the right image without animating.
-function ThemeImage({ src, visible, className, mounted }: { src: string; visible: boolean; className: string; mounted?: boolean }) {
+// Only the primary (light) image is prioritised: the server can't know the theme, and preloading both
+// at high priority makes the hidden one compete with the visible LCP image. The duplicate is decorative.
+function ThemeImage({ src, visible, className, mounted, primary }: { src: string; visible: boolean; className: string; mounted?: boolean; primary?: boolean }) {
+    const reduceMotion = useReducedMotion()
     return (
         <motion.div
             className={`absolute inset-0 ${mounted ? "" : className}`}
             initial={false}
             animate={mounted ? { opacity: visible ? 1 : 0 } : undefined}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            transition={{ duration: reduceMotion ? 0 : 0.8, ease: "easeInOut" }}
         >
             <Image
-                fetchPriority="high"
                 src={src}
-                alt={`Portrait of ${DEV_NAME}, Senior Software Developer`}
+                alt={primary ? `Portrait of ${DEV_NAME}, Senior Software Developer` : ""}
                 fill
                 sizes="(min-width: 1280px) 500px, (min-width: 1024px) 400px, 100vw"
                 className="object-cover"
-                priority
+                priority={primary}
+                loading="eager"
             />
         </motion.div>
     )
@@ -53,14 +56,14 @@ export function HeroSection() {
                     </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                    <Button className="inline-flex items-center gap-2" asChild>
                     <Link href="/projects">
-                    <Button className="inline-flex items-center gap-2">
-                        View My Work <ArrowRightIcon className="w-4 h-4" />
+                        View My Work <ArrowRightIcon aria-hidden="true" className="w-4 h-4" />
+                    </Link>
                     </Button>
-                    </Link>
-                    <Link href="/contact">
-                    <Button variant="outline">Get In Touch</Button>
-                    </Link>
+                    <Button variant="outline" asChild>
+                    <Link href="/contact">Get In Touch</Link>
+                    </Button>
                     <Button variant="ghost" asChild>
                     <a href={DEV_RESUME} target="_blank" rel="noopener noreferrer">
                         <Download className="w-4 h-4" /> Resume
@@ -72,7 +75,7 @@ export function HeroSection() {
                 <div className="flex items-center justify-center">
                 <div className="relative aspect-square w-full max-w-150 overflow-hidden rounded-full border-8 border-muted">
                     {/* Day and night versions of the same illustration, crossfaded on theme change */}
-                    <ThemeImage src={CURR_IMG_LIGHT} visible={!isDark} className="opacity-100 dark:opacity-0" mounted={mounted} />
+                    <ThemeImage primary src={CURR_IMG_LIGHT} visible={!isDark} className="opacity-100 dark:opacity-0" mounted={mounted} />
                     <ThemeImage src={CURR_IMG_DARK} visible={isDark} className="opacity-0 dark:opacity-100" mounted={mounted} />
                 </div>
                 </div>
