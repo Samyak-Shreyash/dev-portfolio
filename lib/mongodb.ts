@@ -212,5 +212,20 @@ export const LoginAttemptDBService = {
   {
     const { db } = await connectToDatabase();
     return db.collection('loginAttempts').insertOne({ ipHash, createdAt: new Date() });
+  },
+
+  // The nonce is the _id, so a replayed proof fails on the duplicate key
+  async consumeChallenge(nonce: string, expiresAt: Date)
+  {
+    const { db } = await connectToDatabase();
+    const collection = db.collection<{ _id: string; expiresAt: Date }>('usedLoginChallenges');
+    await collection.deleteMany({ expiresAt: { $lt: new Date() } });
+    try {
+      await collection.insertOne({ _id: nonce, expiresAt });
+      return true;
+    } catch (err) {
+      if ((err as { code?: number }).code === 11000) return false;
+      throw err;
+    }
   }
 };
