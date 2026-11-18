@@ -63,16 +63,24 @@ export const metadata: Metadata= {
   }) {
     return (
       <html lang="en" suppressHydrationWarning>
-        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
         <body className={inter.className}>
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
           />
           <ThemesProvider attribute="class" enableSystem disableTransitionOnChange>
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:shadow-md focus:outline-2 focus:outline-primary"
+            >
+              Skip to main content
+            </a>
             <div className="relative flex min-h-screen flex-col">
               <HeaderWrapper />
-              {children}
+              {/* The single <main> landmark for every page; pages render plain containers inside it */}
+              <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col outline-none">
+                {children}
+              </main>
               <SiteFooter />
             </div>
             <Toaster />

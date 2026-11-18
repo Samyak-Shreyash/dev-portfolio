@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button-link";
 import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN, DEV_NAME, DEV_TITLE, TECH_STACK, siteMetaData } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
@@ -44,7 +44,7 @@ const blogs = await BlogDBService.getPublishedBlogs();
 const projects = await ProjectDBService.getAllProjects();
 
   return (
-    <main>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -77,7 +77,7 @@ const projects = await ProjectDBService.getAllProjects();
       <ContactSection muted = {false}/> :
       <ContactSection muted = {true}/>
       }
-    </main>
+    </div>
   );
 }
 
@@ -101,12 +101,12 @@ function TechSection() {
           <div key={tech.tech} className="group/tip relative flex flex-col items-center gap-2">
             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-background/60">
               <Image
-                src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
+                src={`/icons/tech/${tech.icon}.svg`}
                 alt={`${tech.tech} logo`}
                 width={40}
                 height={40} />
             </div>
-            <span role="tooltip" className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md opacity-0 transition-opacity group-hover/tip:opacity-100 group-focus-within/tip:opacity-100">
+            <span aria-hidden="true" className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md opacity-0 transition-opacity group-hover/tip:opacity-100 group-focus-within/tip:opacity-100">
               {tech.tech}
             </span>
           </div>
@@ -238,8 +238,8 @@ function ProjectSection({ projects, muted }: ProjectSectionProp) {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         <Suspense fallback={<PageLoading />}>
-          {[...projects]
-            .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()) // newest first, then take top 3
+          {projects
+            .toSorted((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()) // newest first, then take top 3
             .slice(0, 3)
             .map((project: Project) => (
               <ProjectCard key={project._id?.toString()} project={project} />
@@ -247,11 +247,9 @@ function ProjectSection({ projects, muted }: ProjectSectionProp) {
         </Suspense>
       </div>
       {projects.length > 3 && <div className="mt-8">
-        <Link href="/projects">
-          <Button variant="outline" className="inline-flex items-center gap-2">
-            View All Projects <ArrowRight className="h-4 w-4" />
-          </Button>
-        </Link>
+        <ButtonLink href="/projects" variant="outline" className="inline-flex items-center gap-2">
+              View All Projects <ArrowRight aria-hidden="true" className="h-4 w-4" />
+        </ButtonLink>
       </div>}
     </div>
   </div>
@@ -289,7 +287,7 @@ function BlogSection({blogs, muted}: BlogSectionProp) {
                 </div>
                 <Link
                   href={`/blog/${blog.slug}`}
-                  className="absolute inset-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="absolute inset-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 >
                   <span className="sr-only">Read {blog.title}</span>
                 </Link>
@@ -298,11 +296,9 @@ function BlogSection({blogs, muted}: BlogSectionProp) {
         </Suspense>
       </div>
       <div className="mt-8">
-        <Link href="/blog">
-          <Button variant="outline" className="inline-flex items-center gap-2">
-            Read All Posts <ArrowRight className="h-4 w-4" />
-          </Button>
-        </Link>
+        <ButtonLink href="/blog" variant="outline" className="inline-flex items-center gap-2">
+              Read All Posts <ArrowRight aria-hidden="true" className="h-4 w-4" />
+        </ButtonLink>
       </div>
     </div>
   </div>
@@ -328,14 +324,10 @@ function ContactSection({ muted }: ContactSectionProp) {
         </p>
       </div>
       <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
-        <Button asChild>
-          <Link href="/contact">
-            Contact Me <ArrowRight className="ml-2 size-4" />
-          </Link>
-        </Button>
-        <Button variant="outline" asChild>
-          <Link href={`mailto:${DEV_EMAIL}`}>Send Email</Link>
-        </Button>
+        <ButtonLink href="/contact">
+            Contact Me <ArrowRight aria-hidden="true" className="ml-2 size-4" />
+        </ButtonLink>
+        <ButtonLink variant="outline" href={`mailto:${DEV_EMAIL}`}>Send Email</ButtonLink>
       </div>
     </div>
   </div>

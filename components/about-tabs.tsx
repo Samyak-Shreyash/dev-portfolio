@@ -53,7 +53,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
                   <div
                     key={key}
                     className={cn(
-                      "group/tip relative p-4 rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.03] group cursor-pointer",
+                      "group/tip relative p-4 rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.03] group",
                       tech.skill >= 4
                         ? "border-primary/50"
                         : ""
@@ -62,16 +62,17 @@ import { MDXRemote } from "next-mdx-remote/rsc";
                     <div className="flex items-center space-x-3">
                       <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary font-semibold border-2 border-primary/20 group-hover:ring-2 group-hover:ring-primary/40 transition-all duration-300">
                         <Image
-                          src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
+                          src={`/icons/tech/${tech.icon}.svg`}
                           alt={`${tech.tech} logo`}
                           width={30}
                           height={30} />
                       </div>
                       <div>
                         <h3 className="font-medium">{tech.tech}</h3>
+                        <p className="sr-only">Skill level: {tech.skill>4?"Advanced":tech.skill>2?"Intermediate":"Beginner"}</p>
                       </div>
                     </div>
-                    <div className="flex mt-1">
+                    <div aria-hidden="true" className="flex mt-1">
                           {Array.from({ length: 5 }).map((_, i) => (
                             <div
                               key={i}
@@ -83,7 +84,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
                               )} />
                           ))}
                         </div>
-                    <span role="tooltip" className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md opacity-0 transition-opacity group-hover/tip:opacity-100 group-focus-within/tip:opacity-100">
+                    <span aria-hidden="true" className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md opacity-0 transition-opacity group-hover/tip:opacity-100 group-focus-within/tip:opacity-100">
                       {tech.skill>4?"Advanced":tech.skill>2?"Intermediate":"Beginner"}
                     </span>
                   </div>

@@ -71,10 +71,11 @@ export default function ContactForm() {
       <div className="relative rounded-lg border border-primary/10 bg-background/80 backdrop-blur-sm p-6 shadow-sm">
         <h2 className="text-2xl text-primary font-semibold mb-6">Send me a message</h2>
         {submitted ? (
-          <div className="text-center py-8">
+          <div role="status" className="text-center py-8">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-500 mb-4">
             </div>
-            <h3 className="text-xl font-medium mb-2">Message Sent!</h3>
+            {/* The form this replaces held focus, so move it to the confirmation */}
+            <h3 ref={(el) => el?.focus()} tabIndex={-1} className="text-xl font-medium mb-2 outline-none">Message Sent!</h3>
             <p className="text-muted-foreground mb-4">Thank you for reaching out. I&apos;ll get back to you soon.</p>
             <Button variant="outline" onClick={() => setSubmitted(false)}>
               Send another message
@@ -82,7 +83,7 @@ export default function ContactForm() {
           </div>
         ) : (
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} noValidate className="space-y-6">
               <input
                 ref={honeypotRef}
                 type="text"
@@ -98,9 +99,9 @@ export default function ContactForm() {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>Name <span aria-hidden="true">*</span></FormLabel>
                       <FormControl>
-                        <Input placeholder="Your name" {...field} className="bg-background/50 " />
+                        <Input placeholder="Your name" autoComplete="name" required maxLength={100} {...field} className="bg-background/50" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -111,9 +112,9 @@ export default function ContactForm() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>Email <span aria-hidden="true">*</span></FormLabel>
                       <FormControl>
-                        <Input placeholder="your.email@example.com" {...field} className="bg-background/50" />
+                        <Input type="email" placeholder="your.email@example.com" autoComplete="email" autoCapitalize="none" spellCheck={false} required maxLength={254} {...field} className="bg-background/50" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -124,9 +125,9 @@ export default function ContactForm() {
                 name="subject"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Subject</FormLabel>
+                    <FormLabel>Subject <span aria-hidden="true">*</span></FormLabel>
                     <FormControl>
-                      <Input placeholder="What is this regarding?" {...field} className="bg-background/50" />
+                      <Input placeholder="What is this regarding?" required maxLength={150} {...field} className="bg-background/50" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -137,10 +138,12 @@ export default function ContactForm() {
                 name="message"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Message</FormLabel>
+                    <FormLabel>Message <span aria-hidden="true">*</span></FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Your message here..."
+                        required
+                        maxLength={5000}
                         className="min-h-[120px] bg-background/50"
                         {...field}
                       />
@@ -151,13 +154,14 @@ export default function ContactForm() {
               />
               <Button
                 type="submit"
-                className="w-full bg-linear-to-r from-primary))/80] to-primary hover:from-primary/90 hover:to-primary/70 transition-all duration-300"
+                className="w-full bg-linear-to-r from-primary/80 to-primary hover:from-primary/90 hover:to-primary/70 transition-colors duration-150"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
                   <>
                     <svg
-                      className="animate-spin -ml-1 mr-2 h-4 w-4 text-background"
+                      aria-hidden="true"
+                      className="motion-safe:animate-spin -ml-1 mr-2 h-4 w-4 text-background"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"

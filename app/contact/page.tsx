@@ -24,17 +24,18 @@ const faqJsonLd = {
   
 export default function ContactPage() {
     return (
-        <main className='min-h-screen bg-linear-to-b from-background-500 to-secondary/10'>
+        <div className='relative min-h-screen bg-linear-to-b from-background to-secondary/10'>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
             />
-            <div className='absolute inset-0 [mask-image: radial-gradient(circle, white, transparent 85%)] pointer-events-none'></div>
+            {/* Faint dot grid, faded out towards the edges; muted-foreground keeps it visible in both themes */}
+            <div aria-hidden="true" className='absolute inset-0 bg-[radial-gradient(hsl(var(--muted-foreground)/0.25)_1px,transparent_1px)] bg-size-[24px_24px] [mask-image:radial-gradient(circle,white,transparent_85%)] pointer-events-none'></div>
 
             <section className='container relative mx-auto py-16 px-4'>
                 <div className='max-w-5xl mx-auto'>
                     <div className='mb-12 text-center'>
-                        <h1 className='text-5xl font-bold tracking-tighter bg-clip-text text-transparent bg-linear-to-r from-primary to-primary))/60]'>
+                        <h1 className='text-5xl font-bold tracking-tighter bg-clip-text text-transparent bg-linear-to-r from-primary to-primary/60'>
                         Let&apos;s Connect
                         </h1>
                         <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
@@ -138,7 +139,7 @@ export default function ContactPage() {
                     <div className="mx-auto max-w-3xl space-y-8 text-center">
                     <div className="space-y-2">
                         <Badge variant="outline">FAQ</Badge>
-                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl bg-clip-text text-transparent bg-linear-to-r from-primary to-primary))/90]">Frequently Asked Questions</h2>
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl bg-clip-text text-transparent bg-linear-to-r from-primary to-primary/90">Frequently Asked Questions</h2>
                         <p className="max-w-175 mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                         Here are some common questions about my services and work process.
                         </p>
@@ -163,6 +164,6 @@ export default function ContactPage() {
                     </div>
                 </div>
                 </section>
-        </main>
+        </div>
     )
 }

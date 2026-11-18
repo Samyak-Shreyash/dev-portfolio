@@ -424,6 +424,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
 
         <TabsContent value="write" className="p-0 mt-0">
           <textarea
+            aria-label="Post content (Markdown)"
             ref={textareaRef}
             value={value}
             onChange={(e) => onChange(e.target.value)}

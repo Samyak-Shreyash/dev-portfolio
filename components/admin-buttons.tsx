@@ -4,58 +4,75 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { LogOut, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { toast } from "@/hooks/use-toast"
 import { BlogApiService, ContactApiService } from "@/lib/api-services"
 
-export function DeleteMessageButton({ msgId }: { msgId: string }) {
+// A Dialog instead of window.confirm/alert: those block the main thread until dismissed,
+// which showed up as a ~1s INP on the delete buttons.
+function DeleteButton({ label, onDelete }: { label: string; onDelete: () => Promise<unknown> }) {
   const router = useRouter()
+  const [open, setOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
 
   const handleDelete = async () => {
-    if (!confirm("Delete this message? This cannot be undone.")) return
     try {
       setIsDeleting(true)
-      await ContactApiService.deleteMessage(msgId)
+      await onDelete()
+      setOpen(false)
       router.refresh()
     } catch (error) {
-      console.error("Error deleting message:", error)
-      alert(error instanceof Error ? error.message : "An error occurred")
+      console.error(`Error deleting ${label}:`, error)
+      toast({
+        title: `Could not delete ${label}`,
+        description: error instanceof Error ? error.message : "An error occurred",
+        variant: "destructive",
+      })
     } finally {
       setIsDeleting(false)
     }
   }
 
   return (
-    <Button size="sm" variant="ghost" className="text-destructive hover:bg-destructive/10" onClick={handleDelete} disabled={isDeleting}>
-      <Trash2 className="h-4 w-4 mr-1" />
-      {isDeleting ? "Deleting..." : "Delete"}
-    </Button>
+    <Dialog open={open} onOpenChange={(next) => !isDeleting && setOpen(next)}>
+      <DialogTrigger asChild>
+        <Button size="sm" variant="ghost" className="text-destructive hover:bg-destructive/10" disabled={isDeleting}>
+          <Trash2 className="h-4 w-4 mr-1" />
+          {isDeleting ? "Deleting..." : "Delete"}
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Delete this {label}?</DialogTitle>
+          <DialogDescription>This cannot be undone.</DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <Button variant="outline" onClick={() => setOpen(false)} disabled={isDeleting}>
+            Cancel
+          </Button>
+          <Button variant="destructive" onClick={handleDelete} disabled={isDeleting}>
+            {isDeleting ? "Deleting..." : "Delete"}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }
 
+export function DeleteMessageButton({ msgId }: { msgId: string }) {
+  return <DeleteButton label="message" onDelete={() => ContactApiService.deleteMessage(msgId)} />
+}
+
 export function DeletePostButton({ postId }: { postId: string }) {
-  const router = useRouter()
-  const [isDeleting, setIsDeleting] = useState(false)
-
-  const handleDelete = async () => {
-    if (!confirm("Delete this post? This cannot be undone.")) return
-    try {
-      setIsDeleting(true)
-      await BlogApiService.deleteBlog(postId)
-      router.refresh()
-    } catch (error) {
-      console.error("Error deleting post:", error)
-      alert(error instanceof Error ? error.message : "An error occurred")
-    } finally {
-      setIsDeleting(false)
-    }
-  }
-
-  return (
-    <Button size="sm" variant="ghost" className="text-destructive hover:bg-destructive/10" onClick={handleDelete} disabled={isDeleting}>
-      <Trash2 className="h-4 w-4 mr-1" />
-      {isDeleting ? "Deleting..." : "Delete"}
-    </Button>
-  )
+  return <DeleteButton label="post" onDelete={() => BlogApiService.deleteBlog(postId)} />
 }
 
 export function LogoutButton() {
