@@ -14,7 +14,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { toast } from "@/hooks/use-toast"
-import { BlogApiService, ContactApiService } from "@/lib/api-services"
+import { BlogApiService, ContactApiService, ProjectApiService } from "@/lib/api-services"
 
 // A Dialog instead of window.confirm/alert: those block the main thread until dismissed,
 // which showed up as a ~1s INP on the delete buttons.
@@ -73,6 +73,10 @@ export function DeleteMessageButton({ msgId }: { msgId: string }) {
 
 export function DeletePostButton({ postId }: { postId: string }) {
   return <DeleteButton label="post" onDelete={() => BlogApiService.deleteBlog(postId)} />
+}
+
+export function DeleteProjectButton({ projectId }: { projectId: string }) {
+  return <DeleteButton label="project" onDelete={() => ProjectApiService.deleteProject(projectId)} />
 }
 
 export function LogoutButton() {

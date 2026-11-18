@@ -30,6 +30,18 @@ export function mapBlog(Post: WithId<Document> | Blog | null): Blog | null {
   } as Blog; 
 }
 
+export function mapProject(project: Project | null): Project | null {
+  if (!project)
+    return null;
+
+  return {
+    ...project,
+    _id: project._id.toString(),
+    createdAt: new Date(project.createdAt).toISOString(),
+    updatedAt: new Date(project.updatedAt).toISOString(),
+  };
+}
+
 export const blogSchema = z.object({
   title: z.string().min(1, "Title is required"),
   slug: z.string().min(1, "Slug is required").regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Use lowercase letters, numbers and hyphens only"),
@@ -43,8 +55,8 @@ export const blogSchema = z.object({
 export const projectSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string(),
-  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Use lowercase letters, numbers and hyphens only").optional(),
-  demoUrl: z.string().url("Invalid URL").optional(),
+  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Use lowercase letters, numbers and hyphens only").or(z.literal("")).optional(),
+  demoUrl: z.string().url("Invalid URL").or(z.literal("")).optional(),
   repoUrl: z.string().url("Invalid URL").min(1, "Github Link is required"),
   technologies: z.array(z.string()),
   image: z.string().optional(),

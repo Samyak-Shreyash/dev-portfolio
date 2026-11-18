@@ -20,3 +20,8 @@ export function revalidateBlogs() {
   revalidateTag("blogs", { expire: 0 })
   revalidatePath("/")
 }
+
+export function revalidateProjects() {
+  revalidateTag("projects", { expire: 0 })
+  revalidatePath("/")
+}
