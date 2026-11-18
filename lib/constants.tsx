@@ -112,9 +112,17 @@ export const TECH_STACK = [
 
 export const WORK_EXP = [
   {
-    company: "Mphasis",
+    company: "Wells Fargo",
+    role: "Senior Software Engineer",
+    period: "Apr'2026-Present",
+    description:
+      "Updates Incoming . . .",
+    technologies: ["Java", "SQL", "MongoDB", "OCP", "harness", "Kafka", "GenAI"],
+  },
+  {
+    company: "Goldman Sachs | Mphasis",
     role: "Senior System Software Engineer",
-    period: "Oct'2023-Present",
+    period: "Oct'2023-Apr'2026",
     description:
       " - Developed and enhanced **financial technology** workflows using **Java** and **Spring** Framework, ensuring scalable and maintainable solutions across multiple services." +
       "\n - Managed and optimized data flow using **Sybase**, **MySQL**, and **JDBC**, implemented structured exception handling to improve fault tolerance and minimize runtime errors." +
@@ -152,9 +160,15 @@ export const WORK_EXP = [
 // Accomplishments for timeline
 export const ACCOMPLISHMENTS = [
   {
+    date: "Apr 2026",
+    title: "Senior Software Engineer at wells Fargo",
+    description: "Senior Assistant Vice-President",
+    icon: <Briefcase className="h-6 w-6" />,
+  },
+  {
     date: "Oct 2023",
-    title: "Lead Engineer At Mphasis",
-    description: "Working with Goldman Sachs",
+    title: "Senior Software Engineer at Goldman Sachs",
+    description: "Contingent from Mphasis",
     icon: <Briefcase className="h-6 w-6" />,
   },
   {
