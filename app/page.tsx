@@ -101,7 +101,7 @@ function TechSection() {
           <div key={tech.tech} className="group/tip relative flex flex-col items-center gap-2">
             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-background/60">
               <Image
-                src={`https://icon.icepanel.io/Technology/svg/${tech.icon}.svg`}
+                src={`/icons/tech/${tech.icon}.svg`}
                 alt={`${tech.tech} logo`}
                 width={40}
                 height={40} />
