@@ -151,7 +151,7 @@ export default function ContactForm() {
               />
               <Button
                 type="submit"
-                className="w-full bg-linear-to-r from-primary))/80] to-primary hover:from-primary/90 hover:to-primary/70 transition-all duration-300"
+                className="w-full bg-linear-to-r from-primary/80 to-primary hover:from-primary/90 hover:to-primary/70 transition-colors duration-150"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
