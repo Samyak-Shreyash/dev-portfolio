@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { Blog, Project } from "./types";
-import { PROJECTS_BASE_URL } from "./constants";
+import { PROJECTS_ROOT_DOMAIN } from "./constants";
 import { WithId } from "mongodb";
 import readingTime from "reading-time";
 import { z } from "zod";
@@ -79,9 +79,9 @@ export const messageSchema = z.object({
     }).max(5000, { message: "Message must be at most 5000 characters." }),
 })
 
-// Projects hosted on the projects subdomain have a slug; others keep their own demo URL
+// Projects hosted on their own subdomain have a slug; others keep their own demo URL
 export function getProjectDemoUrl(project: Pick<Project, "slug" | "demoUrl">): string | undefined {
-  return project.slug ? `${PROJECTS_BASE_URL}/${project.slug}` : project.demoUrl
+  return project.slug ? `https://${project.slug}.${PROJECTS_ROOT_DOMAIN}` : project.demoUrl
 }
 
 export function slugify(text: string): string {

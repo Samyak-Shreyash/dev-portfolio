@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { projectSchema } from "@/lib/utils";
-import { PROJECTS_BASE_URL } from "@/lib/constants";
+import { PROJECTS_ROOT_DOMAIN } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
@@ -172,7 +172,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
                     <Input placeholder="my-awesome-project" {...field} />
                   </FormControl>
                   <FormDescription>
-                    Optional. Live Demo links to {PROJECTS_BASE_URL}/{field.value || "<slug>"} and overrides the Demo URL
+                    Optional. Live Demo links to https://{field.value || "<slug>"}.{PROJECTS_ROOT_DOMAIN} and overrides the Demo URL
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
