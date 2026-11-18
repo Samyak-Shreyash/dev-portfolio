@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button-link";
 import { DEV_EMAIL, DEV_GITHUB, DEV_LINKEDIN, DEV_NAME, DEV_TITLE, TECH_STACK, siteMetaData } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
@@ -247,11 +247,9 @@ function ProjectSection({ projects, muted }: ProjectSectionProp) {
         </Suspense>
       </div>
       {projects.length > 3 && <div className="mt-8">
-        <Button variant="outline" className="inline-flex items-center gap-2" asChild>
-            <Link href="/projects">
+        <ButtonLink href="/projects" variant="outline" className="inline-flex items-center gap-2">
               View All Projects <ArrowRight aria-hidden="true" className="h-4 w-4" />
-            </Link>
-        </Button>
+        </ButtonLink>
       </div>}
     </div>
   </div>
@@ -298,11 +296,9 @@ function BlogSection({blogs, muted}: BlogSectionProp) {
         </Suspense>
       </div>
       <div className="mt-8">
-        <Button variant="outline" className="inline-flex items-center gap-2" asChild>
-            <Link href="/blog">
+        <ButtonLink href="/blog" variant="outline" className="inline-flex items-center gap-2">
               Read All Posts <ArrowRight aria-hidden="true" className="h-4 w-4" />
-            </Link>
-        </Button>
+        </ButtonLink>
       </div>
     </div>
   </div>
@@ -328,14 +324,10 @@ function ContactSection({ muted }: ContactSectionProp) {
         </p>
       </div>
       <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
-        <Button asChild>
-          <Link href="/contact">
-            Contact Me <ArrowRight className="ml-2 size-4" />
-          </Link>
-        </Button>
-        <Button variant="outline" asChild>
-          <Link href={`mailto:${DEV_EMAIL}`}>Send Email</Link>
-        </Button>
+        <ButtonLink href="/contact">
+            Contact Me <ArrowRight aria-hidden="true" className="ml-2 size-4" />
+        </ButtonLink>
+        <ButtonLink variant="outline" href={`mailto:${DEV_EMAIL}`}>Send Email</ButtonLink>
       </div>
     </div>
   </div>

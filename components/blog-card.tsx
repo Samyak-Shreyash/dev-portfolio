@@ -19,6 +19,7 @@ export function BlogCard({ blog }: BlogCardProps) {
           src={blog.coverImage?.toString() ?? "/placeholder.svg?height=192&width=384"}
           alt={`Cover image for ${blog.title}`}
           fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           className="object-cover"
         />
       </div>
