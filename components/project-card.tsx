@@ -5,12 +5,15 @@ import Link from "next/link";
 import type { Project } from "@/lib/types";
 import { ExternalLink, Github } from "lucide-react";
 import { Button } from "./ui/button";
+import { getProjectDemoUrl } from "@/lib/utils";
 
 interface ProjectProps {
   project: Project;
 }
 
 export function ProjectCard({ project }: ProjectProps) {
+  const demoUrl = getProjectDemoUrl(project);
+
   return (
     <Card className="overflow-hidden group h-full flex flex-col">
       <div className="aspect-video relative overflow-hidden">
@@ -22,9 +25,9 @@ export function ProjectCard({ project }: ProjectProps) {
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-          {project.demoUrl && (
+          {demoUrl && (
             <Button variant="secondary" size="sm" asChild>
-              <Link href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+              <Link href={demoUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
               </Link>
             </Button>
@@ -48,10 +51,10 @@ export function ProjectCard({ project }: ProjectProps) {
             </Badge>
           ))}
         </div>
-        {(project.demoUrl || project.repoUrl) && (
+        {(demoUrl || project.repoUrl) && (
           <div className="flex gap-4 mt-4 text-sm">
-            {project.demoUrl && (
-              <Link href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline">
+            {demoUrl && (
+              <Link href={demoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline">
                 <ExternalLink className="h-4 w-4" /> Live Demo
               </Link>
             )}

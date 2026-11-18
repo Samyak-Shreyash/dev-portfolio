@@ -4,17 +4,15 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
-import { Suspense } from "react";
-import PageLoading from "@/components/ui/page-loading";
 import { Blog, Project } from "@/lib/types";
 import { ProjectCard } from "@/components/project-card";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { HeroSection } from "@/components/hero-section";
-import { BlogDBService, ProjectDBService } from "@/lib/mongodb";
+import { getCachedProjects, getCachedPublishedBlogs } from "@/lib/cached-data";
 import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic"
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: { absolute: `${DEV_NAME} | Senior Software Developer & Full Stack Engineer` },
@@ -40,8 +38,8 @@ const jsonLd = {
 
 export default async function Home() {
   
-const blogs = await BlogDBService.getPublishedBlogs();
-const projects = await ProjectDBService.getAllProjects();
+const blogs = await getCachedPublishedBlogs();
+const projects = await getCachedProjects();
 
   return (
     <div>
@@ -237,14 +235,12 @@ function ProjectSection({ projects, muted }: ProjectSectionProp) {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-        <Suspense fallback={<PageLoading />}>
           {projects
             .toSorted((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()) // newest first, then take top 3
             .slice(0, 3)
             .map((project: Project) => (
               <ProjectCard key={project._id?.toString()} project={project} />
             ))}
-        </Suspense>
       </div>
       {projects.length > 3 && <div className="mt-8">
         <ButtonLink href="/projects" variant="outline" className="inline-flex items-center gap-2">
@@ -272,7 +268,6 @@ function BlogSection({blogs, muted}: BlogSectionProp) {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-        <Suspense fallback={<PageLoading />}>
           {blogs
             .slice(0, 2)
             .map((blog: Blog) => (
@@ -293,7 +288,6 @@ function BlogSection({blogs, muted}: BlogSectionProp) {
                 </Link>
               </div>
             ))}
-        </Suspense>
       </div>
       <div className="mt-8">
         <ButtonLink href="/blog" variant="outline" className="inline-flex items-center gap-2">

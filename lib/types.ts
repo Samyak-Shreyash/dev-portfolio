@@ -14,6 +14,7 @@ export interface Project {
     _id: string
     title: string
     description: string
+    slug?: string
     demoUrl?: string
     repoUrl: string
     technologies: Array<string>

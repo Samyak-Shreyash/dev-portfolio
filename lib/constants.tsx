@@ -238,6 +238,7 @@ function normalizeSiteUrl(raw: string) {
   return url.replace(/\/+$/, "")
 }
 const SITE_URL = normalizeSiteUrl(process.env.NEXT_PUBLIC_BASE_URL || "https://samyakshreyash.in")
+export const PROJECTS_BASE_URL = "https://projects.samyakshreyash.in"
 
 export const siteMetaData = {
   title: DEV_NAME,
