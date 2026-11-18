@@ -91,7 +91,7 @@ export function ImageUpload({ value, onChange }: ImageUploadProps) {
 
       {value ? (
         <div className="relative aspect-video rounded-md overflow-hidden border">
-          <Image src={value || "/placeholder.svg"} alt="Cover image" fill className="object-cover" />
+          <Image src={value || "/placeholder.svg"} alt="Cover image" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center gap-2 p-8 bg-[hsl(var(--muted))]/50 border-[hsl(var(--muted-foreground))] rounded-md">

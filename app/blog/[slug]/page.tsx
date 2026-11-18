@@ -110,6 +110,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 src={post.coverImage ?? "/placeholder.svg" } 
                 alt={`Cover image for ${post.title}`} 
                 fill
+                sizes="(min-width: 896px) 896px, 100vw"
                 priority
                 />
             </div>
