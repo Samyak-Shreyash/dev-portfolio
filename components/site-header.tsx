@@ -27,10 +27,11 @@ interface SiteHeaderProps {
                   <Link href="/" className="flex items-center gap-2 font-semibold">
                   <span className="text-xl">Samyak <span className="text-primary">Shreyash</span></span>
                   </Link>
-                  <nav className="hidden md:flex gap-6 items-center">
+                  <nav aria-label="Primary" className="hidden md:flex gap-6 items-center">
                       {navLink.map((item) => (
                           <Link key={item.name}
                           href={item.href}
+                          aria-current={pathname === item.href ? "page" : undefined}
                           className={`text-sm font-medium transition-colors hover:text-primary ${
                               pathname === item.href ? "text-primary" : "text-muted-foreground"
                             }`}
@@ -42,16 +43,16 @@ interface SiteHeaderProps {
                   <div className="hidden md:flex gap-3">
                   <ThemeToggle />
             <Button variant="link" size="sm" asChild>
-              <Link href={DEV_RESUME} download target="_blank">
+              <a href={DEV_RESUME} target="_blank" rel="noopener noreferrer">
                 Resume
-              </Link>
+              </a>
             </Button>
             </div>
 
                   <Sheet>
                       <SheetTrigger asChild className="md:hidden">
                           <Button variant="outline" size="icon">
-                              <Menu className="h-5 w-5" />
+                              <Menu aria-hidden="true" className="h-5 w-5" />
                               <span className="sr-only">Toggle Menu</span>
                           </Button>
                       </SheetTrigger>
@@ -59,16 +60,17 @@ interface SiteHeaderProps {
                       <div className="flex justify-between pt-3 pr-5">
                   <ThemeToggle />
             <Button variant="outline" size="sm" asChild>
-              <Link href={DEV_RESUME} download target="_blank">
+              <a href={DEV_RESUME} target="_blank" rel="noopener noreferrer">
                 Resume
-              </Link>
+              </a>
             </Button>
             </div>
-                      <nav className="flex flex-col gap-4 mt-8">
+                      <nav aria-label="Mobile" className="flex flex-col gap-4 mt-8">
                           {navLink.map((item) =>(
                               <Link
                               key={item.name}
                               href={item.href}
+                          aria-current={pathname === item.href ? "page" : undefined}
                               className={`text-lg font-medium transition-colors hover:text-primary ${
                                   pathname === item.href ? "text-primary" : "text-muted-foreground"
                                 }`}

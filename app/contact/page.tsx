@@ -24,7 +24,7 @@ const faqJsonLd = {
   
 export default function ContactPage() {
     return (
-        <main className='min-h-screen bg-linear-to-b from-background-500 to-secondary/10'>
+        <div className='min-h-screen bg-linear-to-b from-background-500 to-secondary/10'>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -163,6 +163,6 @@ export default function ContactPage() {
                     </div>
                 </div>
                 </section>
-        </main>
+        </div>
     )
 }
